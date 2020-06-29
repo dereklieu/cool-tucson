@@ -7,7 +7,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Cool Tucson Bad Demo'
+      template: __dirname + '/src/index.html'
     })
   ],
   module: {
