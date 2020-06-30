@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "Urban heat educational project",
   "scripts": {
-    "serve": "webpack-dev-server --client-log-level silent --content-base ./dist --hot",
+    "start": "webpack-dev-server --client-log-level silent --content-base ./dist --hot",
     "build": "webpack --mode=production"
   },
   "repository": {
