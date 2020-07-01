@@ -1,11 +1,8 @@
 'use strict';
 import React from 'react';
+import { Intervention } from './intervention';
 
 export class Interventions extends React.PureComponent {
-  select(icon) {
-    console.log(icon);
-  }
-
   renderInterventions() {
     const interventions = [
       {
@@ -26,12 +23,10 @@ export class Interventions extends React.PureComponent {
     ];
 
     return interventions.map(d => (
-      <div
-        className="flex-child px12 py12 mx6 cursor-pointer border round"
-        key={d.icon}
-        onClick={() => this.select(d.icon)}
-      >
-        <svg className="icon w36 h36"><use xlinkHref={`#icon-${d.icon}`} /></svg>
+      <div className="flex-child" key={d.icon}>
+        <div className="mx6 border round">
+          <Intervention id={d.icon} />
+        </div>
       </div>
     ));
   }
