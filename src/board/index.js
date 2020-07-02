@@ -1,16 +1,16 @@
 'use strict';
-import c from 'classnames';
 import React from 'react';
-import { useDrop } from 'react-dnd';
-
-const pixel = (number) => Math.floor(number) + 'px';
+import { connect } from 'react-redux';
+import { Cell } from './cell';
+import { pixel } from '../util/style-util';
+import { boardSelectors } from '../store/board-selectors';
 
 const width = 900;
 const ratio = .3;
 const height = width * ratio;
 const rowLength = 4;
 
-const plotStyle = {
+const cellStyle = {
   borderBottom: `${pixel(width * ratio)} solid #eee`,
   borderLeft: `${pixel(width * ratio / 2)} solid transparent`,
   borderRight: `${pixel(width * ratio / 2)} solid transparent`,
@@ -25,30 +25,30 @@ const containerDimensions = {
   height: `${Math.floor(width * ratio)}px`
 };
 
-export class Plots extends React.PureComponent {
-  renderPlots(height) {
+let Board = class Board extends React.PureComponent {
+  renderRow(height) {
     return (
       <div className="grid grid--gut24">
-        {[...Array(rowLength)].map((_, i) => this.renderPlot(height, i))}
+        {[...Array(rowLength)].map((_, i) => this.renderCell(height, i))}
       </div>
     )
   }
 
-  renderPlot(height, i) {
+  renderCell(height, i) {
     return (
       <div
         className="col flex-parent flex-parent--column flex-parent--center-main"
         style={{ height: pixel(height) }}
-        key={`plot-${i}`}
+        key={`cell-${i}`}
       >
-        <Plot height={height} />
+        <Cell height={height} />
       </div>
     );
   }
 
   render() {
     return (
-      <div className="relative" style={plotStyle}>
+      <div className="relative" style={cellStyle}>
         <div
           className="absolute"
           style={{
@@ -58,7 +58,7 @@ export class Plots extends React.PureComponent {
             height: pixel(height * .4)
           }}
         >
-          {this.renderPlots(height * .4)}
+          {this.renderRow(height * .4)}
         </div>
 
         <div
@@ -70,33 +70,19 @@ export class Plots extends React.PureComponent {
             height: pixel(height * .6)
           }}
         >
-          {this.renderPlots(height * .6)}
+          {this.renderRow(height * .6)}
         </div>
       </div>
     );
   }
 }
 
-function Plot (props) {
-  const { height } = props;
-  const [{ isOver, canDrop }, drop] = useDrop({
-    accept: 'INTERVENTION',
-    collect: monitor => ({
-      canDrop: monitor.canDrop(),
-      isOver: monitor.isOver()
-    })
-  });
+const mapStateToProps = state => ({
+  cells: boardSelectors.cells(state)
+});
 
-  const containerClass = c('w-full', {
-    'border border--gray': isOver,
-    'border border--gray-light': canDrop && !isOver
-  });
+Board = connect(
+  mapStateToProps
+)(Board);
 
-  return (
-    <div
-      className={containerClass}
-      style={{ height: pixel(height / 2), borderRadius: '50%' }}
-      ref={drop}
-    />
-  );
-}
+export { Board };

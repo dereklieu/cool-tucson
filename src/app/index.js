@@ -1,10 +1,12 @@
 'use strict';
 import React from 'react';
 import { DndProvider } from 'react-dnd'
+import { Provider } from 'react-redux';
 import { HTML5Backend } from 'react-dnd-html5-backend'
 
+import { store } from '../store';
 import { Interventions } from '../interventions';
-import { Plots } from '../plots';
+import { Board } from '../board';
 
 export class App extends React.PureComponent {
   constructor(props) {
@@ -15,24 +17,26 @@ export class App extends React.PureComponent {
 
   render() {
     return (
-      <DndProvider backend={HTML5Backend}>
-        <div className="scroll-hidden viewport-full relative">
-          <div className="absolute w-full viewport-full top left flex-parent flex-parent--column flex-parent--center-main">
-            <div className="flex-child w-full">
-              <div className="flex-parent flex-parent--center-main">
-                <div className="flex-child">
-                  <Plots />
+      <Provider store={store}>
+        <DndProvider backend={HTML5Backend}>
+          <div className="scroll-hidden viewport-full relative">
+            <div className="absolute w-full viewport-full top left flex-parent flex-parent--column flex-parent--center-main">
+              <div className="flex-child w-full">
+                <div className="flex-parent flex-parent--center-main">
+                  <div className="flex-child">
+                    <Board />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="absolute bottom left w-full">
-            <div className="mb30">
-              <Interventions />
+            <div className="absolute bottom left w-full">
+              <div className="mb30">
+                <Interventions />
+              </div>
             </div>
           </div>
-        </div>
-      </DndProvider>
+        </DndProvider>
+      </Provider>
     )
   }
 }
