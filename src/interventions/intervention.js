@@ -11,7 +11,7 @@ const collect = (monitor) => {
 }
 
 export const Intervention = (props) => {
-  const { id } = props;
+  const { id, icon } = props;
 
   const [{ isDragging }, drag] = useDrag({
     item: { id, type },
@@ -24,7 +24,7 @@ export const Intervention = (props) => {
 
   return (
     <div ref={drag} className="px12 py12" style={containerStyle}>
-      <svg className="icon w36 h36"><use xlinkHref={`#icon-${id}`} /></svg>
+      <svg className="icon w36 h36"><use xlinkHref={`#icon-${icon}`} /></svg>
     </div>
   );
 };

@@ -1,8 +1,12 @@
 'use strict';
 
-export const dropIntervention = (row, column, intervention) => ({
+const actions = {};
+
+actions.dropIntervention = (row, column, icon) => ({
   type: 'DROP_INTERVENTION',
   row,
   column,
-  intervention
+  icon
 });
+
+export const boardActionCreators = actions;

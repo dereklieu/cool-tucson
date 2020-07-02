@@ -25,7 +25,7 @@ export class Interventions extends React.PureComponent {
     return interventions.map(d => (
       <div className="flex-child" key={d.icon}>
         <div className="mx6 border round">
-          <Intervention id={d.icon} />
+          <Intervention id={d.icon} icon={d.icon}/>
         </div>
       </div>
     ));

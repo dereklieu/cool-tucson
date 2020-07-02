@@ -3,27 +3,49 @@ import c from 'classnames';
 import React from 'react';
 import { useDrop } from 'react-dnd';
 import { pixel } from '../util/style-util';
+import { Intervention } from '../interventions/intervention';
 
 export function Cell (props) {
-  const { height } = props;
+  const {
+    cell,
+    height,
+    row,
+    column,
+    dropIntervention
+  } = props;
+  const { interventions } = cell;
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: 'INTERVENTION',
+    canDrop: () => interventions.length < 4,
+    drop: ({ id }) => dropIntervention(row, column, id),
     collect: monitor => ({
       canDrop: monitor.canDrop(),
       isOver: monitor.isOver()
     })
   });
 
-  const containerClass = c('w-full', {
-    'border border--gray': isOver,
+  const containerClass = c('w-full relative', {
+    'border border--gray': canDrop && isOver,
     'border border--gray-light': canDrop && !isOver
   });
 
   return (
     <div
       className={containerClass}
-      style={{ height: pixel(height / 2), borderRadius: '50%' }}
+      style={{ height: pixel(height * .5), borderRadius: '50%' }}
       ref={drop}
-    />
+    >
+      {interventions.map(intervention => (
+        <div
+          key={intervention.id}
+          className={`absolute ${intervention.x} ${intervention.y}`}
+        >
+          <Intervention
+            id={intervention.id}
+            icon={intervention.icon}
+          />
+        </div>
+      ))}
+    </div>
   );
 }

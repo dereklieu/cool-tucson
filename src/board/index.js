@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import { Cell } from './cell';
 import { pixel } from '../util/style-util';
 import { boardSelectors } from '../store/board-selectors';
+import { boardActionCreators } from '../store/board-action-creators';
 
 const width = 900;
-const ratio = .3;
+const ratio = .4;
 const height = width * ratio;
 const rowLength = 4;
 
@@ -26,27 +27,33 @@ const containerDimensions = {
 };
 
 let Board = class Board extends React.PureComponent {
-  renderRow(height) {
+  renderRow(cells, row, height) {
+    const { dropIntervention } = this.props;
+    const containerClass = 'col flex-parent flex-parent--column flex-parent--center-main';
+    const containerStyle = { height: pixel(height) };
     return (
       <div className="grid grid--gut24">
-        {[...Array(rowLength)].map((_, i) => this.renderCell(height, i))}
+        {cells[row].map((cell, column) => (
+          <div
+            key={`cell-${row}-${column}`}
+            className={containerClass}
+            style={containerStyle}
+          >
+            <Cell
+              cell={cell}
+              height={height}
+              row={row}
+              column={column}
+              dropIntervention={dropIntervention}
+            />
+          </div>
+        ))}
       </div>
     )
   }
 
-  renderCell(height, i) {
-    return (
-      <div
-        className="col flex-parent flex-parent--column flex-parent--center-main"
-        style={{ height: pixel(height) }}
-        key={`cell-${i}`}
-      >
-        <Cell height={height} />
-      </div>
-    );
-  }
-
   render() {
+    const { cells } = this.props;
     return (
       <div className="relative" style={cellStyle}>
         <div
@@ -58,7 +65,7 @@ let Board = class Board extends React.PureComponent {
             height: pixel(height * .4)
           }}
         >
-          {this.renderRow(height * .4)}
+          {this.renderRow(cells, 0, height * .4)}
         </div>
 
         <div
@@ -70,7 +77,7 @@ let Board = class Board extends React.PureComponent {
             height: pixel(height * .6)
           }}
         >
-          {this.renderRow(height * .6)}
+          {this.renderRow(cells, 1, height * .6)}
         </div>
       </div>
     );
@@ -81,8 +88,13 @@ const mapStateToProps = state => ({
   cells: boardSelectors.cells(state)
 });
 
+const mapDispatch = {
+  dropIntervention: boardActionCreators.dropIntervention
+};
+
 Board = connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatch
 )(Board);
 
 export { Board };
