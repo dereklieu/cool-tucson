@@ -4,6 +4,7 @@ import React from 'react';
 import { useDrop } from 'react-dnd';
 import { pixel } from '../util/style-util';
 import { Intervention } from '../interventions/intervention';
+import constants from '../constants';
 
 export function Cell (props) {
   const {
@@ -15,7 +16,7 @@ export function Cell (props) {
   } = props;
   const { interventions } = cell;
   const [{ isOver, canDrop }, drop] = useDrop({
-    accept: 'INTERVENTION',
+    accept: constants.NEW_INTERVENTION,
     canDrop: () => interventions.length < 4,
     drop: ({ id }) => dropIntervention(row, column, id),
     collect: monitor => ({
@@ -43,6 +44,7 @@ export function Cell (props) {
           <Intervention
             id={intervention.id}
             icon={intervention.icon}
+            type={constants.FIELDED_INTERVENTION}
           />
         </div>
       ))}

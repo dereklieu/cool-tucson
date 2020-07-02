@@ -2,8 +2,6 @@
 import React from 'react';
 import { useDrag } from 'react-dnd';
 
-const type = 'INTERVENTION';
-
 const collect = (monitor) => {
   return {
     isDragging: monitor.isDragging()
@@ -11,7 +9,7 @@ const collect = (monitor) => {
 }
 
 export const Intervention = (props) => {
-  const { id, icon } = props;
+  const { id, icon, type } = props;
 
   const [{ isDragging }, drag] = useDrag({
     item: { id, type },
