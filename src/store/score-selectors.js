@@ -11,4 +11,14 @@ scoreSelectors.currency = createSelector(
   score => score.currency
 );
 
+scoreSelectors.social = createSelector(
+  root,
+  score => score.social
+);
+
+scoreSelectors.environmental = createSelector(
+  root,
+  score => score.environmental
+);
+
 export { scoreSelectors };
