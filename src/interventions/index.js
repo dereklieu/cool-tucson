@@ -1,35 +1,50 @@
 'use strict';
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { settingSelectors } from '../store/setting-selectors';
 import { Intervention } from './intervention';
 import constants from '../constants';
+import interventions from '../assets/data/interventions.json';
 
-export class Interventions extends React.PureComponent {
-  renderInterventions() {
-    const interventions = [
-      {
-        icon: 'bike',
-        description: 'Biking is fun',
-        cost: 4
+const cost = 5; // TODO: replace with actual cost
+
+const parsedInterventions = interventions.map(d => {
+  return {
+    score: {
+      hd: {
+        cost,
+        environmental: d.environmental_hd,
+        social: d.social_hd
       },
-      {
-        icon: 'cloud',
-        description: 'Cool, cool shade',
-        cost: 2
+      hh: {
+        cost,
+        environmental: d.environmental_hh,
+        social: d.social_hh
       },
-      {
-        icon: 'water',
-        description: 'How about a water feature',
-        cost: 8
+      t: {
+        cost,
+        environmental: d.environmental_t,
+        social: d.social_t
       }
-    ];
+    },
+    description: d.description,
+    name: d.intervention,
+    type: d.location
+  };
+});
 
-    return interventions.map(d => (
-      <div className="flex-child" key={d.icon}>
+let Interventions = class Interventions extends React.PureComponent {
+  renderInterventions() {
+    const { locale } = this.props;
+
+    return parsedInterventions.map(d => (
+      <div className="flex-child" key={d.name} data-tip={d.name}>
         <div className="mx6 border round">
           <Intervention
-            id={d.icon}
-            icon={d.icon}
-            type={constants.NEW_INTERVENTION}
+            name={d.name}
+            score={d.score[locale]}
+            dragType={constants.NEW_INTERVENTION}
           />
         </div>
       </div>
@@ -44,3 +59,13 @@ export class Interventions extends React.PureComponent {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  locale: settingSelectors.locale(state)
+});
+
+Interventions = connect(
+  mapStateToProps
+)(Interventions);
+
+export { Interventions };

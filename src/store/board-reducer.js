@@ -13,14 +13,16 @@ const initialState = {
   ]
 };
 
-const pushIntervention = icon => interventions => {
+const pushIntervention = (name, score) => interventions => {
   const idx = interventions.length;
   const x = idx < 2 ? 'left ' : 'right';
   const y = idx % 2 === 0 ? 'top' : 'bottom';
+
   return interventions.concat({
     x,
     y,
-    icon,
+    name,
+    score,
     id: hat()
   });
 };
@@ -36,7 +38,7 @@ export function reducer(state = initialState, action) {
           action.column,
           'interventions'
         ],
-        pushIntervention(action.icon)
+        pushIntervention(action.name, action.score)
       );
   }
   return state;

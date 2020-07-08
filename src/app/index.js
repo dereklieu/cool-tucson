@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
+import ReactTooltip from 'react-tooltip';
 
 import { scoreSelectors } from '../store/score-selectors';
 
@@ -44,6 +45,11 @@ let App = class App extends React.PureComponent {
             </div>
           </div>
         </div>
+        <ReactTooltip
+          className="wmax240 px12 py12 txt-bold round"
+          offset={{ top: 10 }}
+          effect="solid"
+        />
       </div>
     )
   }

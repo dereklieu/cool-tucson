@@ -2,11 +2,12 @@
 
 const actions = {};
 
-actions.dropIntervention = (row, column, icon) => ({
+actions.dropIntervention = (name, score, row, column) => ({
   type: 'DROP_INTERVENTION',
+  name,
+  score,
   row,
-  column,
-  icon
+  column
 });
 
 export const boardActionCreators = actions;

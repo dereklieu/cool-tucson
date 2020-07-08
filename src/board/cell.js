@@ -18,7 +18,7 @@ export function Cell (props) {
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: constants.NEW_INTERVENTION,
     canDrop: () => interventions.length < 4,
-    drop: ({ id }) => dropIntervention(row, column, id),
+    drop: ({ name, score }) => dropIntervention(name, score, row, column),
     collect: monitor => ({
       canDrop: monitor.canDrop(),
       isOver: monitor.isOver()
@@ -42,9 +42,9 @@ export function Cell (props) {
           className={`absolute ${intervention.x} ${intervention.y}`}
         >
           <Intervention
-            id={intervention.id}
-            icon={intervention.icon}
-            type={constants.FIELDED_INTERVENTION}
+            name={intervention.name}
+            score={intervention.score}
+            dragType={constants.FIELDED_INTERVENTION}
           />
         </div>
       ))}
