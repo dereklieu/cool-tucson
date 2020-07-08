@@ -12,13 +12,18 @@ export function Cell (props) {
     height,
     row,
     column,
+    currency,
     dropIntervention
   } = props;
   const { interventions } = cell;
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: constants.NEW_INTERVENTION,
-    canDrop: () => interventions.length < 4,
-    drop: ({ name, score }) => dropIntervention(name, score, row, column),
+    canDrop: ({ score }) => {
+      return interventions.length < 4 && currency >= score.cost;
+    },
+    drop: ({ name, score }) => {
+      return dropIntervention(name, score, row, column);
+    },
     collect: monitor => ({
       canDrop: monitor.canDrop(),
       isOver: monitor.isOver()

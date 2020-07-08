@@ -14,18 +14,18 @@ const parsedInterventions = interventions.map(d => {
     score: {
       hd: {
         cost,
-        environmental: d.environmental_hd,
-        social: d.social_hd
+        environmental: Number(d.environmental_hd),
+        social: Number(d.social_hd)
       },
       hh: {
         cost,
-        environmental: d.environmental_hh,
-        social: d.social_hh
+        environmental: Number(d.environmental_hh),
+        social: Number(d.social_hh)
       },
       t: {
         cost,
-        environmental: d.environmental_t,
-        social: d.social_t
+        environmental: Number(d.environmental_t),
+        social: Number(d.social_t)
       }
     },
     description: d.description,

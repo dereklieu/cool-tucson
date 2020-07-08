@@ -3,7 +3,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Cell } from './cell';
 import { px } from '../util/style-util';
+
 import { boardSelectors } from '../store/board-selectors';
+import { scoreSelectors } from '../store/score-selectors';
 import { boardActionCreators } from '../store/board-action-creators';
 
 const width = 900;
@@ -28,7 +30,7 @@ const containerDimensions = {
 
 let Board = class Board extends React.PureComponent {
   renderRow(cells, row, height) {
-    const { dropIntervention } = this.props;
+    const { dropIntervention, currency } = this.props;
     const containerClass = 'col flex-parent flex-parent--column flex-parent--center-main';
     const containerStyle = { height: px(height) };
     return (
@@ -44,6 +46,7 @@ let Board = class Board extends React.PureComponent {
               height={height}
               row={row}
               column={column}
+              currency={currency}
               dropIntervention={dropIntervention}
             />
           </div>
@@ -85,7 +88,8 @@ let Board = class Board extends React.PureComponent {
 }
 
 const mapStateToProps = state => ({
-  cells: boardSelectors.cells(state)
+  cells: boardSelectors.cells(state),
+  currency: scoreSelectors.currency(state)
 });
 
 const mapDispatch = {
