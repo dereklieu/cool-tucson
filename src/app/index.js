@@ -1,39 +1,36 @@
 'use strict';
 import React from 'react';
+import { connect } from 'react-redux';
 import { DndProvider } from 'react-dnd'
-import { Provider } from 'react-redux';
 import { HTML5Backend } from 'react-dnd-html5-backend'
 
-import { store } from '../store';
+import { scoreSelectors } from '../store/score-selectors';
+
 import { Interventions } from '../interventions';
 import { Board } from '../board';
 import { ProgressBar } from '../indicators/progress-bar';
 
-export class App extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-  }
-
+let App = class App extends React.PureComponent {
   render() {
+    const {
+      currency
+    } = this.props;
+
     return (
-      <Provider store={store}>
+      <div className="scroll-hidden viewport-full relative">
         <DndProvider backend={HTML5Backend}>
-          <div className="scroll-hidden viewport-full relative">
-            <div className="absolute w-full viewport-full top left flex-parent flex-parent--column flex-parent--center-main">
-              <div className="flex-child w-full">
-                <div className="flex-parent flex-parent--center-main">
-                  <div className="flex-child">
-                    <Board />
-                  </div>
+          <div className="absolute w-full viewport-full top left flex-parent flex-parent--column flex-parent--center-main">
+            <div className="flex-child w-full">
+              <div className="flex-parent flex-parent--center-main">
+                <div className="flex-child">
+                  <Board />
                 </div>
               </div>
             </div>
-            <div className="absolute bottom left w-full">
-              <div className="mb30">
-                <Interventions />
-              </div>
+          </div>
+          <div className="absolute bottom left w-full">
+            <div className="mb30">
+              <Interventions />
             </div>
           </div>
         </DndProvider>
@@ -42,12 +39,22 @@ export class App extends React.PureComponent {
             <div className="col--6 col--offl3">
               <ProgressBar
                 barClassName="bg-gray-light"
-                progress={93}
+                progress={currency}
               />
             </div>
           </div>
         </div>
-      </Provider>
+      </div>
     )
   }
 }
+
+const mapStateToProps = state => ({
+  currency: scoreSelectors.currency(state)
+});
+
+App = connect(
+  mapStateToProps
+)(App);
+
+export { App };
