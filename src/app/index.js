@@ -34,7 +34,7 @@ export class App extends React.PureComponent {
           </div>
         </div>
         <ReactTooltip
-          className="wmax240 px12 py12 txt-bold round"
+          className="px12 py12 txt-bold txt-m round"
           offset={{ top: 10 }}
           effect="solid"
         />
