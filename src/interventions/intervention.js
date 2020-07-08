@@ -1,6 +1,7 @@
 'use strict';
 import React from 'react';
 import { useDrag } from 'react-dnd';
+import { IconLabel } from '../indicators/icon-label';
 
 const collect = (monitor) => {
   return {
@@ -22,7 +23,7 @@ export const Intervention = (props) => {
 
   return (
     <div ref={drag} className="px12 py12" style={containerStyle}>
-      <svg className="icon w36 h36"><use xlinkHref={`#icon-${icon}`} /></svg>
+      <IconLabel icon={icon} size={36} />
     </div>
   );
 };

@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Cell } from './cell';
-import { pixel } from '../util/style-util';
+import { px } from '../util/style-util';
 import { boardSelectors } from '../store/board-selectors';
 import { boardActionCreators } from '../store/board-action-creators';
 
@@ -12,9 +12,9 @@ const height = width * ratio;
 const rowLength = 4;
 
 const cellStyle = {
-  borderBottom: `${pixel(width * ratio)} solid #eee`,
-  borderLeft: `${pixel(width * ratio / 2)} solid transparent`,
-  borderRight: `${pixel(width * ratio / 2)} solid transparent`,
+  borderBottom: `${px(width * ratio)} solid #eee`,
+  borderLeft: `${px(width * ratio / 2)} solid transparent`,
+  borderRight: `${px(width * ratio / 2)} solid transparent`,
   height: 0,
   width: `${width}px`
 };
@@ -30,7 +30,7 @@ let Board = class Board extends React.PureComponent {
   renderRow(cells, row, height) {
     const { dropIntervention } = this.props;
     const containerClass = 'col flex-parent flex-parent--column flex-parent--center-main';
-    const containerStyle = { height: pixel(height) };
+    const containerStyle = { height: px(height) };
     return (
       <div className="grid grid--gut24">
         {cells[row].map((cell, column) => (
@@ -61,8 +61,8 @@ let Board = class Board extends React.PureComponent {
           style={{
             top: 0,
             left: 0,
-            width: pixel(width * (1 - ratio)),
-            height: pixel(height * .4)
+            width: px(width * (1 - ratio)),
+            height: px(height * .4)
           }}
         >
           {this.renderRow(cells, 0, height * .4)}
@@ -71,10 +71,10 @@ let Board = class Board extends React.PureComponent {
         <div
           className="absolute"
           style={{
-            top: pixel(height * .4),
-            left: pixel(-width * ratio * .4 / 2),
-            width: pixel(width - width * ratio * .6),
-            height: pixel(height * .6)
+            top: px(height * .4),
+            left: px(-width * ratio * .4 / 2),
+            width: px(width - width * ratio * .6),
+            height: px(height * .6)
           }}
         >
           {this.renderRow(cells, 1, height * .6)}

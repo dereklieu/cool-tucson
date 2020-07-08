@@ -1,2 +1,3 @@
 'use strict';
-export const pixel = (number) => Math.floor(number) + 'px';
+export const px = (number) => Math.floor(number) + 'px';
+export const pct = (number) => number + '%';

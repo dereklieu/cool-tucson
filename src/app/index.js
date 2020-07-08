@@ -7,6 +7,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 import { store } from '../store';
 import { Interventions } from '../interventions';
 import { Board } from '../board';
+import { ProgressBar } from '../indicators/progress-bar';
 
 export class App extends React.PureComponent {
   constructor(props) {
@@ -36,6 +37,16 @@ export class App extends React.PureComponent {
             </div>
           </div>
         </DndProvider>
+        <div className="absolute top left w-full">
+          <div className="mt30 grid">
+            <div className="col--6 col--offl3">
+              <ProgressBar
+                barClassName="bg-gray-light"
+                progress={93}
+              />
+            </div>
+          </div>
+        </div>
       </Provider>
     )
   }

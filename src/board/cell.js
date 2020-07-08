@@ -2,7 +2,7 @@
 import c from 'classnames';
 import React from 'react';
 import { useDrop } from 'react-dnd';
-import { pixel } from '../util/style-util';
+import { px } from '../util/style-util';
 import { Intervention } from '../interventions/intervention';
 import constants from '../constants';
 
@@ -33,7 +33,7 @@ export function Cell (props) {
   return (
     <div
       className={containerClass}
-      style={{ height: pixel(height * .5), borderRadius: '50%' }}
+      style={{ height: px(height * .5), borderRadius: '50%' }}
       ref={drop}
     >
       {interventions.map(intervention => (
