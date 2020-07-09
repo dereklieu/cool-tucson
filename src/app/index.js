@@ -2,12 +2,12 @@
 import React from 'react';
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
-import ReactTooltip from 'react-tooltip';
 
 import { Interventions } from '../interventions';
 import { Board } from '../board';
 import { Bin } from '../board/bin';
 import { Score } from '../indicators/score';
+import { Tooltip } from '../indicators/tooltip';
 
 export class App extends React.PureComponent {
   render() {
@@ -34,12 +34,7 @@ export class App extends React.PureComponent {
             <Score />
           </div>
         </div>
-        <ReactTooltip
-          className="px12 py12 txt-bold txt-m round"
-          offset={{ right: 10 }}
-          place="right"
-          effect="solid"
-        />
+        <Tooltip />
       </div>
     )
   }
