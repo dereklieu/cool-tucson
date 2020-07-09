@@ -3,6 +3,7 @@ import React from 'react';
 import ReactTooltip from 'react-tooltip'
 import { useDrag } from 'react-dnd';
 import { IconLabel } from '../indicators/icon-label';
+import constants from '../constants';
 
 const collect = (monitor) => {
   return {
@@ -31,6 +32,11 @@ export const Intervention = (props) => {
     begin: () => ReactTooltip.hide(),
     collect
   });
+
+  // Hide placed interventions when they are being dragged
+  if (isDragging && dragType === constants.FIELDED_INTERVENTION) {
+    return null;
+  }
 
   const containerStyle = {
     cursor: isDragging ? 'grabbing' : 'grab'

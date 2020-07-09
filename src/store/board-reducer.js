@@ -8,19 +8,13 @@ const cell = () => ({
 
 const initialState = {
   cells: [
-    [...Array(4)].map(cell),
-    [...Array(4)].map(cell)
+    [...Array(6)].map(cell),
+    [...Array(6)].map(cell)
   ]
 };
 
 const pushIntervention = (name, score) => interventions => {
-  const idx = interventions.length;
-  const x = idx < 2 ? 'left ' : 'right';
-  const y = idx % 2 === 0 ? 'top' : 'bottom';
-
   return interventions.concat({
-    x,
-    y,
     name,
     score,
     id: hat()

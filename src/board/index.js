@@ -8,10 +8,9 @@ import { boardSelectors } from '../store/board-selectors';
 import { scoreSelectors } from '../store/score-selectors';
 import { boardActionCreators } from '../store/board-action-creators';
 
-const width = 900;
-const ratio = .4;
+const width = 980;
+const ratio = .25;
 const height = width * ratio;
-const rowLength = 4;
 
 const cellStyle = {
   borderBottom: `${px(width * ratio)} solid #eee`,
@@ -23,9 +22,9 @@ const cellStyle = {
 
 const containerDimensions = {
   top: 0,
-  left: `-${Math.floor(width * ratio / 2)}px`,
-  width: `${width}px`,
-  height: `${Math.floor(width * ratio)}px`
+  left: px(-width * ratio / 2),
+  width: px(width),
+  height: px(width * ratio)
 };
 
 let Board = class Board extends React.PureComponent {

@@ -6,6 +6,16 @@ import { px } from '../util/style-util';
 import { Intervention } from '../interventions/intervention';
 import constants from '../constants';
 
+const getPositionStyle = i => {
+  const x = i < 2 ? 'left' : 'right';
+  const y = i % 2 === 0 ? 'top' : 'bottom';
+  const style = {
+    [x]: px(-10),
+    [y]: px(-10)
+  }
+  return style;
+};
+
 export function Cell (props) {
   const {
     cell,
@@ -41,10 +51,11 @@ export function Cell (props) {
       style={{ height: px(height * .5), borderRadius: '50%' }}
       ref={drop}
     >
-      {interventions.map(intervention => (
+      {interventions.map((intervention, i) => (
         <div
           key={intervention.id}
-          className={`absolute ${intervention.x} ${intervention.y}`}
+          className="absolute"
+          style={getPositionStyle(i)}
         >
           <Intervention
             name={intervention.name}
