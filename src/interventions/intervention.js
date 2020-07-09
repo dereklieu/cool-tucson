@@ -20,15 +20,14 @@ const parseName = name =>
 
 export const Intervention = (props) => {
   const {
+    id,
     name,
     score,
     dragType
   } = props;
 
-  const id = parseName(name);
-
   const [{ isDragging }, drag] = useDrag({
-    item: { name, score, type: dragType },
+    item: { id, name, score, type: dragType },
     begin: () => ReactTooltip.hide(),
     collect
   });
@@ -42,9 +41,11 @@ export const Intervention = (props) => {
     cursor: isDragging ? 'grabbing' : 'grab'
   };
 
+  const displayName = parseName(name);
+
   return (
     <div ref={drag} className="px12 py12 wmin60 align-center" style={containerStyle}>
-      <strong>{id}</strong>
+      <strong>{displayName}</strong>
     </div>
   );
 };

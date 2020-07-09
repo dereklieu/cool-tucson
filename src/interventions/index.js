@@ -42,6 +42,7 @@ let Interventions = class Interventions extends React.PureComponent {
       <div className="flex-child" key={d.name} data-tip={d.name}>
         <div className="mx6 border round">
           <Intervention
+            id={d.name}
             name={d.name}
             score={d.score[locale]}
             dragType={constants.NEW_INTERVENTION}

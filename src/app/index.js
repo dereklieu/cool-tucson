@@ -6,6 +6,7 @@ import ReactTooltip from 'react-tooltip';
 
 import { Interventions } from '../interventions';
 import { Board } from '../board';
+import { Bin } from '../board/bin';
 import { Score } from '../indicators/score';
 
 export class App extends React.PureComponent {
@@ -13,7 +14,7 @@ export class App extends React.PureComponent {
     return (
       <div className="scroll-hidden viewport-full relative">
         <DndProvider backend={HTML5Backend}>
-          <div className="absolute w-full viewport-full top left flex-parent flex-parent--column flex-parent--center-main">
+          <Bin className="absolute w-full viewport-full top left flex-parent flex-parent--column flex-parent--center-main">
             <div className="flex-child w-full">
               <div className="flex-parent flex-parent--center-main">
                 <div className="flex-child">
@@ -21,7 +22,7 @@ export class App extends React.PureComponent {
                 </div>
               </div>
             </div>
-          </div>
+          </Bin>
           <div className="absolute bottom left w-full">
             <div className="mb30">
               <Interventions />

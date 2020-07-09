@@ -23,7 +23,7 @@ export function Cell (props) {
     row,
     column,
     currency,
-    dropIntervention
+    applyIntervention
   } = props;
   const { interventions } = cell;
   const [{ isOver, canDrop }, drop] = useDrop({
@@ -32,7 +32,7 @@ export function Cell (props) {
       return interventions.length < 4 && currency >= score.cost;
     },
     drop: ({ name, score }) => {
-      return dropIntervention(name, score, row, column);
+      return applyIntervention(name, score, row, column);
     },
     collect: monitor => ({
       canDrop: monitor.canDrop(),
@@ -58,6 +58,7 @@ export function Cell (props) {
           style={getPositionStyle(i)}
         >
           <Intervention
+            id={intervention.id}
             name={intervention.name}
             score={intervention.score}
             dragType={constants.FIELDED_INTERVENTION}

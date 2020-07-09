@@ -29,7 +29,7 @@ const containerDimensions = {
 
 let Board = class Board extends React.PureComponent {
   renderRow(cells, row, height) {
-    const { dropIntervention, currency } = this.props;
+    const { applyIntervention, currency } = this.props;
     const containerClass = 'col flex-parent flex-parent--column flex-parent--center-main';
     const containerStyle = { height: px(height) };
     return (
@@ -46,7 +46,7 @@ let Board = class Board extends React.PureComponent {
               row={row}
               column={column}
               currency={currency}
-              dropIntervention={dropIntervention}
+              applyIntervention={applyIntervention}
             />
           </div>
         ))}
@@ -92,7 +92,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatch = {
-  dropIntervention: boardActionCreators.dropIntervention
+  applyIntervention: boardActionCreators.applyIntervention
 };
 
 Board = connect(
