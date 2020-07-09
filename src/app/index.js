@@ -23,8 +23,8 @@ export class App extends React.PureComponent {
               </div>
             </div>
           </Bin>
-          <div className="absolute bottom left w-full">
-            <div className="mb30">
+          <div className="absolute top left">
+            <div className="ml30">
               <Interventions />
             </div>
           </div>
@@ -36,7 +36,8 @@ export class App extends React.PureComponent {
         </div>
         <ReactTooltip
           className="px12 py12 txt-bold txt-m round"
-          offset={{ top: 10 }}
+          offset={{ right: 10 }}
+          place="right"
           effect="solid"
         />
       </div>

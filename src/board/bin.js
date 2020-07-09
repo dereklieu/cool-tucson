@@ -24,7 +24,6 @@ let Bin = props => {
     })
   });
 
-  console.log(canDrop, isOver)
   const classes = c(className, {
     'bg-orange-faint': canDrop && !isOver,
     'bg-orange-light': isOver

@@ -40,7 +40,7 @@ let Interventions = class Interventions extends React.PureComponent {
 
     return parsedInterventions.map(d => (
       <div className="flex-child" key={d.name} data-tip={d.name}>
-        <div className="mx6 border round">
+        <div className="my6 border round">
           <Intervention
             id={d.name}
             name={d.name}
@@ -54,7 +54,9 @@ let Interventions = class Interventions extends React.PureComponent {
 
   render() {
     return (
-      <div className="flex-parent flex-parent--center-main">
+      <div
+        className="flex-parent flex-parent--column flex-parent--center-main viewport-full"
+      >
         {this.renderInterventions()}
       </div>
     );
