@@ -16,4 +16,9 @@ actions.removeIntervention = (id, score) => ({
   score
 });
 
+actions.changeInterventionType = (type) => ({
+  type: 'CHANGE_INTERVENTION_TYPE',
+  type
+});
+
 export const boardActionCreators = actions;

@@ -11,4 +11,9 @@ boardSelectors.cells = createSelector(
   board => board.cells
 );
 
+boardSelectors.interventionType = createSelector(
+  root,
+  board => board.interventionType
+);
+
 export { boardSelectors };
