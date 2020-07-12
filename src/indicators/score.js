@@ -12,21 +12,24 @@ let Score = class Score extends React.PureComponent {
       environmental
     } = this.props;
 
+    const scores = [
+      { progress: social, label: 'Social' },
+      { progress: environmental, label: 'Environmental' },
+      { progress: currency, label: '$' }
+    ];
+
     return (
-      <div className="flex-parent flex-parent--center-main flex-parent--center-cross">
-        <div className="flex-child mx12">
-          Social: {social}
-        </div>
-        <div className="flex-child mx12">
-          Environmental: {environmental}
-        </div>
-        <div className="flex-child ml12 mr6">$</div>
-        <div className="flex-child w300">
-          <ProgressBar
-            barClassName="bg-gray-light"
-            progress={currency}
-          />
-        </div>
+      <div className="flex-parent flex-parent--end-main flex-parent--wrap w600">
+        {scores.map(s => (
+          <div className="flex-child">
+            <ProgressBar
+              label={s.label}
+              className="w300"
+              barClassName="bg-gray-light"
+              progress={s.progress}
+            />
+          </div>
+        ))}
       </div>
     );
   }

@@ -29,8 +29,8 @@ export class App extends React.PureComponent {
             </div>
           </div>
         </DndProvider>
-        <div className="absolute top left w-full">
-          <div className="mt30">
+        <div className="absolute top right">
+          <div className="mt30 mr30">
             <Score />
           </div>
         </div>
