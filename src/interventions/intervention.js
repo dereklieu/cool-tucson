@@ -2,8 +2,10 @@
 import React from 'react';
 import ReactTooltip from 'react-tooltip'
 import { useDrag } from 'react-dnd';
+import c from 'classnames';
 import { IconLabel } from '../indicators/icon-label';
 import constants from '../constants';
+import { px } from '../util/style-util';
 
 const collect = (monitor) => {
   return {
@@ -26,6 +28,8 @@ export const Intervention = (props) => {
     dragType
   } = props;
 
+  const isFielded = dragType === constants.FIELDED_INTERVENTION;
+
   const [{ isDragging }, drag] = useDrag({
     item: { id, name, score, type: dragType },
     begin: () => ReactTooltip.hide(),
@@ -33,18 +37,31 @@ export const Intervention = (props) => {
   });
 
   // Hide placed interventions when they are being dragged
-  if (isDragging && dragType === constants.FIELDED_INTERVENTION) {
+  if (isDragging && isFielded) {
     return null;
   }
 
+  const dimension = isFielded ? 'auto' : 90;
+
   const containerStyle = {
-    cursor: isDragging ? 'grabbing' : 'grab'
+    cursor: isDragging ? 'grabbing' : 'grab',
+    lineHeight: px(dimension),
+    width: px(dimension),
+    height: px(dimension),
+    verticalAlign: 'middle'
   };
+
+  const containerClass = c(
+    'align-center',
+    {
+      'round-full bg-gray-faint': !isFielded
+    }
+  );
 
   const displayName = parseName(name);
 
   return (
-    <div ref={drag} className="px12 py12 wmin60 align-center" style={containerStyle}>
+    <div ref={drag} className={containerClass} style={containerStyle}>
       <strong>{displayName}</strong>
     </div>
   );
