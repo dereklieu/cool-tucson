@@ -21,7 +21,7 @@ let Score = class Score extends React.PureComponent {
     return (
       <div className="flex-parent flex-parent--end-main flex-parent--wrap w600">
         {scores.map(s => (
-          <div className="flex-child">
+          <div className="flex-child" key={s.label}>
             <ProgressBar
               label={s.label}
               className="w300"

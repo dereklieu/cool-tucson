@@ -13,28 +13,20 @@ export class App extends React.PureComponent {
   render() {
     return (
       <div className="scroll-hidden viewport-full relative">
+        <Tooltip />
+        <div className="absolute right mr30 mt30">
+          <Score />
+        </div>
         <DndProvider backend={HTML5Backend}>
-          <Bin className="absolute w-full viewport-full top left flex-parent flex-parent--column flex-parent--center-main">
-            <div className="flex-child w-full">
-              <div className="flex-parent flex-parent--center-main">
-                <div className="flex-child">
-                  <Board />
-                </div>
-              </div>
-            </div>
-          </Bin>
-          <div className="absolute top left">
-            <div className="ml30">
+          <Bin className="w-full viewport-full absolute top left flex-parent flex-parent--column flex-parent--end-main">
+            <div className="flex-child">
               <Interventions />
             </div>
-          </div>
+            <div className="flex-child">
+              <Board />
+            </div>
+          </Bin>
         </DndProvider>
-        <div className="absolute top right">
-          <div className="mt30 mr30">
-            <Score />
-          </div>
-        </div>
-        <Tooltip />
       </div>
     )
   }

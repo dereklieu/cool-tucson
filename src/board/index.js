@@ -12,7 +12,8 @@ const width = 980;
 const ratio = .25;
 const height = width * ratio;
 
-const cellStyle = {
+const boardStyle = {
+  margin: 'auto',
   borderBottom: `${px(width * ratio)} solid #eee`,
   borderLeft: `${px(width * ratio / 2)} solid transparent`,
   borderRight: `${px(width * ratio / 2)} solid transparent`,
@@ -57,7 +58,7 @@ let Board = class Board extends React.PureComponent {
   render() {
     const { cells } = this.props;
     return (
-      <div className="relative" style={cellStyle}>
+      <div className="relative" style={boardStyle}>
         <div
           className="absolute"
           style={{

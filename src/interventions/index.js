@@ -3,19 +3,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { settingSelectors } from '../store/setting-selectors';
+import { boardSelectors } from '../store/board-selectors';
 import { Intervention } from './intervention';
 import { interventions } from './interventions';
 import { groupBy } from '../util/group-by';
 import constants from '../constants';
 
 let Interventions = class Interventions extends React.PureComponent {
-  renderGroup = (name, interventions) => {
+  renderGroup = (interventions) => {
     return (
-      <div className="flex-child" key={name}>
-        <h3>{name}</h3>
-        <div className="flex-parent flex-parent--center-cross">
-          {interventions.map(this.renderIntervention)}
-        </div>
+      <div className="flex-parent flex-parent--center-cross flex-parent--center-main">
+        {interventions.map(this.renderIntervention)}
       </div>
     );
   };
@@ -35,18 +33,22 @@ let Interventions = class Interventions extends React.PureComponent {
   };
 
   render() {
+    const { interventionType } = this.props;
     const groups = groupBy(interventions, 'type');
-    console.log(interventions[0]['type'], groups);
+    const activeGroup = groups[interventionType];
     return (
       <div className="flex-parent flex-parent--column">
-        {Object.keys(groups).map(name => this.renderGroup(name, groups[name]))}
+        <div className="flex-child">
+          {this.renderGroup(activeGroup)}
+        </div>
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  locale: settingSelectors.locale(state)
+  locale: settingSelectors.locale(state),
+  interventionType: boardSelectors.interventionType(state)
 });
 
 Interventions = connect(
