@@ -1,14 +1,14 @@
 'use strict';
 import * as immutable from 'object-path-immutable';
 import hat from 'hat';
-import { interventions as data } from '../interventions/interventions';
+import { interventionTypes } from '../interventions/interventions';
 
 const cell = () => ({
   interventions: []
 });
 
 const initialState = {
-  interventionType: data[0].type,
+  interventionType: interventionTypes[0],
   cells: [
     [...Array(6)].map(cell),
     [...Array(6)].map(cell)

@@ -19,7 +19,7 @@ export class App extends React.PureComponent {
         </div>
         <DndProvider backend={HTML5Backend}>
           <Bin className="w-full viewport-full absolute top left flex-parent flex-parent--column flex-parent--end-main">
-            <div className="flex-child">
+            <div className="flex-child mb60">
               <Interventions />
             </div>
             <div className="flex-child">

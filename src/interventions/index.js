@@ -37,10 +37,8 @@ let Interventions = class Interventions extends React.PureComponent {
     const groups = groupBy(interventions, 'type');
     const activeGroup = groups[interventionType];
     return (
-      <div className="flex-parent flex-parent--column">
-        <div className="flex-child">
-          {this.renderGroup(activeGroup)}
-        </div>
+      <div className="round border">
+        {this.renderGroup(activeGroup)}
       </div>
     );
   }

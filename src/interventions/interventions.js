@@ -2,7 +2,7 @@ import i from '../assets/data/interventions.json';
 
 const cost = 5; // TODO: replace with actual cost
 
-export const interventions = i.map(d => {
+const interventions = i.map(d => {
   return {
     score: {
       hd: {
@@ -26,3 +26,15 @@ export const interventions = i.map(d => {
     type: d.location
   };
 });
+
+const types = new Set();
+interventions.forEach(i => {
+  types.add(i.type);
+});
+
+const interventionTypes = Array.from(types);
+
+export {
+  interventions,
+  interventionTypes
+};
