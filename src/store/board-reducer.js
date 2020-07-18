@@ -64,7 +64,7 @@ export function reducer(state = initialState, action) {
       return immutable.set(
         state,
         'interventionType',
-        action.type
+        action.interventionType
       );
   }
   return state;
