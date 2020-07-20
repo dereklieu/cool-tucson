@@ -7,13 +7,11 @@ import { Interventions } from '../interventions';
 import { Board } from '../board';
 import { Bin } from '../board/bin';
 import { Score } from '../indicators/score';
-import { Tooltip } from '../indicators/tooltip';
 
 export class App extends React.PureComponent {
   render() {
     return (
       <div className="scroll-hidden viewport-full relative">
-        <Tooltip />
         <div className="absolute right mr30 mt30">
           <Score />
         </div>

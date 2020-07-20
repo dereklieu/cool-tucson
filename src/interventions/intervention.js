@@ -1,6 +1,5 @@
 'use strict';
 import React from 'react';
-import ReactTooltip from 'react-tooltip'
 import { useDrag } from 'react-dnd';
 import c from 'classnames';
 import { IconLabel } from '../indicators/icon-label';
@@ -33,7 +32,6 @@ export const Intervention = (props) => {
 
   const [{ isDragging }, drag] = useDrag({
     item: { id, name, score, type: dragType },
-    begin: () => ReactTooltip.hide(),
     collect
   });
 
