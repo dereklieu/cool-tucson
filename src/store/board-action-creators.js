@@ -21,4 +21,9 @@ actions.changeInterventionType = (interventionType) => ({
   interventionType
 });
 
+actions.changeActiveIntervention = (intervention) => ({
+  type: 'CHANGE_ACTIVE_INTERVENTION',
+  intervention
+});
+
 export const boardActionCreators = actions;

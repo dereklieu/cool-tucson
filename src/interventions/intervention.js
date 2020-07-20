@@ -23,15 +23,19 @@ export const Intervention = (props) => {
   const {
     id,
     name,
-    active,
+    isActive,
+    changeActiveIntervention,
     score,
     dragType
   } = props;
 
   const isFielded = dragType === constants.FIELDED_INTERVENTION;
 
+  const isDraggable = isFielded || isActive;
+
   const [{ isDragging }, drag] = useDrag({
     item: { id, name, score, type: dragType },
+    canDrag: () => isDraggable,
     collect
   });
 
@@ -42,8 +46,15 @@ export const Intervention = (props) => {
 
   const dimension = isFielded ? 'auto' : 90;
 
+  let cursor;
+  if (isDraggable) {
+    cursor = isDragging ? 'grabbing' : 'grab';
+  } else {
+    cursor = 'pointer';
+  }
+
   const containerStyle = {
-    cursor: isDragging ? 'grabbing' : 'grab',
+    cursor,
     lineHeight: px(dimension),
     width: px(dimension),
     height: px(dimension),
@@ -54,17 +65,24 @@ export const Intervention = (props) => {
     'align-center',
     {
       'round-full bg-gray-faint': !isFielded,
-      'border': active
+      'border': isActive,
+      'color-gray-light': !isDraggable
     }
   );
 
   const displayName = parseName(name);
+  const setActive = () => {
+    if (changeActiveIntervention) {
+      changeActiveIntervention(id);
+    }
+  };
 
   return (
     <div
       ref={drag}
       className={containerClass}
       style={containerStyle}
+      onClick={setActive}
     >
       <strong>{displayName}</strong>
     </div>

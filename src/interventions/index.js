@@ -39,13 +39,18 @@ let Interventions = class Interventions extends React.PureComponent {
   };
 
   renderIntervention = (d) => {
-    const { locale, activeIntervention } = this.props;
+    const {
+      locale,
+      changeActiveIntervention,
+      activeIntervention
+    } = this.props;
     return (
       <div className="flex-child" key={d.name} data-tip={d.name}>
         <Intervention
           id={d.name}
           name={d.name}
-          active={d.name === activeIntervention}
+          isActive={d.name === activeIntervention}
+          changeActiveIntervention={changeActiveIntervention}
           score={d.score[locale]}
           dragType={constants.NEW_INTERVENTION}
         />
@@ -82,6 +87,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatch = {
+  changeActiveIntervention: boardActionCreators.changeActiveIntervention,
   changeInterventionType: boardActionCreators.changeInterventionType
 };
 

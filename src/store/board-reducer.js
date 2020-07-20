@@ -66,6 +66,13 @@ export function reducer(state = initialState, action) {
         removeIntervention(action.id)
       );
 
+    case 'CHANGE_ACTIVE_INTERVENTION':
+      return immutable.set(
+        state,
+        'activeIntervention',
+        action.intervention
+      );
+
     case 'CHANGE_INTERVENTION_TYPE':
       state = immutable.set(
         state,
