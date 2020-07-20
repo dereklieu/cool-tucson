@@ -24,6 +24,7 @@ export const Intervention = (props) => {
   const {
     id,
     name,
+    active,
     score,
     dragType
   } = props;
@@ -54,14 +55,19 @@ export const Intervention = (props) => {
   const containerClass = c(
     'align-center',
     {
-      'round-full bg-gray-faint': !isFielded
+      'round-full bg-gray-faint': !isFielded,
+      'border': active
     }
   );
 
   const displayName = parseName(name);
 
   return (
-    <div ref={drag} className={containerClass} style={containerStyle}>
+    <div
+      ref={drag}
+      className={containerClass}
+      style={containerStyle}
+    >
       <strong>{displayName}</strong>
     </div>
   );

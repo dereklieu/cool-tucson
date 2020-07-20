@@ -16,4 +16,9 @@ boardSelectors.interventionType = createSelector(
   board => board.interventionType
 );
 
+boardSelectors.activeIntervention = createSelector(
+  root,
+  board => board.activeIntervention
+);
+
 export { boardSelectors };

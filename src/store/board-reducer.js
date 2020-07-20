@@ -1,14 +1,20 @@
 'use strict';
 import * as immutable from 'object-path-immutable';
 import hat from 'hat';
-import { interventionTypes } from '../interventions/interventions';
+import {
+  interventions as data,
+  interventionTypes
+} from '../interventions/interventions';
 
 const cell = () => ({
   interventions: []
 });
 
+const getInterventionForType = (type) => data.find(i => i.type === type);
+
 const initialState = {
   interventionType: interventionTypes[0],
+  activeIntervention: getInterventionForType(interventionTypes[0]).name,
   cells: [
     [...Array(6)].map(cell),
     [...Array(6)].map(cell)
@@ -61,10 +67,15 @@ export function reducer(state = initialState, action) {
       );
 
     case 'CHANGE_INTERVENTION_TYPE':
-      return immutable.set(
+      state = immutable.set(
         state,
         'interventionType',
         action.interventionType
+      );
+      return immutable.set(
+        state,
+        'activeIntervention',
+        getInterventionForType(action.interventionType).name
       );
   }
   return state;
