@@ -6,18 +6,23 @@ import {
   interventionTypes
 } from '../interventions/interventions';
 
-const cell = () => ({
-  interventions: []
+const getRandomInterventionType = () => {
+  const count = interventionTypes.length;
+  return interventionTypes[Math.floor(Math.random() * count)];
+};
+
+const makeCell = () => ({
+  interventions: [],
+  type: getRandomInterventionType()
 });
 
-const getInterventionForType = (type) => data.find(i => i.type === type);
-
+const initialIntervention = data[0];
 const initialState = {
-  interventionType: interventionTypes[0],
-  activeIntervention: getInterventionForType(interventionTypes[0]).name,
+  interventionType: initialIntervention.type,
+  activeIntervention: initialIntervention.name,
   cells: [
-    [...Array(6)].map(cell),
-    [...Array(6)].map(cell)
+    [...Array(6)].map(makeCell),
+    [...Array(6)].map(makeCell)
   ]
 };
 
@@ -82,7 +87,7 @@ export function reducer(state = initialState, action) {
       return immutable.set(
         state,
         'activeIntervention',
-        getInterventionForType(action.interventionType).name
+        data.find(i => i.type === action.interventionType).name
       );
   }
   return state;

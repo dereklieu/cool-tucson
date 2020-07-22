@@ -3,6 +3,7 @@ import c from 'classnames';
 import React from 'react';
 import { useDrop } from 'react-dnd';
 import { px } from '../util/style-util';
+import { formatCellConstant } from '../util/format';
 import { Intervention } from '../interventions/intervention';
 import constants from '../constants';
 
@@ -23,11 +24,15 @@ export function Cell (props) {
     row,
     column,
     currency,
-    applyIntervention
+    applyIntervention,
+    isActive
   } = props;
   const { interventions } = cell;
   const [{ isOver, canDrop }, drop] = useDrop({
-    accept: constants.NEW_INTERVENTION,
+    accept: formatCellConstant(
+      constants.NEW_INTERVENTION,
+      cell.type
+    ),
     canDrop: ({ score }) => {
       return interventions.length < 4 && currency >= score.cost;
     },
@@ -41,8 +46,10 @@ export function Cell (props) {
   });
 
   const containerClass = c('w-full relative', {
-    'border border--gray': canDrop && isOver,
-    'border border--gray-light': canDrop && !isOver
+    'border': isActive,
+    'border--orange-light': isOver && canDrop,
+    'border--gray': !isOver && canDrop,
+    'border--gray-light': !isOver && !canDrop,
   });
 
   return (

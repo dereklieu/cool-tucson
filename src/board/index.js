@@ -30,7 +30,11 @@ const containerDimensions = {
 
 let Board = class Board extends React.PureComponent {
   renderRow(cells, row, height) {
-    const { applyIntervention, currency } = this.props;
+    const {
+      interventionType,
+      currency,
+      applyIntervention
+    } = this.props;
     const containerClass = 'col flex-parent flex-parent--column flex-parent--center-main';
     const containerStyle = { height: px(height) };
     return (
@@ -48,6 +52,7 @@ let Board = class Board extends React.PureComponent {
               column={column}
               currency={currency}
               applyIntervention={applyIntervention}
+              isActive={cell.type === interventionType}
             />
           </div>
         ))}
@@ -89,6 +94,7 @@ let Board = class Board extends React.PureComponent {
 
 const mapStateToProps = state => ({
   cells: boardSelectors.cells(state),
+  interventionType: boardSelectors.interventionType(state),
   currency: scoreSelectors.currency(state)
 });
 

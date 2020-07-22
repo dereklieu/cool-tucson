@@ -5,6 +5,7 @@ import c from 'classnames';
 import { IconLabel } from '../indicators/icon-label';
 import constants from '../constants';
 import { px } from '../util/style-util';
+import { formatCellConstant } from '../util/format';
 
 const collect = (monitor) => {
   return {
@@ -23,18 +24,28 @@ export const Intervention = (props) => {
   const {
     id,
     name,
+    interventionType,
     isActive,
     changeActiveIntervention,
     score,
     dragType
   } = props;
 
+  // Fielded interventions have different behavior than
+  // non-fielded.
+  //
+  // 1. They can be dragged without an active state.
+  // 2. Drag destinations are not discriminatory
+  // (as board cells are).
   const isFielded = dragType === constants.FIELDED_INTERVENTION;
 
   const isDraggable = isFielded || isActive;
+  const type = isFielded
+    ? dragType
+    : formatCellConstant(dragType, interventionType);
 
   const [{ isDragging }, drag] = useDrag({
-    item: { id, name, score, type: dragType },
+    item: { id, name, score, type },
     canDrag: () => isDraggable,
     collect
   });

@@ -49,6 +49,7 @@ let Interventions = class Interventions extends React.PureComponent {
         <Intervention
           id={d.name}
           name={d.name}
+          interventionType={d.type}
           isActive={d.name === activeIntervention}
           changeActiveIntervention={changeActiveIntervention}
           score={d.score[locale]}
