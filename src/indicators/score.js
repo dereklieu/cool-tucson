@@ -9,7 +9,8 @@ let Score = class Score extends React.PureComponent {
     const {
       currency,
       social,
-      environmental
+      environmental,
+      winScore
     } = this.props;
 
     const scores = [
@@ -20,13 +21,13 @@ let Score = class Score extends React.PureComponent {
 
     return (
       <div className="flex-parent flex-parent--end-main flex-parent--wrap w600">
-        {scores.map(s => (
+        {scores.map((s, i) => (
           <div className="flex-child" key={s.label}>
             <ProgressBar
               label={s.label}
               className="w300"
-              barClassName="bg-gray-light"
               progress={s.progress}
+              winScore={i === 2 ? undefined : winScore}
             />
           </div>
         ))}
@@ -37,8 +38,9 @@ let Score = class Score extends React.PureComponent {
 
 const mapStateToProps = state => ({
   currency: scoreSelectors.currency(state),
-  social: scoreSelectors.social(state),
-  environmental: scoreSelectors.environmental(state)
+  social: scoreSelectors.socialScore(state),
+  environmental: scoreSelectors.environmentalScore(state),
+  winScore: scoreSelectors.winScore(state)
 });
 
 Score = connect(
