@@ -2,7 +2,7 @@
 
 import { createSelector } from 'reselect';
 
-const root = state => state.score;
+const root = state => state.board.score;
 
 const scoreSelectors = {};
 
