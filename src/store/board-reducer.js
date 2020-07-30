@@ -72,6 +72,11 @@ export function reducer(state = initialState, action) {
       );
 
     case 'CHANGE_ACTIVE_INTERVENTION':
+      state = immutable.set(
+        state,
+        'interventionType',
+        data.find(d => d.name === action.intervention).type
+      );
       return immutable.set(
         state,
         'activeIntervention',

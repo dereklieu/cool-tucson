@@ -1,10 +1,14 @@
 'use strict';
 import React from 'react';
+import c from 'classnames';
+import { connect } from 'react-redux';
 import { interventions } from './interventions';
+import { boardSelectors } from '../store/board-selectors';
 
-export const Description = (props) => {
+let Description = (props) => {
   const {
-    activeIntervention
+    activeIntervention,
+    className
   } = props;
 
   const intervention = interventions.find(
@@ -12,7 +16,7 @@ export const Description = (props) => {
   );
 
   return (
-    <div className="wmax600 hmax360 scroll-auto scroll-styled">
+    <div className={c(className, 'wmax600 hmax360 scroll-auto scroll-styled')}>
       <div className="flex-parent flex-parent--end-cross mb24">
         <h3 className="flex-child txt-h3 txt-bold">{intervention.name}</h3>
         <div className="flex-child txt-s round border px6 py3 ml12">{intervention.type}</div>
@@ -23,3 +27,10 @@ export const Description = (props) => {
     </div>
   );
 };
+
+const mapStateToProps = state => ({
+  activeIntervention: boardSelectors.activeIntervention(state)
+});
+
+Description = connect(mapStateToProps)(Description);
+export { Description };

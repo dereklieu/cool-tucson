@@ -6,7 +6,6 @@ import { settingSelectors } from '../store/setting-selectors';
 import { boardSelectors } from '../store/board-selectors';
 import { boardActionCreators } from '../store/board-action-creators';
 import { Intervention } from './intervention';
-import { Description } from './description';
 import { interventions } from './interventions';
 import { groupBy } from '../util/group-by';
 import constants from '../constants';
@@ -14,13 +13,9 @@ import constants from '../constants';
 const interventionGroups = groupBy(interventions, 'type');
 
 let Interventions = class Interventions extends React.PureComponent {
-  changeInterventionType = (e) => {
-    this.props.changeInterventionType(e.target.value);
-  };
-
-  renderGroup = (interventions) => {
+  renderGroup = (interventions, groupName) => {
     return (
-      <div className="flex-parent flex-parent--center-cross flex-parent--center-main">
+      <div className="flex-parent flex-parent--center-cross" key={groupName}>
         {interventions.map(this.renderIntervention)}
       </div>
     );
@@ -48,19 +43,11 @@ let Interventions = class Interventions extends React.PureComponent {
   };
 
   render() {
-    const {
-      interventionType,
-      activeIntervention
-    } = this.props;
-    const activeGroup = interventionGroups[interventionType];
     return (
-      <div className="flex-parent flex-parent--column flex-parent--center-cross">
-        <div className="flex-child mb60">
-          <Description activeIntervention={activeIntervention} />
-        </div>
-        <div className="flex-child">
-          {this.renderGroup(activeGroup)}
-        </div>
+      <div>
+        {Object.keys(interventionGroups).map(group =>
+          this.renderGroup(interventionGroups[group], group)
+        )}
       </div>
     );
   }
@@ -68,13 +55,11 @@ let Interventions = class Interventions extends React.PureComponent {
 
 const mapStateToProps = state => ({
   locale: settingSelectors.locale(state),
-  interventionType: boardSelectors.interventionType(state),
   activeIntervention: boardSelectors.activeIntervention(state)
 });
 
 const mapDispatch = {
-  changeActiveIntervention: boardActionCreators.changeActiveIntervention,
-  changeInterventionType: boardActionCreators.changeInterventionType
+  changeActiveIntervention: boardActionCreators.changeActiveIntervention
 };
 
 Interventions = connect(
