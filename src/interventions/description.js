@@ -12,7 +12,7 @@ export const Description = (props) => {
   );
 
   return (
-    <div className="prose wmax600">
+    <div className="prose wmax600 hmax360 scroll-auto scroll-styled">
       <h3 className="txt-h3">{intervention.name}</h3>
       <p>{intervention.description}</p>
     </div>
