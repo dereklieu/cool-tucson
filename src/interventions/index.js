@@ -18,18 +18,6 @@ let Interventions = class Interventions extends React.PureComponent {
     this.props.changeInterventionType(e.target.value);
   };
 
-  renderGroupToggle = () => {
-    const { interventionType } = this.props;
-    const groups = Object.keys(interventionGroups);
-    return (
-      <select onChange={this.changeInterventionType} value={interventionType}>
-        {groups.map(group => (
-          <option key={group} value={group}>{group}</option>
-        ))}
-      </select>
-    );
-  };
-
   renderGroup = (interventions) => {
     return (
       <div className="flex-parent flex-parent--center-cross flex-parent--center-main">
@@ -69,9 +57,6 @@ let Interventions = class Interventions extends React.PureComponent {
       <div className="flex-parent flex-parent--column flex-parent--center-cross">
         <div className="flex-child mb60">
           <Description activeIntervention={activeIntervention} />
-        </div>
-        <div className="flex-child mb30">
-          {this.renderGroupToggle()}
         </div>
         <div className="flex-child">
           {this.renderGroup(activeGroup)}
