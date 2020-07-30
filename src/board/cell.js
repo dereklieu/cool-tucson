@@ -33,11 +33,12 @@ export function Cell (props) {
       constants.NEW_INTERVENTION,
       cell.type
     ),
-    canDrop: ({ score }) => {
-      return interventions.length < 4 && currency >= score.cost;
+    canDrop: ({ id, score }) => {
+      return id === 'base' ||
+        (interventions.length < 4 && currency >= score.cost);
     },
-    drop: ({ name, score }) => {
-      return applyIntervention(name, score, row, column);
+    drop: ({ id, name, score }) => {
+      return applyIntervention(id, name, score, row, column);
     },
     collect: monitor => ({
       canDrop: monitor.canDrop(),

@@ -84,7 +84,7 @@ export const Intervention = (props) => {
   const displayName = parseName(name);
   const setActive = () => {
     if (changeActiveIntervention) {
-      changeActiveIntervention(id);
+      changeActiveIntervention(name, interventionType);
     }
   };
 

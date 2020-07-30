@@ -6,17 +6,22 @@ import { settingSelectors } from '../store/setting-selectors';
 import { boardSelectors } from '../store/board-selectors';
 import { boardActionCreators } from '../store/board-action-creators';
 import { Intervention } from './intervention';
-import { interventions } from './interventions';
+import { interventions, getBaseIntervention } from './interventions';
 import { groupBy } from '../util/group-by';
 import constants from '../constants';
 
 const interventionGroups = groupBy(interventions, 'type');
 
 let Interventions = class Interventions extends React.PureComponent {
-  renderGroup = (interventions, groupName) => {
+  renderGroup = (interventions, type) => {
     return (
-      <div className="flex-parent flex-parent--center-cross" key={groupName}>
-        {interventions.map(this.renderIntervention)}
+      <div className="flex-parent flex-parent--center-cross" key={type}>
+        {
+          [
+            getBaseIntervention(type),
+            ...interventions
+          ].map(this.renderIntervention)
+        }
       </div>
     );
   };
@@ -28,9 +33,9 @@ let Interventions = class Interventions extends React.PureComponent {
       activeIntervention
     } = this.props;
     return (
-      <div className="flex-child" key={d.name} data-tip={d.name}>
+      <div className="flex-child" key={d.name}>
         <Intervention
-          id={d.name}
+          id={d.id}
           name={d.name}
           interventionType={d.type}
           isActive={d.name === activeIntervention}

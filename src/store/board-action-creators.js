@@ -2,13 +2,23 @@
 
 const actions = {};
 
-actions.applyIntervention = (name, score, row, column) => ({
-  type: 'APPLY_INTERVENTION',
-  name,
-  score,
-  row,
-  column
-});
+actions.applyIntervention = (id, name, score, row, column) => {
+  if (id === 'base') {
+    return {
+      type: 'CLEAR_INTERVENTIONS',
+      row,
+      column
+    };
+  } else {
+    return {
+      type: 'APPLY_INTERVENTION',
+      name,
+      score,
+      row,
+      column
+    };
+  }
+}
 
 actions.removeIntervention = (id, score) => ({
   type: 'REMOVE_INTERVENTION',
@@ -21,9 +31,10 @@ actions.changeInterventionType = (interventionType) => ({
   interventionType
 });
 
-actions.changeActiveIntervention = (intervention) => ({
+actions.changeActiveIntervention = (intervention, interventionType) => ({
   type: 'CHANGE_ACTIVE_INTERVENTION',
-  intervention
+  intervention,
+  interventionType
 });
 
 export const boardActionCreators = actions;

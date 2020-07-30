@@ -64,6 +64,19 @@ export function reducer(state = initialState, action) {
         pushIntervention(action.name, action.score)
       );
 
+    case 'CLEAR_INTERVENTIONS': {
+      return immutable.set(
+        state,
+        [
+          'cells',
+          action.row,
+          action.column,
+          'interventions'
+        ],
+        []
+      );
+    }
+
     case 'REMOVE_INTERVENTION':
       return immutable.update(
         state,
@@ -75,7 +88,7 @@ export function reducer(state = initialState, action) {
       state = immutable.set(
         state,
         'interventionType',
-        data.find(d => d.name === action.intervention).type
+        action.interventionType
       );
       return immutable.set(
         state,
