@@ -40,19 +40,6 @@ export function reducer(state = initialState, action) {
         pushIntervention(action.name, action.score)
       );
 
-    case 'CLEAR_INTERVENTIONS': {
-      return immutable.set(
-        state,
-        [
-          'cells',
-          action.row,
-          action.column,
-          'interventions'
-        ],
-        []
-      );
-    }
-
     case 'REMOVE_INTERVENTION':
       state = immutable.update(
         state,
@@ -64,6 +51,27 @@ export function reducer(state = initialState, action) {
         'cells',
         removeIntervention(action.id)
       );
+
+    case 'CLEAR_INTERVENTIONS': {
+      const path = [
+        'cells',
+        action.row,
+        action.column,
+        'interventions'
+      ];
+      immutable.get(state, path, []).forEach(i => {
+        state = immutable.update(
+          state,
+          'score',
+          removeInterventionScore(i.score)
+        );
+      });
+      return immutable.set(
+        state,
+        path,
+        []
+      );
+    }
 
     case 'CHANGE_ACTIVE_INTERVENTION':
       state = immutable.set(
