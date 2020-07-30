@@ -34,7 +34,15 @@ interventions.forEach(i => {
 
 const interventionTypes = Array.from(types);
 
+const baseTypes = {
+  'Private buildings': 'Basic building',
+  'Open area': 'Parking lot',
+  Street: 'Basic street',
+  'Town hall': 'Basic town hall'
+};
+
 export {
   interventions,
-  interventionTypes
+  interventionTypes,
+  baseTypes
 };
