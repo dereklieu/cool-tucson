@@ -16,13 +16,13 @@ let Score = class Score extends React.PureComponent {
     const scores = [
       { progress: social, label: 'Social' },
       { progress: environmental, label: 'Environmental' },
-      { progress: currency, label: '$' }
+      { progress: currency, label: 'Cost' }
     ];
 
     return (
       <div className="flex-parent flex-parent--end-main flex-parent--wrap w600">
         {scores.map((s, i) => (
-          <div className="flex-child" key={s.label}>
+          <div className="flex-child mb12" key={s.label}>
             <ProgressBar
               label={s.label}
               className="w300"

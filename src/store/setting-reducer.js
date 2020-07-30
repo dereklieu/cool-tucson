@@ -8,7 +8,7 @@ const locales = {
 };
 
 const initialState = {
-  locale: undefined
+  locale: locales['hot dry']
 };
 
 export function reducer(state = initialState, action) {

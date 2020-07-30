@@ -16,13 +16,13 @@ export function ProgressBar(props) {
 
   const containerClass = c(
     className,
-    'relative h12 round border scroll-hidden',
+    'relative h24 round border scroll-hidden',
     { 'flex-child ml6': !!label }
   );
 
   const barClass = c(
     barClassName,
-    'absolute left h12 round-l transition',
+    'absolute left h24 round-l transition',
     {
       'round-r': progress === 100,
       'bg-gray-light': !hasWinCondition || progress < winScore,
@@ -36,13 +36,12 @@ export function ProgressBar(props) {
 
   let winIndicator = null;
   if (hasWinCondition) {
-    const winIndicatorStyle = {
-      left: pct(winScore),
-      top: '-2px',
-      height: '16px'
-    };
+    const winIndicatorStyle = { left: pct(winScore) };
     winIndicator = (
-      <div className="absolute border border-l" style={winIndicatorStyle} />
+      <div
+        className="absolute border border-l top h24"
+        style={winIndicatorStyle}
+      />
     );
   }
 
