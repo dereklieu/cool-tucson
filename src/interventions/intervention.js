@@ -64,16 +64,16 @@ export const Intervention = (props) => {
 
   const size = 80;
   const dimension = isFielded ? 'auto' : px(size);
+  const height = !isFielded && interventionType === 'Street' ? px(size / 2) : dimension;
   const containerStyle = {
     cursor,
-    lineHeight: dimension,
+    height,
+    lineHeight: height,
     width: dimension,
-    height: dimension,
     verticalAlign: 'middle'
   };
 
   let backgroundShape;
-  console.log(interventionType);
   if (!isFielded) {
     switch (interventionType) {
       case 'Private buildings':
@@ -103,7 +103,6 @@ export const Intervention = (props) => {
           <div
             className="absolute top left border"
             style={{
-              marginTop: px(size / 4),
               width: dimension,
               height: px(size / 2)
             }}

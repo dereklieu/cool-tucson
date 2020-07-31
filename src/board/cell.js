@@ -47,11 +47,64 @@ export function Cell (props) {
   });
 
   const containerClass = c('w-full relative', {
-    'border': isActive,
-    'border--orange-light': isOver && canDrop,
-    'border--gray': !isOver && canDrop,
-    'border--gray-light': !isOver && !canDrop,
+    'color-orange-light': isOver && canDrop,
+    'color-gray': !isOver && canDrop,
+    'color-gray-light': !isOver && !canDrop,
   });
+
+  const dimension = height * 0.7;
+
+  let backgroundShape;
+  switch (cell.type) {
+    case 'Private buildings':
+      backgroundShape = (
+        <div
+          className="absolute top left border"
+          style={{
+            width: px(dimension),
+            height: px(dimension)
+          }}
+        />
+      );
+      break;
+    case 'Open area':
+      backgroundShape = (
+        <div
+          className="absolute top left border round-full"
+          style={{
+            width: px(dimension),
+            height: px(dimension)
+          }}
+        />
+      );
+      break;
+    case 'Street':
+      backgroundShape = (
+        <div
+          className="absolute top left border"
+          style={{
+            marginTop: px(dimension / 4),
+            height: px(dimension / 2),
+            width: px(dimension)
+          }}
+        />
+      );
+      break;
+    case 'Town hall':
+      backgroundShape = (
+        <div
+          className="absolute top left"
+          style={{
+            width: 0,
+            height: 0,
+            borderStyle: 'solid',
+            borderWidth: `0 ${px(dimension / 2)} ${px(dimension)} ${px(dimension / 2)}`,
+            borderColor: 'transparent transparent rgba(100, 100, 100, 0.1) transparent'
+          }}
+        />
+      );
+      break;
+  }
 
   return (
     <div
@@ -59,6 +112,7 @@ export function Cell (props) {
       style={{ height: px(height * .5), borderRadius: '50%' }}
       ref={drop}
     >
+      {backgroundShape}
       {interventions.map((intervention, i) => (
         <div
           key={intervention.id}
