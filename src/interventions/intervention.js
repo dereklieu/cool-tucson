@@ -55,8 +55,6 @@ export const Intervention = (props) => {
     return null;
   }
 
-  const dimension = isFielded ? 'auto' : 90;
-
   let cursor;
   if (isDraggable) {
     cursor = isDragging ? 'grabbing' : 'grab';
@@ -64,19 +62,75 @@ export const Intervention = (props) => {
     cursor = 'pointer';
   }
 
+  const size = 80;
+  const dimension = isFielded ? 'auto' : px(size);
   const containerStyle = {
     cursor,
-    lineHeight: px(dimension),
-    width: px(dimension),
-    height: px(dimension),
+    lineHeight: dimension,
+    width: dimension,
+    height: dimension,
     verticalAlign: 'middle'
   };
 
+  let backgroundShape;
+  console.log(interventionType);
+  if (!isFielded) {
+    switch (interventionType) {
+      case 'Private buildings':
+        backgroundShape = (
+          <div
+            className="absolute top left border"
+            style={{
+              width: dimension,
+              height: dimension
+            }}
+          />
+        );
+        break;
+      case 'Open area':
+        backgroundShape = (
+          <div
+            className="absolute top left border round-full"
+            style={{
+              width: dimension,
+              height: dimension
+            }}
+          />
+        );
+        break;
+      case 'Street':
+        backgroundShape = (
+          <div
+            className="absolute top left border"
+            style={{
+              marginTop: px(size / 4),
+              width: dimension,
+              height: px(size / 2)
+            }}
+          />
+        );
+        break;
+      case 'Town hall':
+        backgroundShape = (
+          <div
+            className="absolute top left"
+            style={{
+              width: 0,
+              height: 0,
+              borderStyle: 'solid',
+              borderWidth: `0 ${px(size / 2)} ${px(size)} ${px(size / 2)}`,
+              borderColor: 'transparent transparent rgba(100, 100, 100, 0.1) transparent'
+            }}
+          />
+        );
+        break;
+    }
+  }
+
   const containerClass = c(
-    'align-center',
+    'align-center relative',
     {
-      'round-full bg-gray-faint': !isFielded,
-      'border': isActive,
+      'ml6 mb6': !isFielded,
       'color-gray-light': !isDraggable
     }
   );
@@ -95,6 +149,7 @@ export const Intervention = (props) => {
       style={containerStyle}
       onClick={setActive}
     >
+      {backgroundShape}
       <strong>{displayName}</strong>
     </div>
   );
