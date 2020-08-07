@@ -21,4 +21,9 @@ boardSelectors.activeIntervention = createSelector(
   board => board.activeIntervention
 );
 
+boardSelectors.badges = createSelector(
+  root,
+  board => board.badges
+);
+
 export { boardSelectors };

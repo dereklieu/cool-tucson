@@ -5,6 +5,7 @@ import {
   interventions as data,
   interventionTypes
 } from '../interventions/interventions';
+import { badges } from '../badges/badges';
 
 const initialIntervention = data[0];
 const initialState = {
@@ -18,17 +19,15 @@ const initialState = {
     currency: 100,
     environmental: 0,
     social: 0
-  }
+  },
+  badges: []
 };
 
 export function reducer(state = initialState, action) {
   switch(action.type) {
     case 'APPLY_INTERVENTION':
-      state = immutable.update(
-        state,
-        'score',
-        applyInterventionScore(action.score)
-      );
+      state = immutable.update(state, 'score', applyInterventionScore(action.score));
+      state = immutable.update(state, 'badges', syncBadges(state.score));
       return immutable.update(
         state,
         [
@@ -41,16 +40,10 @@ export function reducer(state = initialState, action) {
       );
 
     case 'REMOVE_INTERVENTION':
-      state = immutable.update(
-        state,
-        'score',
-        removeInterventionScore(action.score)
-      );
-      return immutable.update(
-        state,
-        'cells',
-        removeIntervention(action.id)
-      );
+      state = immutable.update(state, 'score', removeInterventionScore(action.score));
+      state = immutable.update(state, 'badges', syncBadges(state.score));
+      state = immutable.update(state, 'cells', removeIntervention(action.id));
+      return state;
 
     case 'CLEAR_INTERVENTIONS': {
       const path = [
@@ -60,12 +53,9 @@ export function reducer(state = initialState, action) {
         'interventions'
       ];
       immutable.get(state, path, []).forEach(i => {
-        state = immutable.update(
-          state,
-          'score',
-          removeInterventionScore(i.score)
-        );
+        state = immutable.update(state, 'score', removeInterventionScore(i.score));
       });
+      state = immutable.update(state, 'badges', syncBadges(state.score));
       return immutable.set(
         state,
         path,
@@ -74,23 +64,12 @@ export function reducer(state = initialState, action) {
     }
 
     case 'CHANGE_ACTIVE_INTERVENTION':
-      state = immutable.set(
-        state,
-        'interventionType',
-        action.interventionType
-      );
-      return immutable.set(
-        state,
-        'activeIntervention',
-        action.intervention
-      );
+      state = immutable.set(state, 'interventionType', action.interventionType);
+      state = immutable.set(state, 'activeIntervention', action.intervention);
+      return state;
 
     case 'CHANGE_INTERVENTION_TYPE':
-      state = immutable.set(
-        state,
-        'interventionType',
-        action.interventionType
-      );
+      state = immutable.set(state, 'interventionType', action.interventionType);
       return immutable.set(
         state,
         'activeIntervention',
@@ -154,4 +133,13 @@ function removeInterventionScore(score) {
     environmental: state.environmental - environmental,
     social: state.social - social
   });
+}
+
+function syncBadges(score) {
+  return state => {
+    return badges.filter(badge => {
+      const { type, threshold } = badge.requirement;
+      return score[type] >= threshold ? badge.title : null
+    }).filter(Boolean);
+  };
 }

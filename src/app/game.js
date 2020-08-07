@@ -6,6 +6,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 import { Description } from '../interventions/description';
 import { Interventions } from '../interventions';
 import { Board } from '../board';
+import { Badges } from '../badges';
 import { Bin } from '../board/bin';
 import { Score } from '../indicators/score';
 
@@ -30,5 +31,6 @@ export const Game = () => (
         <Interventions />
       </div>
     </DndProvider>
+    <Badges />
   </div>
 );
