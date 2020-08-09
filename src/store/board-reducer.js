@@ -136,10 +136,24 @@ function removeInterventionScore(score) {
 }
 
 function syncBadges(score) {
+  const passed = badges.filter(b => {
+    const { type, threshold } = b.requirement;
+    return score[type] >= threshold;
+  });
+
   return state => {
-    return badges.filter(badge => {
-      const { type, threshold } = badge.requirement;
-      return score[type] >= threshold ? badge.title : null
-    }).filter(Boolean);
+    const earned = new Set(state.map(b => b.title));
+    const newBadges = passed.filter(b => !earned.has(b.title)).map(b => ({
+      title: b.title,
+      isPassed: true
+    }));
+    return state.concat(newBadges).map(b => {
+      const { title } = b;
+      const isPassed = Boolean(passed.find(b => b.title === title));
+      return {
+        ...b,
+        isPassed
+      };
+    });
   };
 }

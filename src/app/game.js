@@ -31,6 +31,8 @@ export const Game = () => (
         <Interventions />
       </div>
     </DndProvider>
-    <Badges />
+    <div className="absolute right mt240">
+      <Badges />
+    </div>
   </div>
 );

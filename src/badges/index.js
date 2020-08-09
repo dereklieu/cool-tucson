@@ -1,30 +1,63 @@
 'use strict';
 import React from 'react';
 import { connect } from 'react-redux';
-import { scoreSelectors } from '../store/score-selectors';
+import { boardSelectors } from '../store/board-selectors';
+import { ActiveBadge } from './active-badge';
 import { badges } from './badges';
 
 let Badges = class Badges extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      active: null
+      isExpanded: false,
+      active: []
     };
+    this.mounted = true;
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    // Detect changes to props;
-    // Also set timer to reset state.
+  componentWillUnmount() {
+    this.mounted = false;
+  }
+
+  componentDidUpdate(prevProps) {
+    const { badges } = this.props;
+    if (badges.length > prevProps.badges.length) {
+      const next = badges.slice(prevProps.length);
+      this.setState(state =>
+        ({ active: state.active.concat(next) })
+      );
+    }
+  }
+
+  removeActive = (title) => {
+    this.setState(state =>
+      ({ active: state.active.filter((b) => b.title !== title) })
+    );
+  }
+
+  renderExpanded() {
+    return null;
   }
 
   render() {
-    return <div />;
+    const { isExpanded, active } = this.state;
+    return (
+      <div className="relative">
+        {isExpanded && this.renderExpanded()}
+        {active.map((badge, i) => (
+          <ActiveBadge
+            key={badge.title}
+            badge={badge}
+            onRemove={this.removeActive}
+          />
+        ))}
+      </div>
+    );
   }
 }
 
 const mapStateToProps = state => ({
-  social: scoreSelectors.social(state),
-  environmental: scoreSelectors.environmental(state)
+  badges: boardSelectors.badges(state)
 });
 
 Badges = connect(mapStateToProps)(Badges);
