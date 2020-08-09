@@ -62,7 +62,7 @@ export const Intervention = (props) => {
     cursor = 'pointer';
   }
 
-  const size = 80;
+  const size = 60;
   const dimension = isFielded ? 'auto' : px(size);
   const height = !isFielded && interventionType === 'Street' ? px(size / 2) : dimension;
   const containerStyle = {

@@ -6,24 +6,13 @@ import { settingSelectors } from '../store/setting-selectors';
 import { boardSelectors } from '../store/board-selectors';
 import { boardActionCreators } from '../store/board-action-creators';
 import { Intervention } from './intervention';
-import { interventions, getBaseIntervention } from './interventions';
+import { interventions } from './interventions';
 import { groupBy } from '../util/group-by';
 import constants from '../constants';
 
-const interventionGroups = groupBy(interventions, 'type');
-
 let Interventions = class Interventions extends React.PureComponent {
-  renderGroup = (interventions, type) => {
-    return (
-      <div className="flex-parent flex-parent--center-cross" key={type}>
-        {
-          [
-            getBaseIntervention(type),
-            ...interventions
-          ].map(this.renderIntervention)
-        }
-      </div>
-    );
+  renderGroup = (interventions) => {
+    return interventions.map(this.renderIntervention);
   };
 
   renderIntervention = (d) => {
@@ -49,10 +38,8 @@ let Interventions = class Interventions extends React.PureComponent {
 
   render() {
     return (
-      <div>
-        {Object.keys(interventionGroups).map(group =>
-          this.renderGroup(interventionGroups[group], group)
-        )}
+      <div className="flex-parent flex-parent--center-cross flex-parent--center-main">
+        {interventions.map(this.renderIntervention)}
       </div>
     );
   }

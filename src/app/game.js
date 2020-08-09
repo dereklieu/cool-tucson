@@ -12,24 +12,23 @@ import { Score } from '../indicators/score';
 
 export const Game = () => (
   <div className="scroll-hidden viewport-full relative">
-    <div className="absolute right mr30 mt30">
-      <Score />
-    </div>
     <DndProvider backend={HTML5Backend}>
       <Bin className="w-full viewport-full absolute top left flex-parent flex-parent--column flex-parent--end-main">
-        <div className="flex-child mb120">
+        <div className="flex-child mt30" style={{ marginBottom: 'auto' }}>
+          <Score />
+        </div>
+        <div className="flex-child mb30">
           <div className="flex-parent flex-parent--center-main">
             <Description className="flex-child" />
           </div>
+        </div>
+        <div className="flex-child mb30">
+          <Interventions />
         </div>
         <div className="flex-child">
           <Board />
         </div>
       </Bin>
-
-      <div className="absolute top left ml30 mt30">
-        <Interventions />
-      </div>
     </DndProvider>
     <div className="absolute right mt240">
       <Badges />

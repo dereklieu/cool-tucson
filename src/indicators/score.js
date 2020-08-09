@@ -14,23 +14,43 @@ let Score = class Score extends React.PureComponent {
     } = this.props;
 
     const scores = [
-      { progress: social, label: 'Social' },
-      { progress: environmental, label: 'Environmental' },
-      { progress: currency, label: 'Cost' }
+      {
+        progress: social,
+        barClassName: social > winScore
+        ? 'bg-blue-dark'
+        : 'bg-blue-light',
+        label: 'Social score'
+      },
+      {
+        progress: environmental,
+        barClassName: environmental > winScore
+        ? 'bg-green-dark'
+        : 'bg-green-light',
+        label: 'Environmental score'
+      }
     ];
 
     return (
-      <div className="flex-parent flex-parent--end-main flex-parent--wrap w600">
-        {scores.map((s, i) => (
-          <div className="flex-child mb12" key={s.label}>
-            <ProgressBar
-              label={s.label}
-              className="w300"
-              progress={s.progress}
-              winScore={i === 2 ? undefined : winScore}
-            />
-          </div>
-        ))}
+      <div className="flex-parent flex-parent--start-cross flex-parent--center-main">
+        <div className="flex-child">
+          <ProgressBar
+            label="Resources remaining"
+            barClassName="bg-red-light"
+            progress={currency}
+          />
+        </div>
+        <div className="flex-child ml30">
+          {scores.map((s, i) => (
+            <div key={s.label} className="mb6">
+              <ProgressBar
+                label={s.label}
+                barClassName={s.barClassName}
+                progress={s.progress}
+                winScore={winScore}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
