@@ -144,7 +144,7 @@ function syncBadges(score) {
   return state => {
     const earned = new Set(state.map(b => b.title));
     const newBadges = passed.filter(b => !earned.has(b.title)).map(b => ({
-      title: b.title,
+      ...b,
       isPassed: true
     }));
     return state.concat(newBadges).map(b => {

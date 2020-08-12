@@ -30,7 +30,7 @@ export const Game = () => (
         </div>
       </Bin>
     </DndProvider>
-    <div className="absolute right mt240">
+    <div className="absolute right mt30">
       <Badges />
     </div>
   </div>

@@ -1,15 +1,16 @@
 'use strict';
 import React from 'react';
+import c from 'classnames';
 import { connect } from 'react-redux';
 import { boardSelectors } from '../store/board-selectors';
 import { ActiveBadge } from './active-badge';
 import { badges } from './badges';
+import { IconLabel } from '../indicators/icon-label';
 
 let Badges = class Badges extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      isExpanded: false,
       active: []
     };
     this.mounted = true;
@@ -35,17 +36,36 @@ let Badges = class Badges extends React.PureComponent {
     );
   }
 
-  renderExpanded() {
-    return null;
+  renderToggle() {
+    const containerClass = c(
+      'cursor-pointer mt6 transition',
+      'flex-parent flex-parent--column flex-parent--center-main',
+      'absolute right w60 h60 shadow-darken10',
+      'border-t border-l border-b',
+      'round-t round-l round-b',
+      'bg-white bg-green-light-on-hover'
+    );
+    const containerStyle = {
+      lineHeight: '60px'
+    };
+    return (
+      <div className={containerClass} style={containerStyle}>
+        <IconLabel
+          icon="star"
+          size={36}
+          className="flex-parent flex-parent--center-main"
+        />
+      </div>
+    );
   }
 
   render() {
-    const { isExpanded, active } = this.state;
+    const {  active } = this.state;
     return (
       <div className="relative">
-        {isExpanded && this.renderExpanded()}
         {active.map((badge, i) => (
           <ActiveBadge
+            index={i}
             key={badge.title}
             badge={badge}
             onRemove={this.removeActive}

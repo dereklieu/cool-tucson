@@ -2,7 +2,6 @@
 import React from 'react';
 import { useDrag } from 'react-dnd';
 import c from 'classnames';
-import { IconLabel } from '../indicators/icon-label';
 import constants from '../constants';
 import { px } from '../util/style-util';
 import { formatCellConstant } from '../util/format';

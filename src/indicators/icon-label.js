@@ -4,6 +4,7 @@ import c from 'classnames';
 
 export function IconLabel(props) {
   const {
+    className,
     icon,
     label,
     size = 12
@@ -19,6 +20,7 @@ export function IconLabel(props) {
   );
 
   const containerClass = c(
+    className,
     {
       'flex-parent flex-parent--center-main': !!label
     }

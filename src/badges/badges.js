@@ -2,11 +2,19 @@
 
 const badges = [
   {
-    title: 'A test badge',
-    description: 'Hello! This is just a test badge.',
+    title: 'Go green',
+    description: 'You just improved the environment!',
+    requirement: {
+      type: 'environmental',
+      threshold: 1
+    }
+  },
+  {
+    title: 'Social benefits',
+    description: "You've made a positive impact on society!",
     requirement: {
       type: 'social',
-      threshold: 2
+      threshold: 1
     }
   }
 ];

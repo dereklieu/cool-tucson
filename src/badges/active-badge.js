@@ -1,6 +1,8 @@
 'use strict';
 import React from 'react';
 import c from 'classnames';
+import { px } from '../util/style-util';
+import { IconLabel } from '../indicators/icon-label';
 
 export class ActiveBadge extends React.PureComponent {
   constructor(props) {
@@ -19,7 +21,7 @@ export class ActiveBadge extends React.PureComponent {
     if (phase === prevState.phase) return;
 
     if (phase === 'open') {
-      setTimeout(() => this.setState({ phase: 'post' }), 2000);
+      setTimeout(() => this.setState({ phase: 'post' }), 3000);
     } else if (phase === 'post') {
       setTimeout(() => this.props.onRemove(this.props.badge.title), 200);
     }
@@ -27,29 +29,36 @@ export class ActiveBadge extends React.PureComponent {
 
   render() {
     const { phase } = this.state;
-    const containerStyle = {};
+    const { index, badge } = this.props;
+    const containerStyle = {
+      transition: '300ms all',
+      top: px(index * 120)
+    };
+
     switch (phase) {
+      case 'post':
       case 'pre':
-        containerStyle.left = '300px';
+        containerStyle.left = px(360);
         break;
       case 'open':
-        containerStyle.left = '-336px';
-        break;
-      case 'post':
-        containerStyle.left = '300px';
+        containerStyle.left = px(-360);
         break;
     }
 
     const containerClass = c(
-      'absolute border round w300 mr36 transition'
+      'absolute w360 bg-white shadow-darken10',
+      'border-t border-l border-b',
+      'round-t round-l round-b shadow'
     );
-
-
-    const { badge } = this.props;
     return (
       <div className={containerClass} style={containerStyle}>
-        <div className="mx24 my24 prose">
-          <h4 className="txt-h4">{badge.title}</h4>
+        <div className="my24 mx24">
+          <div className="flex-parent flex-parent--center-cross mb6">
+            <IconLabel icon="star" size={24} className="flex-child mr6" />
+            <h4 className="flex-child txt-h4 txt-bold">
+              {badge.title}
+            </h4>
+          </div>
           <p>{badge.description}</p>
         </div>
       </div>
