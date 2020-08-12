@@ -29,12 +29,12 @@ export function Cell (props) {
   } = props;
   const { interventions } = cell;
   const [{ isOver, canDrop }, drop] = useDrop({
-    accept: formatCellConstant(
-      constants.NEW_INTERVENTION,
-      cell.type
-    ),
+    accept: [
+      formatCellConstant(constants.NEW_INTERVENTION, cell.type),
+      constants.ERASER
+    ],
     canDrop: ({ id, score }) => {
-      return id === 'base' ||
+      return id === constants.ERASER ||
         (interventions.length < 4 && currency >= score.cost);
     },
     drop: ({ id, name, score }) => {

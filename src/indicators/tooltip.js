@@ -17,6 +17,28 @@ const offset = {
 };
 
 let Tooltip = class Tooltip extends React.PureComponent {
+  renderIntervention(intervention) {
+    return (
+      <div className="prose">
+        <h5 className="txt-h5">{intervention.name}</h5>
+        <p>
+          <span className={`${pillClass(intervention.type)} inline-block`}>
+            {intervention.type}
+          </span>
+          <span className={`${pillClass('$')} inline-block ml6`}>$$</span>
+        </p>
+      </div>
+    );
+  }
+
+  renderEraser() {
+    return (
+      <div className="prose">
+        <h5 className="txt-h5">Revert</h5>
+      </div>
+    )
+  }
+
   getIntervention = (name) => {
     if (name.indexOf(constants.NEW_INTERVENTION) < 0) return undefined;
     return getIntervention(
@@ -28,19 +50,11 @@ let Tooltip = class Tooltip extends React.PureComponent {
     if (!name) return null;
 
     const intervention = this.getIntervention(name);
-    if (!intervention) return null;
+    if (intervention) return this.renderIntervention(intervention);
 
-    return (
-      <div className="prose">
-        <h5 className="txt-h5">{intervention.name}</h5>
-        <p>
-          <span className={`${pillClass(intervention.type)} inline-block`}>
-            {intervention.type}
-          </span>
-          <span className={`${pillClass('$')} inline-block ml6`}>$$</span>
-        </p>
-      </div>
-    )
+    const isEraser = name === constants.ERASER;
+    if (isEraser) return this.renderEraser();
+    return null;
   }
 
   render() {

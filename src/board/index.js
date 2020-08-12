@@ -2,6 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Cell } from './cell';
+import { Eraser } from './eraser';
 import { px } from '../util/style-util';
 
 import { boardSelectors } from '../store/board-selectors';
@@ -86,6 +87,15 @@ let Board = class Board extends React.PureComponent {
           }}
         >
           {this.renderRow(cells, 1, height * .6)}
+        </div>
+
+        <div
+          className="absolute"
+          style={{
+            left: px(-120)
+          }}
+        >
+          <Eraser />
         </div>
       </div>
     );

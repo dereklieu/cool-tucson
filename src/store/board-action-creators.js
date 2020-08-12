@@ -1,9 +1,11 @@
 'use strict';
 
+import constants from '../constants';
+
 const actions = {};
 
 actions.applyIntervention = (id, name, score, row, column) => {
-  if (id === 'base') {
+  if (id === constants.ERASER) {
     return {
       type: 'CLEAR_INTERVENTIONS',
       row,
