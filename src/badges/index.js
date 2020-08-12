@@ -23,7 +23,7 @@ let Badges = class Badges extends React.PureComponent {
   componentDidUpdate(prevProps) {
     const { badges } = this.props;
     if (badges.length > prevProps.badges.length) {
-      const next = badges.slice(prevProps.length);
+      const next = badges.slice(prevProps.badges.length);
       this.setState(state =>
         ({ active: state.active.concat(next) })
       );

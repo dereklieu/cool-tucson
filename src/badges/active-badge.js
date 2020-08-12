@@ -32,7 +32,7 @@ export class ActiveBadge extends React.PureComponent {
     const { index, badge } = this.props;
     const containerStyle = {
       transition: '300ms all',
-      top: px(index * 120)
+      top: px(index * 100)
     };
 
     switch (phase) {
@@ -52,7 +52,7 @@ export class ActiveBadge extends React.PureComponent {
     );
     return (
       <div className={containerClass} style={containerStyle}>
-        <div className="my24 mx24">
+        <div className="my12 mx12">
           <div className="flex-parent flex-parent--center-cross mb6">
             <IconLabel icon="star" size={24} className="flex-child mr6" />
             <h4 className="flex-child txt-h4 txt-bold">
