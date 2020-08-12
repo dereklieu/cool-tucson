@@ -2,6 +2,8 @@
 import React from 'react';
 import { useDrag } from 'react-dnd';
 import c from 'classnames';
+import ReactTooltip from 'react-tooltip';
+
 import constants from '../constants';
 import { px } from '../util/style-util';
 import { formatCellConstant } from '../util/format';
@@ -38,14 +40,22 @@ export const Intervention = (props) => {
   // (as board cells are).
   const isFielded = dragType === constants.FIELDED_INTERVENTION;
 
-  const isDraggable = isFielded || isActive;
   const type = isFielded
     ? dragType
     : formatCellConstant(dragType, interventionType);
 
+  const setActive = () => {
+    if (changeActiveIntervention) {
+      changeActiveIntervention(name, interventionType);
+    }
+  };
+
   const [{ isDragging }, drag] = useDrag({
     item: { id, name, score, type },
-    canDrag: () => isDraggable,
+    begin: () => {
+      ReactTooltip.hide();
+      setActive();
+    },
     collect
   });
 
@@ -54,12 +64,7 @@ export const Intervention = (props) => {
     return null;
   }
 
-  let cursor;
-  if (isDraggable) {
-    cursor = isDragging ? 'grabbing' : 'grab';
-  } else {
-    cursor = 'pointer';
-  }
+  const cursor = isDragging ? 'grabbing' : 'grab';
 
   const size = 60;
   const dimension = isFielded ? 'auto' : px(size);
@@ -129,16 +134,12 @@ export const Intervention = (props) => {
     'align-center relative',
     {
       'ml6 mb6': !isFielded,
-      'color-gray-light': !isDraggable
+      'color-gray-light': !isActive,
+      'color-gray': isActive
     }
   );
 
   const displayName = parseName(name);
-  const setActive = () => {
-    if (changeActiveIntervention) {
-      changeActiveIntervention(name, interventionType);
-    }
-  };
 
   return (
     <div
