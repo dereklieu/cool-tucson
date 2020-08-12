@@ -146,6 +146,7 @@ export const Intervention = (props) => {
       className={containerClass}
       style={containerStyle}
       onClick={setActive}
+      data-tip={isFielded ? undefined : `${constants.NEW_INTERVENTION}_${name}`}
     >
       {backgroundShape}
       <strong>{displayName}</strong>

@@ -9,6 +9,7 @@ import { Board } from '../board';
 import { Badges } from '../badges';
 import { Bin } from '../board/bin';
 import { Score } from '../indicators/score';
+import { Tooltip } from '../indicators/tooltip';
 
 export const Game = () => (
   <div className="scroll-hidden viewport-full relative">
@@ -33,5 +34,6 @@ export const Game = () => (
     <div className="absolute right mt30">
       <Badges />
     </div>
+    <Tooltip />
   </div>
 );
