@@ -18,7 +18,7 @@ export const Game = () => (
         <div className="flex-child mt30" style={{ marginBottom: 'auto' }}>
           <Score />
         </div>
-        <div className="flex-child mb30">
+        <div className="flex-child my30">
           <div className="flex-parent flex-parent--center-main">
             <Description className="flex-child" />
           </div>
