@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
   output: {
     path: __dirname + '/dist',
-    filename: 'main.js'
+    filename: '[name].[hash].js'
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -24,6 +24,10 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       }
     ]
+  },
+  optimization: {
+    moduleIds: 'hashed',
+    runtimeChunk: 'single'
   },
   devtool: 'source-map'
 };
