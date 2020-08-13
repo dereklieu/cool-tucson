@@ -32,7 +32,7 @@ export class ActiveBadge extends React.PureComponent {
     const { index, badge } = this.props;
     const containerStyle = {
       transition: '300ms all',
-      top: px(index * 100)
+      top: px(index * 100 + 85)
     };
 
     switch (phase) {

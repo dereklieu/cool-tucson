@@ -6,6 +6,7 @@ import { boardSelectors } from '../store/board-selectors';
 import { ActiveBadge } from './active-badge';
 import { badges } from './badges';
 import { IconLabel } from '../indicators/icon-label';
+import constants from '../constants';
 
 let Badges = class Badges extends React.PureComponent {
   constructor(props) {
@@ -36,25 +37,32 @@ let Badges = class Badges extends React.PureComponent {
     );
   }
 
-  renderToggle() {
+  renderCount() {
     const containerClass = c(
-      'cursor-pointer mt6 transition',
-      'flex-parent flex-parent--column flex-parent--center-main',
-      'absolute right w60 h60 shadow-darken10',
+      'absolute right w60 h60 mt6',
+      'align-center align-middle',
+      'cursor-default',
       'border-t border-l border-b',
       'round-t round-l round-b',
-      'bg-white bg-green-light-on-hover'
+      'shadow-darken10 bg-white'
     );
     const containerStyle = {
       lineHeight: '60px'
     };
+    const count = this.props.badges.filter(b => b.isPassed).length;
     return (
-      <div className={containerClass} style={containerStyle}>
+      <div
+        className={containerClass}
+        style={containerStyle}
+      >
         <IconLabel
           icon="star"
-          size={36}
-          className="flex-parent flex-parent--center-main"
+          size={24}
+          className="inline-block"
         />
+        <span className="inline-block">
+          {count}
+        </span>
       </div>
     );
   }
@@ -63,6 +71,7 @@ let Badges = class Badges extends React.PureComponent {
     const {  active } = this.state;
     return (
       <div className="relative">
+        {this.renderCount()}
         {active.map((badge, i) => (
           <ActiveBadge
             index={i}

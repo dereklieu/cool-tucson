@@ -14,7 +14,7 @@ const badges = [
     description: "You've made a positive impact on society!",
     requirement: {
       type: 'social',
-      threshold: 1
+      threshold: 5
     }
   }
 ];
