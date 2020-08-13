@@ -35,6 +35,7 @@ let Tooltip = class Tooltip extends React.PureComponent {
     return (
       <div className="prose">
         <h5 className="txt-h5">Revert</h5>
+        <p>Removes any improvements</p>
       </div>
     )
   }

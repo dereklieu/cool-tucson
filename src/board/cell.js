@@ -34,7 +34,7 @@ export function Cell (props) {
       constants.ERASER
     ],
     canDrop: ({ id, score }) => {
-      return id === constants.ERASER ||
+      return (id === constants.ERASER && interventions.length) ||
         (interventions.length < 4 && currency >= score.cost);
     },
     drop: ({ id, name, score }) => {
