@@ -1,0 +1,97 @@
+{
+	"meta": {
+		"image": "spritesheet.png",
+		"size": {"w":480,"h":360},
+		"scale": "1"
+	},
+	"frames": {
+		"oa-urban-park.png":
+		{
+			"frame": {"x":0,"y":0,"w":120,"h":120},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":120,"h":120},
+			"sourceSize": {"w":120,"h":120}
+		},
+		"oa-water-feature.png":
+		{
+			"frame": {"x":120,"y":0,"w":120,"h":120},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":120,"h":120},
+			"sourceSize": {"w":120,"h":120}
+		},
+		"pb-cool-roof.png":
+		{
+			"frame": {"x":0,"y":120,"w":120,"h":120},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":120,"h":120},
+			"sourceSize": {"w":120,"h":120}
+		},
+		"pb-green-roof.png":
+		{
+			"frame": {"x":120,"y":120,"w":120,"h":120},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":120,"h":120},
+			"sourceSize": {"w":120,"h":120}
+		},
+		"pb-urban-tree.png":
+		{
+			"frame": {"x":240,"y":0,"w":120,"h":120},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":120,"h":120},
+			"sourceSize": {"w":120,"h":120}
+		},
+		"pb-waste-heat.png":
+		{
+			"frame": {"x":240,"y":120,"w":120,"h":120},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":120,"h":120},
+			"sourceSize": {"w":120,"h":120}
+		},
+		"st-cool-pavement.png":
+		{
+			"frame": {"x":0,"y":240,"w":120,"h":120},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":120,"h":120},
+			"sourceSize": {"w":120,"h":120}
+		},
+		"st-drinking-water.png":
+		{
+			"frame": {"x":120,"y":240,"w":120,"h":120},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":120,"h":120},
+			"sourceSize": {"w":120,"h":120}
+		},
+		"st-green-infrastructure.png":
+		{
+			"frame": {"x":240,"y":240,"w":120,"h":120},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":120,"h":120},
+			"sourceSize": {"w":120,"h":120}
+		},
+		"th-cooling-center.png":
+		{
+			"frame": {"x":360,"y":0,"w":120,"h":120},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":120,"h":120},
+			"sourceSize": {"w":120,"h":120}
+		},
+		"th-public-education.png":
+		{
+			"frame": {"x":360,"y":120,"w":120,"h":120},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":120,"h":120},
+			"sourceSize": {"w":120,"h":120}
+		}
+	}
+}
