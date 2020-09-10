@@ -1,0 +1,84 @@
+.oa-urban-park {
+    width: 120px;
+    height: 120px;
+    background: url("spritesheet.png") -0px -0px;
+	background-size: 480px 360px;
+}
+
+.oa-water-features {
+    width: 120px;
+    height: 120px;
+    background: url("spritesheet.png") -120px -0px;
+	background-size: 480px 360px;
+}
+
+.pb-cool-roofs-and-walls {
+    width: 120px;
+    height: 120px;
+    background: url("spritesheet.png") -0px -120px;
+	background-size: 480px 360px;
+}
+
+.pb-green-roofs-and-walls {
+    width: 120px;
+    height: 120px;
+    background: url("spritesheet.png") -120px -120px;
+	background-size: 480px 360px;
+}
+
+.pb-shade-structures {
+    width: 120px;
+    height: 120px;
+    background: url("spritesheet.png") -240px -0px;
+	background-size: 480px 360px;
+}
+
+.pb-urban-tree-canopy {
+    width: 120px;
+    height: 120px;
+    background: url("spritesheet.png") -240px -120px;
+	background-size: 480px 360px;
+}
+
+.pb-waste-heat-reduction {
+    width: 120px;
+    height: 120px;
+    background: url("spritesheet.png") -0px -240px;
+	background-size: 480px 360px;
+}
+
+.s-cool-pavement {
+    width: 120px;
+    height: 120px;
+    background: url("spritesheet.png") -120px -240px;
+	background-size: 480px 360px;
+}
+
+.s-drinking-water {
+    width: 120px;
+    height: 120px;
+    background: url("spritesheet.png") -240px -240px;
+	background-size: 480px 360px;
+}
+
+.s-green-infrastructure {
+    width: 120px;
+    height: 120px;
+    background: url("spritesheet.png") -360px -0px;
+	background-size: 480px 360px;
+}
+
+.th-cooling-centers {
+    width: 120px;
+    height: 120px;
+    background: url("spritesheet.png") -360px -120px;
+	background-size: 480px 360px;
+}
+
+.th-public-education-and-communication {
+    width: 120px;
+    height: 120px;
+    background: url("spritesheet.png") -360px -240px;
+	background-size: 480px 360px;
+}
+

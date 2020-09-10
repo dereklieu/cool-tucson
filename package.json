@@ -6,7 +6,7 @@
     "start": "webpack-dev-server --client-log-level silent --content-base ./dist --hot",
     "clean": "rimraf dist/*",
     "build": "npm run clean && webpack --mode=production",
-    "build-sprites": "spritesheet-js --path src/sprites assets/interventions/*.png"
+    "build-sprites": "spritesheet-js --path src/sprites --format CSS assets/interventions/*.png"
   },
   "repository": {
     "type": "git",
@@ -39,7 +39,7 @@
     "@babel/preset-react": "^7.10.1",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.6.0",
-    "file-loader": "^6.0.0",
+    "file-loader": "^6.1.0",
     "html-webpack-plugin": "^4.3.0",
     "rimraf": "^3.0.2",
     "spritesheet-js": "^1.2.6",
