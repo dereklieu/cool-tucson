@@ -16,7 +16,7 @@ const initialState = {
     [...Array(6)].map(makeCell)
   ],
   score: {
-    currency: 100,
+    currency: 500000,
     environmental: 0,
     social: 0
   },
