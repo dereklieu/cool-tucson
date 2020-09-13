@@ -3,6 +3,7 @@ import c from 'classnames';
 
 export const px = (number) => Math.floor(number) + 'px';
 export const pct = (number) => number + '%';
+export const vw = (number) => number + 'vw';
 
 export const pillClass = (type) => {
   return c(
