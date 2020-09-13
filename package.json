@@ -6,7 +6,9 @@
     "start": "webpack-dev-server --client-log-level silent --content-base ./dist --hot",
     "clean": "rimraf dist/*",
     "build": "npm run clean && webpack --mode=production",
-    "build-sprites": "spritesheet-js --path src/assets/img/sprites --format CSS assets/interventions/*.png"
+    "build-intervention-sprites": "spritesheet-js --path src/assets/img/sprites/interventions --format CSS assets/interventions/*.png",
+    "build-board-sprites": "spritesheet-js --path src/assets/img/sprites/board --format CSS assets/board/*.png",
+    "build-sprites": "npm run build-intervention-sprites && npm run build-board-sprites"
   },
   "repository": {
     "type": "git",
