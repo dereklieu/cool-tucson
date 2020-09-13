@@ -1,0 +1,17 @@
+{
+	"meta": {
+		"image": "spritesheet.png",
+		"size": {"w":561,"h":396},
+		"scale": "1"
+	},
+	"frames": {
+		"pb-house-base.png":
+		{
+			"frame": {"x":0,"y":0,"w":561,"h":396},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":561,"h":396},
+			"sourceSize": {"w":561,"h":396}
+		}
+	}
+}
