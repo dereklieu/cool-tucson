@@ -1,17 +1,41 @@
 {
 	"meta": {
 		"image": "spritesheet.png",
-		"size": {"w":561,"h":396},
+		"size": {"w":1493,"h":864},
 		"scale": "1"
 	},
 	"frames": {
-		"pb-house-base.png":
+		"th-base.png":
 		{
-			"frame": {"x":0,"y":0,"w":561,"h":396},
+			"frame": {"x":0,"y":0,"w":764,"h":495},
 			"rotated": false,
 			"trimmed": false,
-			"spriteSourceSize": {"x":0,"y":0,"w":561,"h":396},
-			"sourceSize": {"w":561,"h":396}
+			"spriteSourceSize": {"x":0,"y":0,"w":764,"h":495},
+			"sourceSize": {"w":764,"h":495}
+		},
+		"oa-base.png":
+		{
+			"frame": {"x":764,"y":0,"w":729,"h":422},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":729,"h":422},
+			"sourceSize": {"w":729,"h":422}
+		},
+		"pb-apartment-base.png":
+		{
+			"frame": {"x":0,"y":495,"w":354,"h":369},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":354,"h":369},
+			"sourceSize": {"w":354,"h":369}
+		},
+		"pb-house-base.png":
+		{
+			"frame": {"x":354,"y":495,"w":321,"h":226},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":321,"h":226},
+			"sourceSize": {"w":321,"h":226}
 		}
 	}
 }
