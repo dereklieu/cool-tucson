@@ -1,102 +1,95 @@
 'use strict';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Cell } from './cell';
-import { Eraser } from './eraser';
-import { px } from '../util/style-util';
+import { px, pct, vw } from '../util/style-util';
 
 import { boardSelectors } from '../store/board-selectors';
 import { scoreSelectors } from '../store/score-selectors';
 import { boardActionCreators } from '../store/board-action-creators';
 
-const width = 980;
-const ratio = .25;
-const height = width * ratio;
+import { Plot } from './plot';
+import { positions } from './positions';
+
+import board from '../assets/img/board/board.png';
+import sprites from '../assets/img/sprites/board/spritesheet.json';
+
+const SPRITE_SIZE = sprites.meta.size;
+
+const BOARD_NATIVE_WIDTH = 2000;
+const BOARD_NATIVE_HEIGHT = 740;
+
+const HEIGHT_RATIO = BOARD_NATIVE_HEIGHT / BOARD_NATIVE_WIDTH;
 
 const boardStyle = {
-  margin: 'auto',
-  borderBottom: `${px(width * ratio)} solid #eee`,
-  borderLeft: `${px(width * ratio / 2)} solid transparent`,
-  borderRight: `${px(width * ratio / 2)} solid transparent`,
-  height: 0,
-  width: `${width}px`
+  width: vw(100),
+  height: vw(100 * HEIGHT_RATIO),
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  backgroundImage: `url('${board}')`,
+  backgroundRepeat: 'no-repeat',
+  backgroundSize: 'cover'
 };
 
-const containerDimensions = {
-  top: 0,
-  left: px(-width * ratio / 2),
-  width: px(width),
-  height: px(width * ratio)
-};
+const x = (w) => w / BOARD_NATIVE_WIDTH;
+const y = (h) => h / BOARD_NATIVE_HEIGHT * HEIGHT_RATIO;
 
 let Board = class Board extends React.PureComponent {
-  renderRow(cells, row, height) {
-    const {
-      interventionType,
-      currency,
-      applyIntervention
-    } = this.props;
-    const containerClass = 'col flex-parent flex-parent--column flex-parent--center-main';
-    const containerStyle = { height: px(height) };
-    return (
-      <div className="grid grid--gut24">
-        {cells[row].map((cell, column) => (
-          <div
-            key={`cell-${row}-${column}`}
-            className={containerClass}
-            style={containerStyle}
-          >
-            <Cell
-              cell={cell}
-              height={height}
-              row={row}
-              column={column}
-              currency={currency}
-              applyIntervention={applyIntervention}
-              isActive={cell.type === interventionType}
-            />
-          </div>
-        ))}
-      </div>
-    )
+  constructor(props) {
+    super(props);
+    this.container = React.createRef();
+    this.state = {
+      containerWidth: null,
+      containerHeight: null
+    };
   }
 
-  render() {
-    const { cells } = this.props;
+  componentDidMount() {
+    window.addEventListener('resize', this.syncDimensions);
+    this.syncDimensions();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.syncDimensions);
+  }
+
+  syncDimensions = () => {
+    const dimensions = this.container.current.getBoundingClientRect();
+    this.setState({
+      containerWidth: dimensions.width,
+      containerHeight: dimensions.height
+    });
+  };
+
+  renderPosition = (position) => {
+    // Nope out until second render when we've synced position
+    const { containerWidth, containerHeight } = this.state;
+    if (containerWidth === null) return null;
+
+    const { sprite, placement } = position;
+
+    const width = vw(x(sprite.w) * 100);
+    const height = vw(y(sprite.h) * 100);
+    const left = vw(x(placement.left) * 100);
+    const top = vw(y(placement.top) * 100);
+
+    const scale = containerWidth / BOARD_NATIVE_WIDTH;
+
+    const backgroundSize = `${px(SPRITE_SIZE.w * scale)} ${px(SPRITE_SIZE.h * scale)}`;
+    const backgroundPosition = `-${px(sprite.x * scale)} -${px(sprite.y * scale)}`;
+
+    const props = { width, height, left, top, backgroundPosition, backgroundSize };
+
     return (
-      <div className="relative" style={boardStyle}>
-        <div
-          className="absolute"
-          style={{
-            top: 0,
-            left: 0,
-            width: px(width * (1 - ratio)),
-            height: px(height * .4)
-          }}
-        >
-          {this.renderRow(cells, 0, height * .4)}
-        </div>
+      <div key={position.id}>
+        <Plot {...props} />
+      </div>
+    );
+  };
 
-        <div
-          className="absolute"
-          style={{
-            top: px(height * .4),
-            left: px(-width * ratio * .4 / 2),
-            width: px(width - width * ratio * .6),
-            height: px(height * .6)
-          }}
-        >
-          {this.renderRow(cells, 1, height * .6)}
-        </div>
-
-        <div
-          className="absolute"
-          style={{
-            left: px(-120)
-          }}
-        >
-          <Eraser />
-        </div>
+  render() {
+    return (
+      <div className="relative scroll-hidden" style={boardStyle} ref={this.container}>
+        {positions.map(this.renderPosition)}
       </div>
     );
   }
