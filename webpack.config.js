@@ -1,3 +1,4 @@
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
@@ -27,6 +28,15 @@ module.exports = {
         test: /\.(png|jpe?g|gif)$/i,
         use: {
           loader: 'file-loader'
+        }
+      },
+      {
+        test: /\.svg$/,
+        use: {
+          loader: 'svg-sprite-loader',
+          options: {
+            symbolId: filePath => path.basename(filePath)
+          }
         }
       }
     ]
