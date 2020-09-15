@@ -31,7 +31,7 @@ let Score = class Score extends React.PureComponent {
     ];
 
     return (
-      <div className="flex-parent flex-parent--start-cross flex-parent--center-main">
+      <div className="flex-parent flex-parent--start-cross flex-parent--center-main color-white">
         <div className="flex-child">
           <ProgressBar
             label="Resources remaining"
@@ -39,18 +39,16 @@ let Score = class Score extends React.PureComponent {
             progress={currency}
           />
         </div>
-        <div className="flex-child ml30">
-          {scores.map((s, i) => (
-            <div key={s.label} className="mb6">
-              <ProgressBar
-                label={s.label}
-                barClassName={s.barClassName}
-                progress={s.progress}
-                winScore={winScore}
-              />
-            </div>
-          ))}
-        </div>
+        {scores.map((s, i) => (
+          <div key={s.label} className="flex-child ml30">
+            <ProgressBar
+              label={s.label}
+              barClassName={s.barClassName}
+              progress={s.progress}
+              winScore={winScore}
+            />
+          </div>
+        ))}
       </div>
     );
   }

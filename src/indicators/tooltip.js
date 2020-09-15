@@ -60,11 +60,14 @@ let Tooltip = class Tooltip extends React.PureComponent {
   }
 
   render() {
+    if (this.props.activeIntervention) return null;
+
     const className=c(
-      'px12 py12 txt-s round bg-white color-black opacity100 wmax360'
+      'px12 py12 txt-s round bg-white color-black opacity100 wmax360 shadow shadow-darken10'
     );
     return (
       <ReactTooltip
+        place="bottom"
         className={className}
         border={true}
         borderColor="#000000"
@@ -78,6 +81,7 @@ let Tooltip = class Tooltip extends React.PureComponent {
 
 const mapStateToProps = state => ({
   locale: settingSelectors.locale(state),
+  activeIntervention: boardSelectors.activeIntervention(state),
   badges: boardSelectors.badges(state)
 });
 
