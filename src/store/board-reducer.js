@@ -7,10 +7,9 @@ import {
 } from '../interventions/interventions';
 import { badges } from '../badges/badges';
 
-const initialIntervention = data[0];
 const initialState = {
-  interventionType: initialIntervention.type,
-  activeIntervention: initialIntervention.name,
+  interventionType: '',
+  activeIntervention: '',
   cells: [
     [...Array(6)].map(makeCell),
     [...Array(6)].map(makeCell)
