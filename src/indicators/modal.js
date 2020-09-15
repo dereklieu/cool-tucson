@@ -1,6 +1,7 @@
 'use strict';
 import React from 'react';
 import c from 'classnames';
+import { CloseButton } from './close-button';
 
 const underlayStyle = {
   zIndex: 1,
@@ -23,6 +24,7 @@ export function Modal(props) {
     >
       <div className="relative w600 wmax-full bg-white inline-block round cursor-default align-l">
         {children}
+        <CloseButton onClick={onExit} />
       </div>
     </div>
   );

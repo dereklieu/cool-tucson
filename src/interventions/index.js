@@ -8,12 +8,17 @@ import { boardActionCreators } from '../store/board-action-creators';
 import { Intervention } from './intervention';
 import { Description } from './description';
 import { interventions } from './interventions';
+import { CloseButton } from '../indicators/close-button';
 import { groupBy } from '../util/group-by';
 import constants from '../constants';
 
 let Interventions = class Interventions extends React.PureComponent {
   renderGroup = (interventions) => {
     return interventions.map(this.renderIntervention);
+  };
+
+  clearActiveIntervention = () => {
+    this.props.changeActiveIntervention('', '');
   };
 
   renderIntervention = (d) => {
@@ -43,9 +48,12 @@ let Interventions = class Interventions extends React.PureComponent {
     return (
       <div className="flex-parent flex-parent--center-main flex-parent--end-cross flex-parent--wrap" style={style}>
         {interventions.map(this.renderIntervention)}
-        <Description
-          className="bg-white px24 py24 mt24 round shadow shadow-darken10"
-        />
+        {this.props.activeIntervention ? (
+          <div className="relative bg-white px24 py24 mt24 round shadow shadow-darken10">
+            <Description />
+            <CloseButton onClick={this.clearActiveIntervention} />
+          </div>
+        ) : null}
       </div>
     );
   }
