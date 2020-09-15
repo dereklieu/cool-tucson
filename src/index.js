@@ -8,6 +8,7 @@ import { App } from './app/index.js';
 
 require('./assets/lib/assembly/assembly.min.css');
 require('./assets/lib/assembly/assembly.js');
+require('./assets/css/base.css');
 
 ReactDOM.render(
   (
