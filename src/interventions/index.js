@@ -6,6 +6,7 @@ import { settingSelectors } from '../store/setting-selectors';
 import { boardSelectors } from '../store/board-selectors';
 import { boardActionCreators } from '../store/board-action-creators';
 import { Intervention } from './intervention';
+import { Description } from './description';
 import { interventions } from './interventions';
 import { groupBy } from '../util/group-by';
 import constants from '../constants';
@@ -21,6 +22,7 @@ let Interventions = class Interventions extends React.PureComponent {
       changeActiveIntervention,
       activeIntervention
     } = this.props;
+
     return (
       <div className="flex-child" key={d.name}>
         <Intervention
@@ -37,9 +39,13 @@ let Interventions = class Interventions extends React.PureComponent {
   };
 
   render() {
+    const style = { zIndex: this.props.activeIntervention ? 100 : 1 };
     return (
-      <div className="flex-parent flex-parent--center-cross flex-parent--center-main">
+      <div className="flex-parent flex-parent--center-main flex-parent--end-cross flex-parent--wrap" style={style}>
         {interventions.map(this.renderIntervention)}
+        <Description
+          className="bg-white px24 py24 mt24 round shadow shadow-darken10"
+        />
       </div>
     );
   }

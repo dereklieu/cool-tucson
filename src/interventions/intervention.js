@@ -4,6 +4,7 @@ import { useDrag } from 'react-dnd';
 import c from 'classnames';
 import ReactTooltip from 'react-tooltip';
 
+import { Icon } from './icon';
 import constants from '../constants';
 import { px } from '../util/style-util';
 import { formatCellConstant } from '../util/format';
@@ -13,13 +14,6 @@ const collect = (monitor) => {
     isDragging: monitor.isDragging()
   };
 }
-
-const parseName = name =>
-  name.split(' ')
-    .map(word =>
-      word === 'and' ? '&' : word.charAt(0).toUpperCase()
-    )
-    .join('');
 
 export const Intervention = (props) => {
   const {
@@ -40,117 +34,44 @@ export const Intervention = (props) => {
   // (as board cells are).
   const isFielded = dragType === constants.FIELDED_INTERVENTION;
 
-  const type = isFielded
-    ? dragType
-    : formatCellConstant(dragType, interventionType);
-
-  const setActive = () => {
-    if (changeActiveIntervention) {
-      changeActiveIntervention(name, interventionType);
-    }
-  };
+  const type = isFielded ? dragType : formatCellConstant(dragType, interventionType);
 
   const [{ isDragging }, drag] = useDrag({
     item: { id, name, score, type },
     begin: () => {
       ReactTooltip.hide();
-      setActive();
+      changeActiveIntervention('', '');
     },
     collect
   });
 
-  // Hide placed interventions when they are being dragged
-  if (isDragging && isFielded) {
-    return null;
-  }
-
+  const size = 80;
   const cursor = isDragging ? 'grabbing' : 'grab';
-
-  const size = 60;
-  const dimension = isFielded ? 'auto' : px(size);
-  const height = !isFielded && interventionType === 'Street' ? px(size / 2) : dimension;
-  const containerStyle = {
-    cursor,
-    height,
-    lineHeight: height,
-    width: dimension,
-    verticalAlign: 'middle'
+  const interventionStyle = {
+    width: px(size),
+    height: px(size),
+    cursor
   };
 
-  let backgroundShape;
-  if (!isFielded) {
-    switch (interventionType) {
-      case 'Private buildings':
-        backgroundShape = (
-          <div
-            className="absolute top left border"
-            style={{
-              width: dimension,
-              height: dimension
-            }}
-          />
-        );
-        break;
-      case 'Open area':
-        backgroundShape = (
-          <div
-            className="absolute top left border round-full"
-            style={{
-              width: dimension,
-              height: dimension
-            }}
-          />
-        );
-        break;
-      case 'Street':
-        backgroundShape = (
-          <div
-            className="absolute top left border"
-            style={{
-              width: dimension,
-              height: px(size / 2)
-            }}
-          />
-        );
-        break;
-      case 'Town hall':
-        backgroundShape = (
-          <div
-            className="absolute top left"
-            style={{
-              width: 0,
-              height: 0,
-              borderStyle: 'solid',
-              borderWidth: `0 ${px(size / 2)} ${px(size)} ${px(size / 2)}`,
-              borderColor: 'transparent transparent rgba(100, 100, 100, 0.1) transparent'
-            }}
-          />
-        );
-        break;
-    }
-  }
+  const interventionClass = c({
+    'bg-white round shadow shadow-darken10': isActive
+  });
 
-  const containerClass = c(
-    'align-center relative',
-    {
-      'ml6 mb6': !isFielded,
-      'color-gray-light': !isActive,
-      'color-gray': isActive
-    }
-  );
-
-  const displayName = parseName(name);
+  const setActive = () => changeActiveIntervention(name, interventionType);
 
   return (
     <div
-      ref={drag}
-      className={containerClass}
-      style={containerStyle}
-      onClick={setActive}
+      className="mx3 my3 bg-transparent"
       data-tip={isFielded ? undefined : `${constants.NEW_INTERVENTION}_${name}`}
     >
-      {backgroundShape}
-      <strong>{displayName}</strong>
+      <div
+        ref={drag}
+        style={interventionStyle}
+        className={interventionClass}
+        onClick={setActive}
+      >
+        <Icon size={size} name={name} type={interventionType} />
+      </div>
     </div>
   );
 };
