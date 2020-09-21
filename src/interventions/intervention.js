@@ -3,11 +3,14 @@ import React from 'react';
 import { useDrag } from 'react-dnd';
 import c from 'classnames';
 import ReactTooltip from 'react-tooltip';
+import { connect } from 'react-redux';
+
+import { interventionActionCreators } from '../store/intervention-action-creators';
 
 import { Icon } from './icon';
+
 import constants from '../constants';
 import { px } from '../util/style-util';
-import { formatCellConstant } from '../util/format';
 
 const collect = (monitor) => {
   return {
@@ -15,32 +18,31 @@ const collect = (monitor) => {
   };
 }
 
-export const Intervention = (props) => {
+let Intervention = (props) => {
   const {
+    setIntervention,
+    dragIntervention,
+
     id,
     name,
-    interventionType,
+    type,
     isActive,
-    changeActiveIntervention,
     score,
-    dragType
   } = props;
 
-  // Fielded interventions have different behavior than
-  // non-fielded.
-  //
-  // 1. They can be dragged without an active state.
-  // 2. Drag destinations are not discriminatory
-  // (as board cells are).
-  const isFielded = dragType === constants.FIELDED_INTERVENTION;
-
-  const type = isFielded ? dragType : formatCellConstant(dragType, interventionType);
-
   const [{ isDragging }, drag] = useDrag({
-    item: { id, name, score, type },
+    item: {
+      type: constants.NEW_INTERVENTION,
+      id,
+      name,
+      score,
+    },
     begin: () => {
       ReactTooltip.hide();
-      changeActiveIntervention('', '');
+      dragIntervention(name);
+    },
+    end: () => {
+      dragIntervention(null);
     },
     collect
   });
@@ -57,21 +59,31 @@ export const Intervention = (props) => {
     'bg-white round shadow shadow-darken10': isActive
   });
 
-  const setActive = () => changeActiveIntervention(name, interventionType);
-
   return (
     <div
       className="mx3 my3 bg-transparent"
-      data-tip={isFielded ? undefined : `${constants.NEW_INTERVENTION}_${name}`}
+      data-tip={`${constants.NEW_INTERVENTION}_${name}`}
     >
       <div
         ref={drag}
         style={interventionStyle}
         className={interventionClass}
-        onClick={setActive}
+        onClick={() => setIntervention(name)}
       >
-        <Icon size={size} name={name} type={interventionType} />
+        <Icon size={size} name={name} type={type} />
       </div>
     </div>
   );
 };
+
+const mapDispatch = {
+  setIntervention: interventionActionCreators.setIntervention,
+  dragIntervention: interventionActionCreators.dragIntervention
+};
+
+Intervention = connect(
+  null,
+  mapDispatch
+)(Intervention);
+
+export { Intervention };

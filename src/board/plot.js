@@ -19,7 +19,7 @@ export function Plot (props) {
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: constants.NEW_INTERVENTION,
     drop: ({ id, name, score }) => {
-      return applyIntervention(id, name, score, row, column);
+      // return applyIntervention(id, name, score, row, column);
     },
     collect: monitor => ({
       canDrop: monitor.canDrop(),

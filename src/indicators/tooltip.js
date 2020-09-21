@@ -5,8 +5,7 @@ import ReactTooltip from 'react-tooltip';
 import c from 'classnames';
 
 import { getIntervention } from '../interventions/interventions'
-import { settingSelectors } from '../store/setting-selectors';
-import { boardSelectors } from '../store/board-selectors';
+import { interventionSelectors } from '../store/intervention-selectors';
 import constants from '../constants';
 import { pillClass } from '../util/style-util';
 
@@ -80,9 +79,7 @@ let Tooltip = class Tooltip extends React.PureComponent {
 }
 
 const mapStateToProps = state => ({
-  locale: settingSelectors.locale(state),
-  activeIntervention: boardSelectors.activeIntervention(state),
-  badges: boardSelectors.badges(state)
+  activeIntervention: interventionSelectors.active(state)
 });
 
 Tooltip = connect(mapStateToProps)(Tooltip);

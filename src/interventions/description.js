@@ -3,7 +3,7 @@ import React from 'react';
 import c from 'classnames';
 import { connect } from 'react-redux';
 import { getIntervention } from './interventions';
-import { boardSelectors } from '../store/board-selectors';
+import { interventionSelectors } from '../store/intervention-selectors';
 import { pillClass } from '../util/style-util';
 import { Modal } from '../indicators/modal';
 
@@ -42,7 +42,7 @@ let Description = (props) => {
 };
 
 const mapStateToProps = state => ({
-  activeIntervention: boardSelectors.activeIntervention(state)
+  activeIntervention: interventionSelectors.active(state)
 });
 
 Description = connect(mapStateToProps)(Description);
