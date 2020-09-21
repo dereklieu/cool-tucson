@@ -3,14 +3,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { px, pct, vw } from '../util/style-util';
 
-import { boardSelectors } from '../store/board-selectors';
-import { scoreSelectors } from '../store/score-selectors';
-import { boardActionCreators } from '../store/board-action-creators';
-
 import { Plot } from './plot';
 import { positions } from './positions';
 
-import board from '../assets/img/board/board.png';
+import board from '../assets/img/board/board.svg';
 import sprites from '../assets/img/sprites/board/spritesheet.json';
 
 const SPRITE_SIZE = sprites.meta.size;
@@ -22,12 +18,7 @@ const HEIGHT_RATIO = BOARD_NATIVE_HEIGHT / BOARD_NATIVE_WIDTH;
 
 const boardStyle = {
   width: vw(100),
-  height: vw(100 * HEIGHT_RATIO),
-  marginLeft: 'auto',
-  marginRight: 'auto',
-  backgroundImage: `url('${board}')`,
-  backgroundRepeat: 'no-repeat',
-  backgroundSize: 'cover'
+  height: vw(100 * HEIGHT_RATIO)
 };
 
 const x = (w) => w / BOARD_NATIVE_WIDTH;
@@ -87,8 +78,14 @@ let Board = class Board extends React.PureComponent {
   };
 
   render() {
+    const { containerWidth, containerHeight } = this.state;
+    const svgStyle = {
+      width: px(containerWidth),
+      height: px(containerHeight)
+    };
     return (
       <div className="relative scroll-hidden" style={boardStyle} ref={this.container}>
+        <svg className="icon absolute" style={svgStyle}><use xlinkHref={`#${board.id}`} /></svg>
         {positions.map(this.renderPosition)}
       </div>
     );
@@ -96,13 +93,9 @@ let Board = class Board extends React.PureComponent {
 }
 
 const mapStateToProps = state => ({
-  cells: boardSelectors.cells(state),
-  interventionType: boardSelectors.interventionType(state),
-  currency: scoreSelectors.currency(state)
 });
 
 const mapDispatch = {
-  applyIntervention: boardActionCreators.applyIntervention
 };
 
 Board = connect(
