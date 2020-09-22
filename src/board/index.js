@@ -1,28 +1,24 @@
 'use strict';
 import React from 'react';
+import c from 'classnames';
 import { connect } from 'react-redux';
-import { px, pct, vw } from '../util/style-util';
+import { px, vw } from '../util/style-util';
 
-import { Plot } from './plot';
-import { positions } from './positions';
+import { interventionSelectors } from '../store/intervention-selectors';
 
+// import { Plot } from './plot';
+// import { positions } from './positions';
+
+import { Plot } from './plot-svg';
+import { positions } from './positions-svg';
+
+import constants from '../constants';
 import board from '../assets/img/board/board.svg';
-import sprites from '../assets/img/sprites/board/spritesheet.json';
-
-const SPRITE_SIZE = sprites.meta.size;
-
-const BOARD_NATIVE_WIDTH = 2000;
-const BOARD_NATIVE_HEIGHT = 740;
-
-const HEIGHT_RATIO = BOARD_NATIVE_HEIGHT / BOARD_NATIVE_WIDTH;
 
 const boardStyle = {
   width: vw(100),
-  height: vw(100 * HEIGHT_RATIO)
+  height: vw(100 * constants.HEIGHT_RATIO)
 };
-
-const x = (w) => w / BOARD_NATIVE_WIDTH;
-const y = (h) => h / BOARD_NATIVE_HEIGHT * HEIGHT_RATIO;
 
 let Board = class Board extends React.PureComponent {
   constructor(props) {
@@ -53,39 +49,32 @@ let Board = class Board extends React.PureComponent {
 
   renderPosition = (position) => {
     // Nope out until second render when we've synced position
-    const { containerWidth, containerHeight } = this.state;
+    const { containerWidth } = this.state;
     if (containerWidth === null) return null;
-
-    const { sprite, placement } = position;
-
-    const width = vw(x(sprite.w) * 100);
-    const height = vw(y(sprite.h) * 100);
-    const left = vw(x(placement.left) * 100);
-    const top = vw(y(placement.top) * 100);
-
-    const scale = containerWidth / BOARD_NATIVE_WIDTH;
-
-    const backgroundSize = `${px(SPRITE_SIZE.w * scale)} ${px(SPRITE_SIZE.h * scale)}`;
-    const backgroundPosition = `-${px(sprite.x * scale)} -${px(sprite.y * scale)}`;
-
-    const props = { width, height, left, top, backgroundPosition, backgroundSize };
 
     return (
       <div key={position.id}>
-        <Plot {...props} />
+        <Plot containerWidth={containerWidth} type={position.type} position={position} />
       </div>
     );
   };
 
   render() {
+    const { dragging } = this.props;
     const { containerWidth, containerHeight } = this.state;
     const svgStyle = {
       width: px(containerWidth),
       height: px(containerHeight)
     };
+    const svgClassName = c(
+      'icon absolute',
+      {
+        'opacity50': !!dragging
+      }
+    );
     return (
       <div className="relative scroll-hidden" style={boardStyle} ref={this.container}>
-        <svg className="icon absolute" style={svgStyle}><use xlinkHref={`#${board.id}`} /></svg>
+        <svg className={svgClassName} style={svgStyle}><use xlinkHref={`#${board.id}`} /></svg>
         {positions.map(this.renderPosition)}
       </div>
     );
@@ -93,6 +82,7 @@ let Board = class Board extends React.PureComponent {
 }
 
 const mapStateToProps = state => ({
+  dragging: interventionSelectors.dragging(state)
 });
 
 const mapDispatch = {

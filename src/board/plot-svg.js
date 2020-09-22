@@ -9,11 +9,6 @@ import { interventionSelectors } from '../store/intervention-selectors';
 import { px, vw } from '../util/style-util';
 import constants from '../constants';
 
-import spritesheet from '../assets/img/sprites/board/spritesheet.png';
-import sprites from '../assets/img/sprites/board/spritesheet.json';
-
-const SPRITE_SIZE = sprites.meta.size;
-
 const x = (w) => w / constants.BOARD_NATIVE_WIDTH;
 const y = (h) => h / constants.BOARD_NATIVE_HEIGHT * constants.HEIGHT_RATIO;
 
@@ -39,42 +34,32 @@ let Plot = (props) => {
   const isDragging = Boolean(activeType);
   const isActiveType = type === activeType;
   const containerClass = c(
-    'absolute scroll-hidden',
     {
       'opacity100': !isDragging || isActiveType,
       'opacity25': isDragging && !isActiveType
     }
   );
 
-  const { sprite, placement } = position;
+  const { svg, placement } = position;
 
-  const width = vw(x(sprite.w) * 100);
-  const height = vw(y(sprite.h) * 100);
+  const width = vw(x(svg.w) * 100);
+  const height = vw(y(svg.h) * 100);
   const left = vw(x(placement.x) * 100);
   const top = vw(y(placement.y) * 100);
 
-  const scale = containerWidth / constants.BOARD_NATIVE_WIDTH;
-
-  const backgroundSize = `${px(SPRITE_SIZE.w * scale)} ${px(SPRITE_SIZE.h * scale)}`;
-  const backgroundPosition = `-${px(sprite.x * scale)} -${px(sprite.y * scale)}`;
-
-  const containerStyle = {
+  const svgStyle = {
     width,
     height,
     left,
-    top,
-    backgroundImage: `url('${spritesheet}')`,
-    backgroundRepeat: 'no-repeat',
-    backgroundSize,
-    backgroundPosition
+    top
   }
 
   return (
     <div
       className={containerClass}
-      style={containerStyle}
       ref={drop}
     >
+      <svg className="icon absolute" style={svgStyle}><use xlinkHref={`#${svg.id}`} /></svg>
     </div>
   );
 };

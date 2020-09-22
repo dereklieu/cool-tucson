@@ -1,10 +1,42 @@
-import sprites from '../assets/img/sprites/board/spritesheet.json';
+import stBase from '../assets/img/svg/st-base.svg';
+import pbHouseBase from '../assets/img/svg/pb-house-base.svg';
+import pbApartmentBase from '../assets/img/svg/pb-apartment-base.svg';
+import oaBase from '../assets/img/svg/oa-base.svg';
+import thBase from '../assets/img/svg/th-base.svg';
+
+const svgs = {
+  stBase: {
+    id: stBase.id,
+    w: 1929,
+    h: 699.6
+  },
+  pbHouseBase: {
+    id: pbHouseBase.id,
+    w: 319.8,
+    h: 225.5
+  },
+  pbApartmentBase: {
+    id: pbApartmentBase.id,
+    w: 353.1,
+    h: 368.5
+  },
+  oaBase: {
+    id: oaBase.id,
+    w: 727.6,
+    h: 420.9
+  },
+  thBase: {
+    id: thBase.id,
+    w: 763.5,
+    h: 494.1
+  }
+}
 
 const positions = [
   {
     id: 'st_base',
     type: 'Street',
-    sprite: sprites.frames['st-base.png'].frame,
+    svg: svgs.stBase,
     placement: {
       x: -108.3,
       y: 208.4,
@@ -14,7 +46,7 @@ const positions = [
     id: 'pb_house_1',
     type: 'Private buildings',
     variant: 'house',
-    sprite: sprites.frames['pb-house-base.png'].frame,
+    svg: svgs.pbHouseBase,
     placement: {
       x: 708.5,
       y: 78.1
@@ -24,7 +56,7 @@ const positions = [
     id: 'pb_apartment_1',
     type: 'Private buildings',
     variant: 'apartment',
-    sprite: sprites.frames['pb-apartment-base.png'].frame,
+    svg: svgs.pbApartmentBase,
     placement: {
       x: 896,
       y: 51.8
@@ -34,7 +66,7 @@ const positions = [
     id: 'pb_apartment_2',
     type: 'Private buildings',
     variant: 'apartment',
-    sprite: sprites.frames['pb-apartment-base.png'].frame,
+    svg: svgs.pbApartmentBase,
     placement: {
       x: 1075.6,
       y: 155.2
@@ -44,7 +76,7 @@ const positions = [
     id: 'pb_house_2',
     type: 'Private buildings',
     variant: 'house',
-    sprite: sprites.frames['pb-house-base.png'].frame,
+    svg: svgs.pbHouseBase,
     placement: {
       x: 1279,
       y: 407.5
@@ -54,7 +86,7 @@ const positions = [
     id: 'pb_house_3',
     type: 'Private buildings',
     variant: 'house',
-    sprite: sprites.frames['pb-house-base.png'].frame,
+    svg: svgs.pbHouseBase,
     placement: {
       x: 1464.5,
       y: 514.5
@@ -63,7 +95,7 @@ const positions = [
   {
     id: 'oa_base',
     type: 'Open area',
-    sprite: sprites.frames['oa-base.png'].frame,
+    svg: svgs.oaBase,
     placement: {
       x: 486.4,
       y: 317.9
@@ -72,7 +104,7 @@ const positions = [
   {
     id: 'th_base',
     type: 'Town hall',
-    sprite: sprites.frames['th-base.png'].frame,
+    svg: svgs.thBase,
     placement: {
       x: -55.1,
       y: 53.7

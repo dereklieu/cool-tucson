@@ -1,6 +1,7 @@
 'use strict';
 
 import { createSelector } from 'reselect';
+import { getIntervention } from '../interventions/interventions';
 
 const root = state => state.intervention;
 
@@ -13,7 +14,12 @@ interventionSelectors.active = createSelector(
 
 interventionSelectors.dragging = createSelector(
   root,
-  intervention => intervention.dragged
+  intervention => intervention.dragging
+);
+
+interventionSelectors.draggedType = createSelector(
+  interventionSelectors.dragging,
+  intervention => intervention ? getIntervention(intervention).type : ''
 );
 
 export { interventionSelectors };
