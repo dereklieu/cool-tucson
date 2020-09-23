@@ -2,9 +2,11 @@
 
 const actions = {};
 
-actions.changeActiveIntervention = (intervention) => ({
-  type: 'CHANGE_ACTIVE_INTERVENTION',
-  intervention: intervention || ''
+actions.applyIntervention = (plot, intervention, score) => ({
+  type: 'APPLY_INTERVENTION',
+  plot,
+  intervention,
+  score
 });
 
 export const boardActionCreators = actions;

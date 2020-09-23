@@ -20,7 +20,6 @@ const interventions = i.map(d => {
       }
     },
     description: d.description,
-    id: d.intervention,
     name: d.intervention,
     type: d.location
   };

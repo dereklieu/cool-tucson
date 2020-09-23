@@ -26,7 +26,6 @@ let Interventions = class Interventions extends React.PureComponent {
     return (
       <div className="flex-child" key={d.name}>
         <Intervention
-          id={d.id}
           name={d.name}
           type={d.type}
           isActive={d.name === activeIntervention}

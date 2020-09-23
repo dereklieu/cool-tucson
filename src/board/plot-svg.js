@@ -4,39 +4,50 @@ import React from 'react';
 import { useDrop } from 'react-dnd';
 import { connect } from 'react-redux';
 
+import { ActiveIntervention } from './active-intervention';
+
 import { interventionSelectors } from '../store/intervention-selectors';
+import { boardActionCreators } from '../store/board-action-creators';
+import { boardSelectors } from '../store/board-selectors';
 
-import { px, vw } from '../util/style-util';
+import { px, vw, x, y } from '../util/style-util';
 import constants from '../constants';
-
-const x = (w) => w / constants.BOARD_NATIVE_WIDTH;
-const y = (h) => h / constants.BOARD_NATIVE_HEIGHT * constants.HEIGHT_RATIO;
 
 let Plot = (props) => {
   const {
+    activeType,
+    activeIntervention,
+    appliedInterventions,
+    applyIntervention,
+
     containerWidth,
+    plot,
     type,
-    position,
-    activeType
+    position
   } = props;
 
+  const isActiveType = type === activeType;
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: constants.NEW_INTERVENTION,
+    canDrop: ({ name }) => {
+      return isActiveType &&
+        !appliedInterventions.includes(name);
+    },
     drop: ({ id, name, score }) => {
-      // return applyIntervention(id, name, score, row, column);
+      applyIntervention(plot, name, score);
     },
     collect: monitor => ({
       canDrop: monitor.canDrop(),
-      isOver: monitor.isOver(),
+      isOver: monitor.isOver()
     })
   });
 
   const isDragging = Boolean(activeType);
-  const isActiveType = type === activeType;
   const containerClass = c(
+    'absolute',
     {
-      'opacity100': !isDragging || isActiveType,
-      'opacity25': isDragging && !isActiveType
+      'opacity100': !isDragging || canDrop,
+      'opacity25': isDragging && !canDrop
     }
   );
 
@@ -47,29 +58,71 @@ let Plot = (props) => {
   const left = vw(x(placement.x) * 100);
   const top = vw(y(placement.y) * 100);
 
-  const svgStyle = {
-    width,
-    height,
-    left,
-    top
+  const interventions = appliedInterventions.map(name => ({
+    ...position.interventions[name],
+    name
+  }));
+
+  // Render a preview of the intervention
+  if (isDragging && canDrop) {
+    interventions.push({
+      ...position.interventions[activeIntervention],
+      name: activeIntervention,
+      isPreview: true
+    });
   }
+
+  const ratio = containerWidth / constants.BOARD_NATIVE_WIDTH;
 
   return (
     <div
       className={containerClass}
+      style={{ top, left, width, height }}
       ref={drop}
     >
-      <svg className="icon absolute" style={svgStyle}><use xlinkHref={`#${svg.id}`} /></svg>
+      <div className="relative">
+        {interventions.filter(i => i.post).map(i => (
+          <ActiveIntervention
+            intervention={i}
+            key={`${i.name}-${i.isPreview ? 'preview' : 'applied'}`}
+            ratio={ratio}
+            isPreview={i.isPreview}
+          />
+        ))}
+
+        <svg
+          className="icon absolute"
+          style={{ width, height }}
+        >
+          <use xlinkHref={`#${svg.id}`} />
+        </svg>
+
+        {interventions.filter(i => !i.post).map(i => (
+          <ActiveIntervention
+            intervention={i}
+            key={`${i.name}-${i.isPreview ? 'preview' : 'applied'}`}
+            ratio={ratio}
+            isPreview={i.isPreview}
+          />
+        ))}
+      </div>
     </div>
   );
 };
 
-const mapStateToProps = state => ({
-  activeType: interventionSelectors.draggedType(state)
+const mapStateToProps = (state, props) => ({
+  activeType: interventionSelectors.draggedType(state),
+  activeIntervention: interventionSelectors.dragging(state),
+  appliedInterventions: boardSelectors.interventions(state, props)
 });
 
+const mapDispatch = {
+  applyIntervention: boardActionCreators.applyIntervention
+};
+
 Plot = connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatch
 )(Plot);
 
 export { Plot };

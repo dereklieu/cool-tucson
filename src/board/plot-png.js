@@ -5,6 +5,7 @@ import { useDrop } from 'react-dnd';
 import { connect } from 'react-redux';
 
 import { interventionSelectors } from '../store/intervention-selectors';
+import { boardActionCreators } from '../store/board-action-creators';
 
 import { px, vw } from '../util/style-util';
 import constants from '../constants';
@@ -27,8 +28,8 @@ let Plot = (props) => {
 
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: constants.NEW_INTERVENTION,
-    drop: ({ id, name, score }) => {
-      // return applyIntervention(id, name, score, row, column);
+    drop: ({ name, score }) => {
+      applyIntervention(position.id, name, score);
     },
     collect: monitor => ({
       canDrop: monitor.canDrop(),
@@ -83,8 +84,13 @@ const mapStateToProps = state => ({
   activeType: interventionSelectors.draggedType(state)
 });
 
+const mapDispach = {
+  applyIntervention: boardActionCreators.applyIntervention
+};
+
 Plot = connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispach
 )(Plot);
 
 export { Plot };

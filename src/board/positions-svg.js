@@ -1,8 +1,10 @@
-import stBase from '../assets/img/svg/st-base.svg';
-import pbHouseBase from '../assets/img/svg/pb-house-base.svg';
-import pbApartmentBase from '../assets/img/svg/pb-apartment-base.svg';
-import oaBase from '../assets/img/svg/oa-base.svg';
-import thBase from '../assets/img/svg/th-base.svg';
+import stBase from '../assets/img/svg/plots/st-base.svg';
+import pbHouseBase from '../assets/img/svg/plots/pb-house-base.svg';
+import pbApartmentBase from '../assets/img/svg/plots/pb-apartment-base.svg';
+import oaBase from '../assets/img/svg/plots/oa-base.svg';
+import thBase from '../assets/img/svg/plots/th-base.svg';
+
+import { interventions } from './interventions-svg';
 
 const svgs = {
   stBase: {
@@ -40,7 +42,8 @@ const positions = [
     placement: {
       x: -108.3,
       y: 208.4,
-    }
+    },
+    interventions: {}
   },
   {
     id: 'pb_house_1',
@@ -50,7 +53,8 @@ const positions = [
     placement: {
       x: 708.5,
       y: 78.1
-    }
+    },
+    interventions: {}
   },
   {
     id: 'pb_apartment_1',
@@ -60,7 +64,8 @@ const positions = [
     placement: {
       x: 896,
       y: 51.8
-    }
+    },
+    interventions: {}
   },
   {
     id: 'pb_apartment_2',
@@ -70,7 +75,8 @@ const positions = [
     placement: {
       x: 1075.6,
       y: 155.2
-    }
+    },
+    interventions: {}
   },
   {
     id: 'pb_house_2',
@@ -80,7 +86,8 @@ const positions = [
     placement: {
       x: 1279,
       y: 407.5
-    }
+    },
+    interventions: {}
   },
   {
     id: 'pb_house_3',
@@ -90,7 +97,8 @@ const positions = [
     placement: {
       x: 1464.5,
       y: 514.5
-    }
+    },
+    interventions: {}
   },
   {
     id: 'oa_base',
@@ -99,7 +107,8 @@ const positions = [
     placement: {
       x: 486.4,
       y: 317.9
-    }
+    },
+    interventions: {}
   },
   {
     id: 'th_base',
@@ -108,8 +117,9 @@ const positions = [
     placement: {
       x: -55.1,
       y: 53.7
-    }
-  },
+    },
+    interventions: interventions.townHall
+  }
 ];
 
 export { positions };

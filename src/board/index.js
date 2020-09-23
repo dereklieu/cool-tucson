@@ -54,7 +54,12 @@ let Board = class Board extends React.PureComponent {
 
     return (
       <div key={position.id}>
-        <Plot containerWidth={containerWidth} type={position.type} position={position} />
+        <Plot
+          containerWidth={containerWidth}
+          plot={position.id}
+          type={position.type}
+          position={position}
+        />
       </div>
     );
   };
@@ -73,9 +78,11 @@ let Board = class Board extends React.PureComponent {
       }
     );
     return (
-      <div className="relative scroll-hidden" style={boardStyle} ref={this.container}>
-        <svg className={svgClassName} style={svgStyle}><use xlinkHref={`#${board.id}`} /></svg>
-        {positions.map(this.renderPosition)}
+      <div className="pt60">
+        <div className="relative" style={boardStyle} ref={this.container}>
+          <svg className={svgClassName} style={svgStyle}><use xlinkHref={`#${board.id}`} /></svg>
+          {positions.map(this.renderPosition)}
+        </div>
       </div>
     );
   }

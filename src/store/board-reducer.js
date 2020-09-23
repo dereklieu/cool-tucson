@@ -1,8 +1,15 @@
 'use strict';
 import * as immutable from 'object-path-immutable';
 import { badges } from '../badges/badges';
+import { positions } from '../board/positions-svg';
+
+const interventions = {};
+positions.forEach(plot => {
+  interventions[plot.id] = [];
+});
 
 const initialState = {
+  interventions,
   score: {
     currency: 500000,
     environmental: 0,
@@ -12,19 +19,25 @@ const initialState = {
 };
 
 export function reducer(state = initialState, action) {
+  switch (action.type) {
+    case 'APPLY_INTERVENTION': {
+      state = immutable.update(state, 'score', applyInterventionScore(action.score));
+      state = immutable.push(state, ['interventions', action.plot], action.intervention);
+    }
+  }
   return state;
 }
 
-  /*
 function applyInterventionScore(score) {
   const { environmental, social, cost } = score;
-  return state => ({
-    currency: state.currency - cost,
-    environmental: state.environmental + environmental,
-    social: state.social + social
+  return score => ({
+    currency: score.currency - cost,
+    environmental: score.environmental + environmental,
+    social: score.social + social
   });
 }
 
+  /*
 function removeInterventionScore(score) {
   const { environmental, social, cost } = score;
   return state => ({

@@ -6,9 +6,12 @@ const root = state => state.board;
 
 const boardSelectors = {};
 
-boardSelectors.activeIntervention = createSelector(
-  root,
-  board => board.activeIntervention
+boardSelectors.interventions = createSelector(
+  [
+    root,
+    (_, props) => props.plot
+  ],
+  (board, plot) => board.interventions[plot]
 );
 
 boardSelectors.badges = createSelector(

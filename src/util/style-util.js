@@ -1,9 +1,12 @@
 'use strict';
 import c from 'classnames';
+import constants from '../constants';
 
 export const px = (number) => Math.floor(number) + 'px';
 export const pct = (number) => number + '%';
 export const vw = (number) => number + 'vw';
+export const x = (width) => width / constants.BOARD_NATIVE_WIDTH;
+export const y = (height) => height / constants.BOARD_NATIVE_HEIGHT * constants.HEIGHT_RATIO;
 
 const interventionColor = {
   'Private buildings': 'bg-blue',

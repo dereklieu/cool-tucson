@@ -23,7 +23,6 @@ let Intervention = (props) => {
     setIntervention,
     dragIntervention,
 
-    id,
     name,
     type,
     isActive,
@@ -33,7 +32,6 @@ let Intervention = (props) => {
   const [{ isDragging }, drag] = useDrag({
     item: {
       type: constants.NEW_INTERVENTION,
-      id,
       name,
       score,
     },
