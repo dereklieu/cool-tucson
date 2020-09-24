@@ -9,6 +9,13 @@ import houseCoolRoof from '../assets/img/svg/pb-house/cool-roof.svg';
 import houseShadeStructure from '../assets/img/svg/pb-house/shade-structure.svg';
 import houseUrbanCopy from '../assets/img/svg/pb-house/urban-canopy.svg';
 
+// Private building apartment
+import aptWasteHeat from '../assets/img/svg/pb-apt/apt-waste-heat.svg';
+import aptGreenRoof from '../assets/img/svg/pb-apt/apt-green-roof.svg';
+import aptCoolRoof from '../assets/img/svg/pb-apt/apt-cool-roof.svg';
+import aptShadeStructure from '../assets/img/svg/pb-apt/apt-shade-structure.svg';
+import aptUrbanCopy from '../assets/img/svg/pb-apt/apt-urban-canopy.svg';
+
 const townHall = {
   'Public education and communication': {
     svg: {
@@ -102,7 +109,74 @@ const privateBuildingHouse = {
   }
 };
 
+const privateBuildingApartment = {
+  'Waste heat reduction': {
+    svg: {
+      id: aptWasteHeat.id,
+      w: 50.7,
+      h: 52
+    },
+    placement: {
+      x: 130.6,
+      y: -9.4,
+      z: 1,
+    }
+  },
+  'Green roofs and walls': {
+    svg: {
+      id: aptGreenRoof.id,
+      w: 182.4,
+      h: 265.9
+    },
+    placement: {
+      x: 113.5,
+      y: 22,
+      z: 1
+    },
+    removes: 'Cool roofs and walls'
+  },
+  'Cool roofs and walls': {
+    svg: {
+      id: aptCoolRoof.id,
+      w: 205.8,
+      h: 302.8
+    },
+    placement: {
+      x: 89.3,
+      y: 0,
+      z: 0
+    },
+    removes: 'Green roofs and walls'
+  },
+  'Shade structures': {
+    svg: {
+      id: aptShadeStructure.id,
+      w: 144.3,
+      h: 98.9
+    },
+    placement: {
+      x: 75,
+      y: 186.7,
+      z: 1
+    }
+  },
+  'Urban tree canopy': {
+    svg: {
+      id: aptUrbanCopy.id,
+      w: 122.2,
+      h: 113.6
+    },
+    placement: {
+      x: 44.6,
+      y: 218.1,
+      z: 1
+    }
+  }
+};
+
+
 export const interventions = {
   townHall,
-  privateBuildingHouse
+  privateBuildingHouse,
+  privateBuildingApartment
 };
