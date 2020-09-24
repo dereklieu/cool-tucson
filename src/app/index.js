@@ -3,19 +3,21 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Game } from './game';
 import { Locales } from '../locales';
-import { settingSelectors } from '../store/setting-selectors';
+import { boardSelectors } from '../store/board-selectors';
 
 let App = class App extends React.PureComponent {
   render() {
     const { locale } = this.props;
-    // TODO: implement locales
-    if (!locale && false) return <Locales />;
-    return <Game />;
+    return (
+      <div className="scroll-hidden viewport-full relative">
+        {locale ? <Game /> : <Locales />}
+      </div>
+    );
   }
 }
 
 const mapStateToProps = state => ({
-  locale: settingSelectors.locale(state)
+  locale: boardSelectors.locale(state)
 });
 
 App = connect(

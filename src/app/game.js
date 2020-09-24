@@ -13,7 +13,7 @@ import { Score } from '../indicators/score';
 import { Tooltip } from '../indicators/tooltip';
 
 export const Game = () => (
-  <div className="scroll-hidden viewport-full relative">
+  <>
     <DndProvider backend={HTML5Backend}>
       <Bin className="w-full viewport-full absolute top left flex-parent flex-parent--column flex-parent--end-main gradient-red">
         <div className="flex-child scroll-hidden">
@@ -32,5 +32,5 @@ export const Game = () => (
       <Badges />
     </div>
     <Tooltip />
-  </div>
+  </>
 );

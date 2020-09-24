@@ -19,4 +19,9 @@ boardSelectors.badges = createSelector(
   board => board.badges
 );
 
+boardSelectors.locale = createSelector(
+  root,
+  board => board.locale
+);
+
 export { boardSelectors };

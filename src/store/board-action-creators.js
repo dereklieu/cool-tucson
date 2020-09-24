@@ -8,4 +8,10 @@ actions.applyIntervention = (plot, intervention) => ({
   intervention
 });
 
+actions.changeLocale = (locale) => ({
+  type: 'CHANGE_LOCALE',
+  locale
+});
+
+
 export const boardActionCreators = actions;

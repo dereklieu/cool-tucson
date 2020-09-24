@@ -9,14 +9,8 @@ positions.forEach(plot => {
   interventions[plot.id] = [];
 });
 
-const locales = {
-  'hot dry': 'hd',
-  'hot humid': 'hh',
-  'temperate': 't'
-};
-
 const initialState = {
-  locale: locales['hot dry'],
+  locale: null,
   interventions,
   score: {
     currency: 500000,
@@ -28,6 +22,11 @@ const initialState = {
 
 export function reducer(state = initialState, action) {
   switch (action.type) {
+    case 'CHANGE_LOCALE':
+      return wrap(state)
+      .set('locale', action.locale)
+      .value();
+
     case 'APPLY_INTERVENTION': {
       const { plot, intervention } = action;
       const position = positions.find(p => p.id === plot);
