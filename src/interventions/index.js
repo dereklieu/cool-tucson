@@ -2,7 +2,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { settingSelectors } from '../store/setting-selectors';
 import { interventionSelectors } from '../store/intervention-selectors';
 import { interventionActionCreators } from '../store/intervention-action-creators';
 
@@ -22,14 +21,13 @@ let Interventions = class Interventions extends React.PureComponent {
   };
 
   renderIntervention = (d) => {
-    const { locale, activeIntervention } = this.props;
+    const { activeIntervention } = this.props;
     return (
       <div className="flex-child" key={d.name}>
         <Intervention
           name={d.name}
           type={d.type}
           isActive={d.name === activeIntervention}
-          score={d.score[locale]}
         />
       </div>
     );
@@ -51,7 +49,6 @@ let Interventions = class Interventions extends React.PureComponent {
 }
 
 const mapStateToProps = state => ({
-  locale: settingSelectors.locale(state),
   activeIntervention: interventionSelectors.active(state)
 });
 

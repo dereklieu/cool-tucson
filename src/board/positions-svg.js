@@ -54,7 +54,7 @@ const positions = [
       x: 708.5,
       y: 78.1
     },
-    interventions: {}
+    interventions: interventions.privateBuildingHouse
   },
   {
     id: 'pb_apartment_1',
@@ -87,7 +87,7 @@ const positions = [
       x: 1279,
       y: 407.5
     },
-    interventions: {}
+    interventions: interventions.privateBuildingHouse
   },
   {
     id: 'pb_house_3',
@@ -98,7 +98,7 @@ const positions = [
       x: 1464.5,
       y: 514.5
     },
-    interventions: {}
+    interventions: interventions.privateBuildingHouse
   },
   {
     id: 'oa_base',

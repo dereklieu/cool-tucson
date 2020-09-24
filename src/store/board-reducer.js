@@ -1,14 +1,22 @@
 'use strict';
-import * as immutable from 'object-path-immutable';
+import { wrap, get } from 'object-path-immutable';
 import { badges } from '../badges/badges';
 import { positions } from '../board/positions-svg';
+import { getIntervention } from '../interventions/interventions';
 
 const interventions = {};
 positions.forEach(plot => {
   interventions[plot.id] = [];
 });
 
+const locales = {
+  'hot dry': 'hd',
+  'hot humid': 'hh',
+  'temperate': 't'
+};
+
 const initialState = {
+  locale: locales['hot dry'],
   interventions,
   score: {
     currency: 500000,
@@ -21,14 +29,41 @@ const initialState = {
 export function reducer(state = initialState, action) {
   switch (action.type) {
     case 'APPLY_INTERVENTION': {
-      state = immutable.update(state, 'score', applyInterventionScore(action.score));
-      state = immutable.push(state, ['interventions', action.plot], action.intervention);
+      const { plot, intervention } = action;
+      const position = positions.find(p => p.id === plot);
+      const meta = position.interventions[intervention];
+      const removes = meta.removes && getInterventionScore(meta.removes, state.locale);
+
+      return wrap(state)
+      .update('score', removeInterventionScore(removes))
+      .update('score', applyInterventionScore(getInterventionScore(intervention, state.locale)))
+      .update(['interventions', plot], removeIntervention(meta.removes))
+      .update(['interventions', plot], pushIntervention(intervention))
+      .update(['interventions', plot], sort(plot))
+      .value();
     }
   }
   return state;
 }
 
+const noop = x => x;
+
+function getInterventionScore(intervention, locale) {
+  return getIntervention(intervention).score[locale];
+}
+
+function removeInterventionScore(score) {
+  if (!score) return noop;
+  const { environmental, social, cost } = score;
+  return state => ({
+    currency: state.currency + cost,
+    environmental: state.environmental - environmental,
+    social: state.social - social
+  });
+}
+
 function applyInterventionScore(score) {
+  if (!score) return noop;
   const { environmental, social, cost } = score;
   return score => ({
     currency: score.currency - cost,
@@ -37,15 +72,27 @@ function applyInterventionScore(score) {
   });
 }
 
-  /*
-function removeInterventionScore(score) {
-  const { environmental, social, cost } = score;
-  return state => ({
-    currency: state.currency + cost,
-    environmental: state.environmental - environmental,
-    social: state.social - social
-  });
+function removeIntervention(intervention) {
+  if (!intervention) return noop;
+  return interventions => interventions.filter(i => i !== intervention);
 }
+
+function pushIntervention(intervention) {
+  if (!intervention) return noop;
+  return interventions => interventions.concat(intervention);
+}
+
+function sort(plot) {
+  const { interventions: order } = positions.find(p => p.id === plot);
+  const getOrder = i => get(order, [i, 'placement', 'z'], 1);
+  return interventions => {
+    let next = interventions;
+    next.sort((a, b) => getOrder(a) - getOrder(b));
+    return next;
+  };
+}
+
+  /*
 
 function syncBadges(score) {
   const passed = badges.filter(b => {

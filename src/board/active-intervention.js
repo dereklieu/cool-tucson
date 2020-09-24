@@ -38,7 +38,7 @@ class ActiveIntervention extends React.PureComponent {
       height,
       transition: this.state.complete ? undefined : 'all 400ms ease-out',
       top: this.state.mounted ? 0 : px(-30),
-      opacity: isPreview ? 0.1 : 1
+      opacity: isPreview ? 0.4 : 1
     };
 
     return (

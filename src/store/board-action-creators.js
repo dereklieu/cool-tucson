@@ -2,11 +2,10 @@
 
 const actions = {};
 
-actions.applyIntervention = (plot, intervention, score) => ({
+actions.applyIntervention = (plot, intervention) => ({
   type: 'APPLY_INTERVENTION',
   plot,
-  intervention,
-  score
+  intervention
 });
 
 export const boardActionCreators = actions;

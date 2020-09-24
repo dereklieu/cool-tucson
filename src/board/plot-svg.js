@@ -33,8 +33,8 @@ let Plot = (props) => {
       return isActiveType &&
         !appliedInterventions.includes(name);
     },
-    drop: ({ id, name, score }) => {
-      applyIntervention(plot, name, score);
+    drop: ({ name }) => {
+      applyIntervention(plot, name);
     },
     collect: monitor => ({
       canDrop: monitor.canDrop(),
@@ -64,7 +64,7 @@ let Plot = (props) => {
   }));
 
   // Render a preview of the intervention
-  if (isDragging && canDrop) {
+  if (isDragging && canDrop && position.interventions[activeIntervention]) {
     interventions.push({
       ...position.interventions[activeIntervention],
       name: activeIntervention,

@@ -26,14 +26,12 @@ let Intervention = (props) => {
     name,
     type,
     isActive,
-    score,
   } = props;
 
   const [{ isDragging }, drag] = useDrag({
     item: {
       type: constants.NEW_INTERVENTION,
-      name,
-      score,
+      name
     },
     begin: () => {
       ReactTooltip.hide();
