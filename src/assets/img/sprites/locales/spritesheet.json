@@ -1,0 +1,33 @@
+{
+	"meta": {
+		"image": "spritesheet.png",
+		"size": {"w":1280,"h":1280},
+		"scale": "1"
+	},
+	"frames": {
+		"el-houslanta.png":
+		{
+			"frame": {"x":0,"y":0,"w":640,"h":640},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":640,"h":640},
+			"sourceSize": {"w":640,"h":640}
+		},
+		"las-albusconix.png":
+		{
+			"frame": {"x":640,"y":0,"w":640,"h":640},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":640,"h":640},
+			"sourceSize": {"w":640,"h":640}
+		},
+		"san-porteattlopolis.png":
+		{
+			"frame": {"x":0,"y":640,"w":640,"h":640},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":640,"h":640},
+			"sourceSize": {"w":640,"h":640}
+		}
+	}
+}
