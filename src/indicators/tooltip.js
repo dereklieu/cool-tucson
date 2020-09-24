@@ -6,6 +6,7 @@ import c from 'classnames';
 
 import { getIntervention } from '../interventions/interventions'
 import { interventionSelectors } from '../store/intervention-selectors';
+import { boardSelectors } from '../store/board-selectors';
 import constants from '../constants';
 import { pillClass } from '../util/style-util';
 
@@ -40,6 +41,21 @@ let Tooltip = class Tooltip extends React.PureComponent {
     );
   }
 
+  renderLocale() {
+    const { locale } = this.props;
+    const descriptions = {
+      t: 'the weather is nice all year round',
+      hh: 'the weather is hot and muggy',
+      hd: 'the sun shines hot and dry'
+    };
+    return (
+      <div className="prose txt-m">
+        <h5 className="txt-h5">You are in <strong>{constants.LOCALES[locale]}</strong></h5>
+        <p>Here, {descriptions[locale]}. Click to try a different place.</p>
+      </div>
+    );
+  }
+
   getIntervention = (name) => {
     if (name.indexOf(constants.NEW_INTERVENTION) < 0) return undefined;
     return getIntervention(
@@ -50,6 +66,7 @@ let Tooltip = class Tooltip extends React.PureComponent {
   getContent = (name) => {
     if (!name) return null;
 
+    if (name === constants.LOCALE_CHANGE) return this.renderLocale();
     if (name === constants.ERASER) return this.renderEraser();
 
     const intervention = this.getIntervention(name);
@@ -79,7 +96,8 @@ let Tooltip = class Tooltip extends React.PureComponent {
 }
 
 const mapStateToProps = state => ({
-  activeIntervention: interventionSelectors.active(state)
+  activeIntervention: interventionSelectors.active(state),
+  locale: boardSelectors.locale(state)
 });
 
 Tooltip = connect(mapStateToProps)(Tooltip);

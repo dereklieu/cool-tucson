@@ -6,6 +6,7 @@ import { Title } from './title';
 import { Locale } from '../locales/locale';
 import { Modal } from '../indicators/modal';
 import { pct } from '../util/style-util';
+import constants from '../constants';
 
 import info from '../assets/img/info/info.png';
 import coolRoof from '../assets/img/info/cool-roof.svg';
@@ -24,11 +25,11 @@ let Menu = (props) => {
     <div className="relative">
       <div className="align-center">
         <Title />
-        <h4 className="txt-h4 mt12 mb24">Tackle urban heat by <strong>dragging improvements onto the map</strong>. Tap an improvement to learn more.</h4>
+        <h4 className="txt-h4 mt12 mb24 mx120">Tackle urban heat by <strong>dragging improvements onto the map</strong>. Tap an improvement to learn more.</h4>
       </div>
       <div className="absolute top left">
-        <div className="mt12 ml12">
-          <Locale type={props.locale} size={72} isStatic={true} onClick={x => x} />
+        <div className="mt12 ml12" data-tip={constants.LOCALE_CHANGE}>
+          <Locale type={props.locale} size={90} onClick={x => x} />
         </div>
       </div>
       <div className="absolute top right" onClick={() => toggleModal(!showModal)}>

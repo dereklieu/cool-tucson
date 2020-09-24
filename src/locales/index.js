@@ -23,14 +23,14 @@ let Locales = class Locales extends React.PureComponent {
           <div className="flex-parent flex-parent--center-cross flex-parent--center-main flex-parent--wrap">
             <div className="flex-child mx12 my12">
               <Locale
-                type="hh"
+                type="hd"
                 size={300}
                 onClick={this.changeLocale}
               />
             </div>
             <div className="flex-child mx12 my12">
               <Locale
-                type="hd"
+                type="hh"
                 size={300}
                 onClick={this.changeLocale}
               />

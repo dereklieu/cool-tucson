@@ -9,8 +9,8 @@ import sprite from '../assets/img/sprites/locales/spritesheet.png';
 const SPRITE_SIZE = sprites.meta.size;
 
 const types = {
-  hd: 'el-houslanta.png',
-  hh: 'las-albusconix.png',
+  hh: 'el-houslanta.png',
+  hd: 'las-albusconix.png',
   t: 'san-porteattlopolis.png'
 };
 
