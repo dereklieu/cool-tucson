@@ -61,6 +61,17 @@ let Plot = (props) => {
   const left = vw(x(placement.x) * 100);
   const top = vw(y(placement.y) * 100);
 
+  const containerStyle = {
+    top,
+    left,
+    width,
+    height
+  };
+
+  if (isActiveType) {
+    containerStyle.zIndex = 10;
+  }
+
   const interventions = appliedInterventions.map(name => ({
     ...position.interventions[name],
     name
@@ -80,7 +91,7 @@ let Plot = (props) => {
   return (
     <div
       className={containerClass}
-      style={{ top, left, width, height }}
+      style={containerStyle}
       ref={drop}
     >
       <div className="relative">

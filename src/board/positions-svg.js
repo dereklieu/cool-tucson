@@ -43,7 +43,7 @@ const positions = [
       x: -108.3,
       y: 208.4,
     },
-    interventions: {}
+    interventions: interventions.street
   },
   {
     id: 'pb_house_1',

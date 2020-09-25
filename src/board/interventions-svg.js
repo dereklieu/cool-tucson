@@ -20,6 +20,11 @@ import aptUrbanCopy from '../assets/img/svg/pb-apt/apt-urban-canopy.svg';
 import urbanPark from '../assets/img/svg/oa/urban-park.svg';
 import water from '../assets/img/svg/oa/water.svg';
 
+// Street
+import drinkingWater from '../assets/img/svg/st/drinking-water.svg';
+import greenInfrastructure from '../assets/img/svg/st/green-infrastructure.svg';
+import coolPavement from '../assets/img/svg/st/cool-pavement.svg';
+
 const townHall = {
   'Public education and communication': {
     svg: {
@@ -206,9 +211,49 @@ const openArea = {
   }
 };
 
+const street = {
+  'Drinking water': {
+    svg: {
+      id: drinkingWater.id,
+      w: 1065.8,
+      h: 337.5
+    },
+    placement: {
+      x: 287.3,
+      y: 66,
+      z: 1
+    }
+  },
+  'Green infrastructure': {
+    svg: {
+      id: greenInfrastructure.id,
+      w: 1309,
+      h: 331.5
+    },
+    placement: {
+      x: 162.9,
+      y: 194.7,
+      z: 2
+    }
+  },
+  'Cool pavement': {
+    svg: {
+      id: coolPavement.id,
+      w: 1929,
+      h: 699.6
+    },
+    placement: {
+      x: 0,
+      y: 0,
+      z: 0
+    }
+  }
+};
+
 export const interventions = {
   townHall,
   privateBuildingHouse,
   privateBuildingApartment,
-  openArea
+  openArea,
+  street
 };
