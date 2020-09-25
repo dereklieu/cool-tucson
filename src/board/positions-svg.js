@@ -108,7 +108,7 @@ const positions = [
       x: 486.4,
       y: 317.9
     },
-    interventions: {}
+    interventions: interventions.openArea
   },
   {
     id: 'th_base',

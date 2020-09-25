@@ -30,7 +30,10 @@ let Plot = (props) => {
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: constants.NEW_INTERVENTION,
     canDrop: ({ name }) => {
-      return isActiveType &&
+      const hasPrereq = !constants.INTERVENTION_PREREQUISITES[name] ||
+        appliedInterventions.includes(constants.INTERVENTION_PREREQUISITES[name]);
+      return hasPrereq &&
+        isActiveType &&
         !appliedInterventions.includes(name);
     },
     drop: ({ name }) => {

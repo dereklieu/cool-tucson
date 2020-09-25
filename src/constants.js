@@ -1,5 +1,17 @@
 'use strict';
 
+import { interventions } from './board/interventions-svg';
+
+// Construct a map of interventions that require other interventions
+const prereqs = {};
+for (const type in interventions) {
+  for (const intervention in interventions[type]) {
+    if (interventions[type][intervention].requires) {
+      prereqs[intervention] = interventions[type][intervention].requires;
+    }
+  }
+}
+
 const constants = {
   NEW_INTERVENTION: 'NEW_INTERVENTION',
   FIELDED_INTERVENTION: 'FIELDED_INTERVENTION',
@@ -18,7 +30,9 @@ const constants = {
   },
 
   INITIAL_CURRENCY: 500,
-  SOCIAL_WIN_SCORE: 10
+  SOCIAL_WIN_SCORE: 10,
+
+  INTERVENTION_PREREQUISITES: prereqs
 };
 
 export default constants;

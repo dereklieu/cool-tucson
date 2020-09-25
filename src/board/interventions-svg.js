@@ -16,6 +16,10 @@ import aptCoolRoof from '../assets/img/svg/pb-apt/apt-cool-roof.svg';
 import aptShadeStructure from '../assets/img/svg/pb-apt/apt-shade-structure.svg';
 import aptUrbanCopy from '../assets/img/svg/pb-apt/apt-urban-canopy.svg';
 
+// Open area
+import urbanPark from '../assets/img/svg/oa/urban-park.svg';
+import water from '../assets/img/svg/oa/water.svg';
+
 const townHall = {
   'Public education and communication': {
     svg: {
@@ -174,9 +178,37 @@ const privateBuildingApartment = {
   }
 };
 
+const openArea = {
+  'Urban park': {
+    svg: {
+      id: urbanPark.id,
+      w: 745,
+      h: 434.7
+    },
+    placement: {
+      x: -2,
+      y: -6,
+      z: 1
+    }
+  },
+  'Water features': {
+    svg: {
+      id: water.id,
+      w: 336.8,
+      h: 197.8
+    },
+    placement: {
+      x: 272.9,
+      y: 148.5,
+      z: 2
+    },
+    requires: 'Urban park'
+  }
+};
 
 export const interventions = {
   townHall,
   privateBuildingHouse,
-  privateBuildingApartment
+  privateBuildingApartment,
+  openArea
 };
