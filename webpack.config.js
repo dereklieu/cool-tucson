@@ -45,5 +45,8 @@ module.exports = {
     moduleIds: 'hashed',
     runtimeChunk: 'single'
   },
-  devtool: 'source-map'
+  devtool: 'source-map',
+  devServer: {
+    stats: 'minimal'
+  }
 };
