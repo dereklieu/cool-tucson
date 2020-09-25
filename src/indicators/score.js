@@ -3,29 +3,30 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { scoreSelectors } from '../store/score-selectors';
 import { ProgressBar } from './progress-bar';
+import constants from '../constants';
+
+const SCORE_PADDING = 1.1;
 
 let Score = class Score extends React.PureComponent {
   render() {
     const {
       currency,
       social,
-      environmental,
-      winScore
+      environmental
     } = this.props;
 
     const scores = [
       {
-        progress: social,
-        barClassName: social > winScore
-        ? 'bg-blue-dark'
-        : 'bg-blue-light',
-        label: 'Social score'
+        score: social,
+        barClassName: social >= constants.SOCIAL_WIN_SCORE
+        ? 'bg-blue-light'
+        : 'bg-blue-dark',
+        label: 'Social score',
+        threshold: 100 / SCORE_PADDING
       },
       {
-        progress: environmental,
-        barClassName: environmental > winScore
-        ? 'bg-green-dark'
-        : 'bg-green-light',
+        score: environmental,
+        barClassName: 'bg-green-dark',
         label: 'Environmental score'
       }
     ];
@@ -36,7 +37,8 @@ let Score = class Score extends React.PureComponent {
           <ProgressBar
             label="Resources remaining"
             barClassName="bg-red-light"
-            progress={currency}
+            score={currency}
+            max={constants.INITIAL_CURRENCY}
           />
         </div>
         {scores.map((s, i) => (
@@ -44,8 +46,9 @@ let Score = class Score extends React.PureComponent {
             <ProgressBar
               label={s.label}
               barClassName={s.barClassName}
-              progress={s.progress}
-              winScore={winScore}
+              score={s.score}
+              threshold={s.threshold}
+              max={constants.SOCIAL_WIN_SCORE * SCORE_PADDING}
             />
           </div>
         ))}
@@ -56,9 +59,8 @@ let Score = class Score extends React.PureComponent {
 
 const mapStateToProps = state => ({
   currency: scoreSelectors.currency(state),
-  social: scoreSelectors.socialScore(state),
-  environmental: scoreSelectors.environmentalScore(state),
-  winScore: scoreSelectors.winScore(state)
+  social: scoreSelectors.social(state),
+  environmental: scoreSelectors.environmental(state)
 });
 
 Score = connect(

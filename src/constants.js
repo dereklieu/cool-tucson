@@ -15,7 +15,10 @@ const constants = {
     hh: 'El Houslanta',
     hd: 'Las Albusconix',
     t: 'San Porteattlopolis'
-  }
+  },
+
+  INITIAL_CURRENCY: 500,
+  SOCIAL_WIN_SCORE: 10
 };
 
 export default constants;

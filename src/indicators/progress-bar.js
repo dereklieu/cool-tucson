@@ -6,15 +6,17 @@ import { pct } from '../util/style-util';
 export function ProgressBar(props) {
   const {
     label,
-    progress,
+    score,
+    threshold,
+    max,
     className,
     barClassName,
-    winScore,
     width,
     height
   } = props;
 
-  const hasWinCondition = !isNaN(winScore);
+  const hasWinCondition = !isNaN(threshold);
+  const progress = score / max * 100;
 
   const hClass = height || 'h24';
   const wClass = width || 'w300';
@@ -32,8 +34,8 @@ export function ProgressBar(props) {
     'absolute left round-l transition',
     {
       'round-r': progress === 100,
-      'bg-gray-light': !hasWinCondition || progress < winScore,
-      'bg-orange-light': hasWinCondition && progress > winScore
+      'bg-gray-light': !hasWinCondition || progress < threshold,
+      'bg-orange-light': hasWinCondition && progress > threshold
     }
   );
 
@@ -43,7 +45,7 @@ export function ProgressBar(props) {
 
   let winIndicator = null;
   if (hasWinCondition) {
-    const winIndicatorStyle = { left: pct(winScore) };
+    const winIndicatorStyle = { left: pct(threshold) };
     winIndicator = (
       <div
         className={`absolute border border-l top ${hClass}`}

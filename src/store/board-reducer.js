@@ -3,6 +3,7 @@ import { wrap, get } from 'object-path-immutable';
 import { badges } from '../badges/badges';
 import { positions } from '../board/positions-svg';
 import { getIntervention } from '../interventions/interventions';
+import constants from '../constants';
 
 const interventions = {};
 positions.forEach(plot => {
@@ -13,7 +14,7 @@ const initialState = {
   locale: null,
   interventions,
   score: {
-    currency: 500000,
+    currency: constants.INITIAL_CURRENCY,
     environmental: 0,
     social: 0
   },
@@ -31,7 +32,9 @@ export function reducer(state = initialState, action) {
       const { plot, intervention } = action;
       const position = positions.find(p => p.id === plot);
       const meta = position.interventions[intervention];
-      const removes = meta.removes && getInterventionScore(meta.removes, state.locale);
+      const removes = meta.removes
+        && state.interventions[plot].includes(meta.removes)
+        && getInterventionScore(meta.removes, state.locale);
 
       return wrap(state)
       .update('score', removeInterventionScore(removes))
