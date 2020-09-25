@@ -23,6 +23,7 @@ class ActiveIntervention extends React.PureComponent {
 
   render () {
     const { intervention, ratio, isPreview } = this.props;
+    const { mounted, complete } = this.state;
 
     const { svg, placement } = intervention;
 
@@ -33,12 +34,17 @@ class ActiveIntervention extends React.PureComponent {
 
     const containerStyle = { top, left };
 
+    let opacity;
+    if (isPreview) opacity = 0.4;
+    else if (!mounted) opacity = 0.2;
+    else opacity = 1;
+
     const svgStyle = {
       width,
       height,
-      transition: this.state.complete ? undefined : 'all 400ms ease-out',
-      top: this.state.mounted ? 0 : px(-30),
-      opacity: isPreview ? 0.4 : 1
+      transition: complete ? undefined : 'all 400ms ease-out',
+      top: mounted ? 0 : px(-30),
+      opacity
     };
 
     return (
