@@ -10,7 +10,7 @@ positions.forEach(plot => {
   interventions[plot.id] = [];
 });
 
-const initialState = {
+export const initialState = {
   locale: null,
   interventions,
   score: {
