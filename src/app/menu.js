@@ -11,6 +11,7 @@ import constants from '../constants';
 import info from '../assets/img/info/info.png';
 import coolRoof from '../assets/img/info/cool-roof.svg';
 
+import { boardActionCreators } from '../store/board-action-creators';
 import { boardSelectors } from '../store/board-selectors';
 
 const infoStyle = {
@@ -28,7 +29,7 @@ let Menu = (props) => {
         <h4 className="txt-h4 mt12 mb24 mx120">Tackle urban heat by <strong>dragging improvements onto the map</strong>. Tap an improvement to learn more.</h4>
       </div>
       <div className="absolute top left">
-        <div className="mt12 ml12" data-tip={constants.LOCALE_CHANGE}>
+        <div className="mt12 ml12" data-tip={constants.LOCALE_CHANGE} onClick={() => props.changeLocale(null)}>
           <Locale type={props.locale} size={90} onClick={x => x} />
         </div>
       </div>
@@ -59,8 +60,13 @@ const mapStateToProps = state => ({
   locale: boardSelectors.locale(state)
 });
 
+const mapDispatch = {
+  changeLocale: boardActionCreators.changeLocale
+};
+
 Menu = connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatch
 )(Menu);
 
 export { Menu };

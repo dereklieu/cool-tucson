@@ -24,7 +24,7 @@ export const initialState = {
 export function reducer(state = initialState, action) {
   switch (action.type) {
     case 'CHANGE_LOCALE':
-      return wrap(state)
+      return wrap(initialState)
       .set('locale', action.locale)
       .value();
 

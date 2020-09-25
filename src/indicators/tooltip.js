@@ -51,7 +51,7 @@ let Tooltip = class Tooltip extends React.PureComponent {
     return (
       <div className="prose txt-m">
         <h5 className="txt-h5">You are in <strong>{constants.LOCALES[locale]}</strong></h5>
-        <p>Here, {descriptions[locale]}. Click to try a different place.</p>
+        <p>Here, {descriptions[locale]}. Click to try someplace new.</p>
       </div>
     );
   }
