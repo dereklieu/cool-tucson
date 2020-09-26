@@ -9,11 +9,12 @@ const underlayStyle = {
 };
 
 export function Modal(props) {
-
   const {
     children,
     onExit
   } = props;
+
+  const trap = e => e.stopPropagation();
 
   return (
     <div
@@ -22,11 +23,10 @@ export function Modal(props) {
       style={underlayStyle}
       onClick={onExit}
     >
-      <div className="relative w600 wmax-full bg-white inline-block round cursor-default align-l">
+      <div className="relative w600 wmax-full bg-white inline-block round cursor-default align-l" onClick={trap}>
         {children}
         <CloseButton onClick={onExit} />
       </div>
     </div>
   );
-
 }

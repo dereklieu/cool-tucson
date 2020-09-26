@@ -2,15 +2,21 @@
 import React from 'react';
 import c from 'classnames';
 import { connect } from 'react-redux';
-import { getIntervention } from './interventions';
+import {
+  getIntervention,
+  getNextIntervention,
+  getPrevIntervention
+} from './interventions';
 import { interventionSelectors } from '../store/intervention-selectors';
-import { pillClass } from '../util/style-util';
-import { Modal } from '../indicators/modal';
+import { interventionActionCreators } from '../store/intervention-action-creators';
+import { pillClass, bgColor, formatCost } from '../util/style-util';
+import { Icon } from './icon';
+import { IconLabel } from '../indicators/icon-label';
 
 let Description = (props) => {
   const {
     activeIntervention,
-    className
+    setIntervention
   } = props;
 
   if (!activeIntervention) return null;
@@ -27,12 +33,47 @@ let Description = (props) => {
     'flex-child txt-s mb12'
   );
 
+  const containerClass = c(
+    'py24 px24 round shadow shadow-darken10',
+    'hmax600 scroll-auto scroll-styled',
+    bgColor(intervention.type)
+  );
+
+  const inputClass = 'py60 px3 bg-lighten50 cursor-pointer color-blue-on-hover opacity75 opacity100-on-hover';
+
   return (
-    <div className={c(className, 'w600 hmax360 scroll-auto scroll-styled')}>
+    <div className={containerClass}>
+      <div className="pb24 flex-parent flex-parent--center-cross flex-parent--space-between-main">
+        <div
+          className={inputClass}
+          onClick={() => setIntervention(getPrevIntervention(intervention.name).name)}
+        >
+          <IconLabel
+            icon="chevron-left"
+            size={24}
+          />
+        </div>
+        <Icon
+          className="round-full bg-white"
+          name={intervention.name}
+          type={intervention.type}
+          size={240}
+        />
+        <div
+          className={inputClass}
+          onClick={() => setIntervention(getNextIntervention(intervention.name).name)}
+        >
+          <IconLabel
+            icon="chevron-right"
+            size={24}
+          />
+        </div>
+      </div>
+
       <div className="flex-parent flex-parent--center-cross flex-parent--wrap">
         <h4 className="flex-child txt-h4 txt-bold mr6 mb12">{intervention.name}</h4>
         <div className={pillClassName}>{intervention.type}</div>
-        <div className={currencyClassName}>$$</div>
+        <div className={currencyClassName}>{formatCost(intervention.cost)}</div>
       </div>
       <div className="prose">
         <p>{intervention.description}</p>
@@ -45,5 +86,9 @@ const mapStateToProps = state => ({
   activeIntervention: interventionSelectors.active(state)
 });
 
-Description = connect(mapStateToProps)(Description);
+const mapDispatch = {
+  setIntervention: interventionActionCreators.setIntervention,
+};
+
+Description = connect(mapStateToProps, mapDispatch)(Description);
 export { Description };

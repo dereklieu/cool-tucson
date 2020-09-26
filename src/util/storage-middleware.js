@@ -18,7 +18,6 @@ export const getStorageState = (key, path, baseState) => {
   let data;
   if (hasStorage) {
     const item = window.localStorage.getItem(key);
-    console.log(!!item);
     data = item ? JSON.parse(item) : null;
   } else {
     data = null;

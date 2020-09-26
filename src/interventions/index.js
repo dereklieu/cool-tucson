@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { interventionSelectors } from '../store/intervention-selectors';
 import { interventionActionCreators } from '../store/intervention-action-creators';
 
+import { Modal } from '../indicators/modal';
 import { Intervention } from './intervention';
 import { Description } from './description';
 import { CloseButton } from '../indicators/close-button';
@@ -36,15 +37,16 @@ let Interventions = class Interventions extends React.PureComponent {
 
   render() {
     return (
-      <div className="flex-parent flex-parent--center-main flex-parent--end-cross flex-parent--wrap">
-        {interventions.map(this.renderIntervention)}
+      <>
+        <div className="w-full flex-parent flex-parent--center-main flex-parent--end-cross flex-parent--wrap">
+          {interventions.map(this.renderIntervention)}
+        </div>
         {this.props.activeIntervention ? (
-          <div className="relative bg-white px24 py24 mt24 round shadow shadow-darken10">
+          <Modal onExit={this.clear}>
             <Description />
-            <CloseButton onClick={this.clear} />
-          </div>
+          </Modal>
         ) : null}
-      </div>
+      </>
     );
   }
 }

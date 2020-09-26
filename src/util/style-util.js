@@ -35,6 +35,8 @@ export const pillClass = (type) => {
   );
 };
 
+export const bgColor = (type) => interventionColor[type] + '-faint';
+
 const stops = [
   15,
   50,
@@ -42,7 +44,7 @@ const stops = [
   Infinity
 ]
 export const formatCost = (cost) => {
-  if (cost <= 0) return 'FREE';
+  if (cost <= 0) return 'Free';
   const i = stops.findIndex(stop => cost <= stop);
   return [...new Array(i + 1)].map(() => '$').join('');
 };
