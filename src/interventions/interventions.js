@@ -19,6 +19,7 @@ const interventions = i.map(d => {
         social: Number(d.social_t)
       }
     },
+    cost: d.cost,
     description: d.description,
     name: d.intervention,
     type: d.location

@@ -28,6 +28,7 @@ let Interventions = class Interventions extends React.PureComponent {
           name={d.name}
           type={d.type}
           isActive={d.name === activeIntervention}
+          cost={d.cost}
         />
       </div>
     );

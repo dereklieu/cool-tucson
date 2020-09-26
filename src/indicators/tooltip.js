@@ -7,8 +7,9 @@ import c from 'classnames';
 import { getIntervention } from '../interventions/interventions'
 import { interventionSelectors } from '../store/intervention-selectors';
 import { boardSelectors } from '../store/board-selectors';
+import { scoreSelectors } from '../store/score-selectors';
 import constants from '../constants';
-import { pillClass } from '../util/style-util';
+import { pillClass, formatCost } from '../util/style-util';
 
 const offset = {
   top: 10,
@@ -28,6 +29,9 @@ let Tooltip = class Tooltip extends React.PureComponent {
   }
 
   renderIntervention(intervention) {
+    const isDisabled = intervention.cost > this.props.currency;
+    const cost = formatCost(intervention.cost);
+
     return (
       <div className="prose">
         <h5 className="txt-h5">{intervention.name}</h5>
@@ -35,8 +39,11 @@ let Tooltip = class Tooltip extends React.PureComponent {
           <span className={`${pillClass(intervention.type)} inline-block`}>
             {intervention.type}
           </span>
-          <span className={`${pillClass('$')} inline-block ml6`}>$$</span>
+          <span className={`${pillClass('$')} inline-block ml6`}>{cost}</span>
         </p>
+        {isDisabled ? (
+          <p className="txt-bold color-red">Not enough resources</p>
+        ) : null}
       </div>
     );
   }
@@ -79,7 +86,7 @@ let Tooltip = class Tooltip extends React.PureComponent {
     if (this.props.activeIntervention) return null;
 
     const className=c(
-      'px12 py12 txt-s round bg-white color-black opacity100 wmax360 shadow shadow-darken10'
+      'px12 py12 txt-m round bg-white color-black opacity100 wmax360 shadow shadow-darken10'
     );
     return (
       <ReactTooltip
@@ -97,7 +104,8 @@ let Tooltip = class Tooltip extends React.PureComponent {
 
 const mapStateToProps = state => ({
   activeIntervention: interventionSelectors.active(state),
-  locale: boardSelectors.locale(state)
+  locale: boardSelectors.locale(state),
+  currency: scoreSelectors.currency(state)
 });
 
 Tooltip = connect(mapStateToProps)(Tooltip);

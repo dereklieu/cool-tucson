@@ -26,11 +26,23 @@ const interventionHoverColor = {
 
 export const getInterventionColor = (type, hover) => {
   return hover ? interventionHoverColor[type] : interventionColor[type];
-}
+};
 
 export const pillClass = (type) => {
   return c(
     'round px6 py3 color-white txt-bold',
     getInterventionColor(type, false)
   );
-}
+};
+
+const stops = [
+  15,
+  50,
+  150,
+  Infinity
+]
+export const formatCost = (cost) => {
+  if (cost <= 0) return 'FREE';
+  const i = stops.findIndex(stop => cost <= stop);
+  return [...new Array(i + 1)].map(() => '$').join('');
+};
