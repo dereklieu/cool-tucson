@@ -41,6 +41,7 @@ let Plot = (props) => {
 
       const hasPrereq = !constants.INTERVENTION_PREREQUISITES[name] ||
         appliedInterventions.includes(constants.INTERVENTION_PREREQUISITES[name]);
+
       return hasPrereq &&
         isActiveType &&
         !appliedInterventions.includes(name);
@@ -59,7 +60,8 @@ let Plot = (props) => {
     'absolute',
     {
       'opacity100': !isDragging || canDrop,
-      'opacity25': isDragging && !canDrop
+      'opacity25': isDragging && !canDrop,
+      move: isOver && canDrop
     }
   );
 
@@ -69,17 +71,21 @@ let Plot = (props) => {
   const height = vw(y(svg.h) * 100);
   const left = vw(x(placement.x) * 100);
   const top = vw(y(placement.y) * 100);
+  let zIndex = 1;
+
+  if (isActiveType) { zIndex += 10; }
+  if (canDrop) { zIndex += 5; }
+  if (activeIntervention === constants.ERASER && appliedInterventions.length) {
+    zIndex += 5;
+  }
 
   const containerStyle = {
     top,
     left,
     width,
-    height
+    height,
+    zIndex
   };
-
-  if (isActiveType) {
-    containerStyle.zIndex = 10;
-  }
 
   const interventions = appliedInterventions.map(name => ({
     ...position.interventions[name],
