@@ -10,11 +10,15 @@ import { Board } from '../board';
 import { Badges } from '../badges';
 import { Score } from '../indicators/score';
 import { Tooltip } from '../indicators/tooltip';
+import { Thermometer } from '../indicators/thermometer';
 
 export const Game = () => (
   <>
     <DndProvider backend={HTML5Backend}>
       <div className="w-full viewport-full absolute top left flex-parent flex-parent--column flex-parent--end-main gradient-red">
+        <div className="absolute right viewport-full mr60 flex-parent flex-parent--column flex-parent--center-main">
+          <Thermometer className="flex-child" />
+        </div>
         <div className="flex-child scroll-hidden">
           <Board />
         </div>
