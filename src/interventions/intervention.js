@@ -46,6 +46,9 @@ let Intervention = (props) => {
     end: () => {
       dragIntervention(null);
     },
+    end: () => {
+      dragIntervention(null);
+    },
     collect
   });
 

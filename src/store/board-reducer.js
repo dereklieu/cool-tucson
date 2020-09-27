@@ -1,5 +1,5 @@
 'use strict';
-import { wrap, get } from 'object-path-immutable';
+import { wrap, update, get, set } from 'object-path-immutable';
 import { badges } from '../badges/badges';
 import { positions } from '../board/positions-svg';
 import { getIntervention } from '../interventions/interventions';
@@ -43,6 +43,24 @@ export function reducer(state = initialState, action) {
       .update(['interventions', plot], pushIntervention(intervention))
       .update(['interventions', plot], sort(plot))
       .value();
+    }
+
+    case 'REMOVE_INTERVENTIONS': {
+      const removes = state.interventions[action.plot]
+      .map(i => getInterventionScore(i, state.locale));
+      removes.forEach(score => {
+        state = update(
+          state,
+          'score',
+          removeInterventionScore(score)
+        );
+      });
+      state = set(
+        state,
+        ['interventions', action.plot],
+        []
+      );
+      return state;
     }
   }
   return state;

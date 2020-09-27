@@ -28,8 +28,17 @@ let Plot = (props) => {
 
   const isActiveType = type === activeType;
   const [{ isOver, canDrop }, drop] = useDrop({
-    accept: constants.NEW_INTERVENTION,
+    accept: [
+      constants.NEW_INTERVENTION,
+      constants.ERASER
+    ],
     canDrop: ({ name }) => {
+      // Eraser can apply on any plot that has applied interventions.
+      if (name === constants.ERASER) {
+        if (appliedInterventions.length) return true;
+        return false;
+      }
+
       const hasPrereq = !constants.INTERVENTION_PREREQUISITES[name] ||
         appliedInterventions.includes(constants.INTERVENTION_PREREQUISITES[name]);
       return hasPrereq &&
@@ -45,7 +54,7 @@ let Plot = (props) => {
     })
   });
 
-  const isDragging = Boolean(activeType);
+  const isDragging = Boolean(activeIntervention);
   const containerClass = c(
     'absolute',
     {

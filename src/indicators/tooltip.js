@@ -22,8 +22,8 @@ let Tooltip = class Tooltip extends React.PureComponent {
   renderEraser() {
     return (
       <div className="prose">
-        <h5 className="txt-h5">Revert</h5>
-        <p>Removes any improvements</p>
+        <h5 className="txt-h5">The Bulldozer</h5>
+        <p>Removes improvements and recovers resources.</p>
       </div>
     )
   }

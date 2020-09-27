@@ -6,9 +6,6 @@ import { px, vw } from '../util/style-util';
 
 import { interventionSelectors } from '../store/intervention-selectors';
 
-// import { Plot } from './plot';
-// import { positions } from './positions';
-
 import { Plot } from './plot-svg';
 import { positions } from './positions-svg';
 

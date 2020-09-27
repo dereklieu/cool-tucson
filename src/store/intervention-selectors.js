@@ -2,6 +2,7 @@
 
 import { createSelector } from 'reselect';
 import { getIntervention } from '../interventions/interventions';
+import constants from '../constants';
 
 const root = state => state.intervention;
 
@@ -19,7 +20,9 @@ interventionSelectors.dragging = createSelector(
 
 interventionSelectors.draggedType = createSelector(
   interventionSelectors.dragging,
-  intervention => intervention ? getIntervention(intervention).type : ''
+  intervention => intervention && intervention !== constants.ERASER
+    ? getIntervention(intervention).type
+    : ''
 );
 
 export { interventionSelectors };

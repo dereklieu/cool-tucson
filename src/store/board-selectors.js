@@ -6,6 +6,16 @@ const root = state => state.board;
 
 const boardSelectors = {};
 
+boardSelectors.hasInterventions = createSelector(
+  root,
+  board => {
+    for (const plot in board.interventions) {
+      if (board.interventions[plot].length) return true;
+    }
+    return false;
+  }
+);
+
 boardSelectors.interventions = createSelector(
   [
     root,
