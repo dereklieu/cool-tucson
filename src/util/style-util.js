@@ -1,4 +1,5 @@
 'use strict';
+import React from 'react';
 import c from 'classnames';
 import constants from '../constants';
 
@@ -34,6 +35,8 @@ export const pillClass = (type) => {
     getInterventionColor(type, false)
   );
 };
+
+export const colorText = (text, color) => <span className={c('txt-bold', color)}>{text}</span>;
 
 export const bgColor = (type) => interventionColor[type] + '-faint';
 

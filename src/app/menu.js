@@ -5,7 +5,7 @@ import { IconLabel } from '../indicators/icon-label';
 import { Title } from './title';
 import { Locale } from '../locales/locale';
 import { Modal } from '../indicators/modal';
-import { pct } from '../util/style-util';
+import { pct, colorText } from '../util/style-util';
 import constants from '../constants';
 
 import info from '../assets/img/info/info.png';
@@ -17,8 +17,6 @@ import { boardSelectors } from '../store/board-selectors';
 const infoStyle = {
   width: pct(100)
 }
-
-const colorText = (text, color) => <span className={c('txt-bold', color)}>{text}</span>;
 
 let Menu = (props) => {
   const [showModal, toggleModal] = useState(false);
