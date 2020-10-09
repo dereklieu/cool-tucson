@@ -24,7 +24,7 @@ const interventions = i.map(d => {
     name: d.intervention,
     type: d.location
   };
-});
+}).reverse();
 
 const types = new Set();
 interventions.forEach(i => {
