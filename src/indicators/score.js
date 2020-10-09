@@ -12,28 +12,32 @@ let Score = class Score extends React.PureComponent {
     const {
       currency,
       social,
-      environmental
+      environmental,
+      hasWon
     } = this.props;
 
     const scores = [
       {
         score: social,
-        barClassName: social >= constants.SOCIAL_WIN_SCORE
+        barClassName: hasWon
         ? 'bg-blue-light'
         : 'bg-blue-dark',
         label: 'Social score',
-        threshold: 100 / SCORE_PADDING
+        tip: constants.SCORE_SOCIAL
       },
       {
         score: environmental,
-        barClassName: 'bg-green-dark',
-        label: 'Environmental score'
+        barClassName: hasWon
+        ? 'bg-green-light'
+        : 'bg-green-dark',
+        label: 'Environmental score',
+        tip: constants.SCORE_ENVIRO
       }
     ];
 
     return (
       <div className="flex-parent flex-parent--start-cross flex-parent--center-main color-white">
-        <div className="flex-child">
+        <div className="flex-child" data-tip={constants.SCORE_CURRENCY}>
           <ProgressBar
             label="Resources remaining"
             barClassName="bg-red-light"
@@ -42,7 +46,7 @@ let Score = class Score extends React.PureComponent {
           />
         </div>
         {scores.map((s, i) => (
-          <div key={s.label} className="flex-child ml30">
+          <div key={s.label} className="flex-child ml30" data-tip={s.tip}>
             <ProgressBar
               label={s.label}
               barClassName={s.barClassName}
@@ -60,7 +64,8 @@ let Score = class Score extends React.PureComponent {
 const mapStateToProps = state => ({
   currency: scoreSelectors.currency(state),
   social: scoreSelectors.social(state),
-  environmental: scoreSelectors.environmental(state)
+  environmental: scoreSelectors.environmental(state),
+  hasWon: scoreSelectors.hasWon(state)
 });
 
 Score = connect(

@@ -71,6 +71,26 @@ let Tooltip = class Tooltip extends React.PureComponent {
     );
   }
 
+  renderScore(name) {
+    let body;
+    switch (name) {
+      case constants.SCORE_CURRENCY:
+        body = 'Resources determine how many improvements you can make. Use the bulldozer to remove improvements and reclaim resources if you run out.';
+        break;
+      case constants.SCORE_ENVIRO:
+        body = 'This captures positive impacts your improvements make on the environment!';
+        break;
+      case constants.SCORE_SOCIAL:
+        body = 'Extreme heat is no fun for anyone. This captures your positive impacts to society.';
+        break;
+    }
+    return (
+      <div className="prose txt-m">
+        <p>{body}</p>
+      </div>
+    );
+  }
+
   getIntervention = (name) => {
     if (name.indexOf(constants.NEW_INTERVENTION) < 0) return undefined;
     return getIntervention(
@@ -84,6 +104,7 @@ let Tooltip = class Tooltip extends React.PureComponent {
     if (name === constants.LOCALE_CHANGE) return this.renderLocale();
     if (name === constants.ERASER) return this.renderEraser();
     if (name === constants.COPY) return this.renderCopy();
+    if (name.slice(0, 5) === 'SCORE') return this.renderScore(name);
 
     const intervention = this.getIntervention(name);
     if (intervention) return this.renderIntervention(intervention);
