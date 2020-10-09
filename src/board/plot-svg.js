@@ -60,8 +60,7 @@ let Plot = (props) => {
     'absolute',
     {
       'opacity100': !isDragging || canDrop,
-      'opacity25': isDragging && !canDrop,
-      move: isOver && canDrop
+      'opacity25': isDragging && !canDrop
     }
   );
 
