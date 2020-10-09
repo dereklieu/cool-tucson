@@ -23,5 +23,9 @@ actions.changeLocale = (locale) => ({
   locale
 });
 
+actions.syncInitialState = (state) => ({
+  type: 'SYNC_INITIAL_STATE',
+  state
+});
 
 export const boardActionCreators = actions;

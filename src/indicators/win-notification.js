@@ -16,7 +16,7 @@ let WinNotification = class WinNotification extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      hasWon: false,
+      hasWon: props.hasWon,
       showModal: false
     };
   }

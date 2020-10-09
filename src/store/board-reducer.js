@@ -62,6 +62,10 @@ export function reducer(state = initialState, action) {
       );
       return state;
     }
+
+    case 'SYNC_INITIAL_STATE': {
+      return action.state
+    }
   }
   return state;
 }

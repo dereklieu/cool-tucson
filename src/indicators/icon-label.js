@@ -25,20 +25,21 @@ export function IconLabel(props) {
     className,
     {
       'flex-parent flex-parent--center-main': !!label,
-      'inline': inline
+      'inline': inline,
+      'block': !inline
     }
   );
 
   return (
-    <div className={containerClass}>
+    <span className={containerClass}>
       <svg className={iconClass}>
         <use xlinkHref={`#icon-${icon}`} />
       </svg>
       { label ? (
-        <div className="flex-child">
+        <span className="flex-child">
           <label>{label}</label>
-        </div>
+        </span>
       ) : null }
-    </div>
+    </span>
   );
 }

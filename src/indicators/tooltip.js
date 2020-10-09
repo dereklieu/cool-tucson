@@ -63,6 +63,14 @@ let Tooltip = class Tooltip extends React.PureComponent {
     );
   }
 
+  renderCopy() {
+    return (
+      <div className="prose txt-m">
+        <p>Copied!</p>
+      </div>
+    );
+  }
+
   getIntervention = (name) => {
     if (name.indexOf(constants.NEW_INTERVENTION) < 0) return undefined;
     return getIntervention(
@@ -75,6 +83,7 @@ let Tooltip = class Tooltip extends React.PureComponent {
 
     if (name === constants.LOCALE_CHANGE) return this.renderLocale();
     if (name === constants.ERASER) return this.renderEraser();
+    if (name === constants.COPY) return this.renderCopy();
 
     const intervention = this.getIntervention(name);
     if (intervention) return this.renderIntervention(intervention);
