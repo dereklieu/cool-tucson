@@ -34,7 +34,7 @@ const constants = {
   },
 
   INITIAL_CURRENCY: 500,
-  SOCIAL_WIN_SCORE: 10,
+  WIN_SCORE: 15,
 
   INTERVENTION_PREREQUISITES: prereqs
 };

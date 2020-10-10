@@ -23,8 +23,11 @@ scoreSelectors.environmental = createSelector(
 );
 
 scoreSelectors.hasWon = createSelector(
-  scoreSelectors.social,
-  social => social >= constants.SOCIAL_WIN_SCORE
+  [
+    scoreSelectors.social,
+    scoreSelectors.environmental
+  ],
+  (social, environmental) => (social + environmental) >= constants.WIN_SCORE
 );
 
 export { scoreSelectors };

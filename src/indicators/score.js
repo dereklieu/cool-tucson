@@ -52,7 +52,7 @@ let Score = class Score extends React.PureComponent {
               barClassName={s.barClassName}
               score={s.score}
               threshold={s.threshold}
-              max={constants.SOCIAL_WIN_SCORE * SCORE_PADDING}
+              max={constants.WIN_SCORE}
             />
           </div>
         ))}
