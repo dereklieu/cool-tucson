@@ -31,6 +31,7 @@ let Tooltip = class Tooltip extends React.PureComponent {
   renderIntervention(intervention) {
     const isDisabled = intervention.cost > this.props.currency;
     const cost = formatCost(intervention.cost);
+    const isWaterFeatures = intervention.name === 'Water features';
 
     return (
       <div className="prose">
@@ -43,6 +44,9 @@ let Tooltip = class Tooltip extends React.PureComponent {
         </p>
         {isDisabled ? (
           <p className="txt-bold color-red">Not enough resources</p>
+        ) : null}
+        {isWaterFeatures ? (
+          <p className="txt-bold color-red">Requires uban park</p>
         ) : null}
       </div>
     );
