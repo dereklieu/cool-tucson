@@ -38,7 +38,7 @@ let Game = (props) => (
         <Interventions />
       </div>
     </DndProvider>
-    <div className="absolute bottom right mb120">
+    <div className="absolute bottom right mb120" style={{ zIndex: 20 }}>
       <Badges />
     </div>
     <WinNotification />

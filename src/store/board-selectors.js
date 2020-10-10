@@ -24,9 +24,9 @@ boardSelectors.interventions = createSelector(
   (board, plot) => board.interventions[plot]
 );
 
-boardSelectors.badges = createSelector(
+boardSelectors.outcomes = createSelector(
   root,
-  board => board.badges
+  board => board.outcomes
 );
 
 boardSelectors.locale = createSelector(

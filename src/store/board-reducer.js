@@ -1,6 +1,5 @@
 'use strict';
 import { wrap, update, get, set } from 'object-path-immutable';
-import { badges } from '../badges/badges';
 import { positions } from '../board/positions-svg';
 import { getIntervention } from '../interventions/interventions';
 import constants from '../constants';
@@ -18,7 +17,7 @@ export const initialState = {
     environmental: 0,
     social: 0
   },
-  badges: []
+  outcomes: []
 };
 
 export function reducer(state = initialState, action) {
@@ -42,6 +41,7 @@ export function reducer(state = initialState, action) {
       .update(['interventions', plot], removeIntervention(meta.removes))
       .update(['interventions', plot], pushIntervention(intervention))
       .update(['interventions', plot], sort(plot))
+      .update('outcomes', applyOutcomes(intervention))
       .value();
     }
 
@@ -60,6 +60,7 @@ export function reducer(state = initialState, action) {
         ['interventions', action.plot],
         []
       );
+      state = set(state, 'outcomes', getRemainingOutcomes(state.interventions));
       return state;
     }
 
@@ -116,28 +117,24 @@ function sort(plot) {
   };
 }
 
-  /*
-
-function syncBadges(score) {
-  const passed = badges.filter(b => {
-    const { type, threshold } = b.requirement;
-    return score[type] >= threshold;
-  });
-
+function applyOutcomes(intervention) {
+  const { outcomes } = getIntervention(intervention);
   return state => {
-    const earned = new Set(state.map(b => b.title));
-    const newBadges = passed.filter(b => !earned.has(b.title)).map(b => ({
-      ...b,
-      isPassed: true
-    }));
-    return state.concat(newBadges).map(b => {
-      const { title } = b;
-      const isPassed = Boolean(passed.find(b => b.title === title));
-      return {
-        ...b,
-        isPassed
-      };
-    });
+    return state.concat(
+      outcomes.filter(outcome => state.indexOf(outcome) === -1)
+    );
   };
 }
-*/
+
+function getRemainingOutcomes(interventions) {
+  const remaining = new Set();
+  for (let id in interventions) {
+    interventions[id].forEach(i => {
+      const { outcomes } = getIntervention(i);
+      outcomes.forEach(outcome => {
+        remaining.add(outcome);
+      });
+    });
+  }
+  return [...remaining];
+}

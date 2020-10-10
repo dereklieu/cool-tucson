@@ -23,16 +23,16 @@ export class ActiveBadge extends React.PureComponent {
     if (phase === 'open') {
       setTimeout(() => this.setState({ phase: 'post' }), 3000);
     } else if (phase === 'post') {
-      setTimeout(() => this.props.onRemove(this.props.badge.title), 200);
+      setTimeout(() => this.props.onRemove(this.props.outcome), 200);
     }
   }
 
   render() {
     const { phase } = this.state;
-    const { index, badge } = this.props;
+    const { index, outcome } = this.props;
     const containerStyle = {
       transition: '300ms all',
-      top: px(index * 100 + 85)
+      top: px(-index * 70 - 70)
     };
 
     switch (phase) {
@@ -54,12 +54,11 @@ export class ActiveBadge extends React.PureComponent {
       <div className={containerClass} style={containerStyle}>
         <div className="my12 mx12">
           <div className="flex-parent flex-parent--center-cross mb6">
-            <IconLabel icon="star" size={24} className="flex-child mr6" />
+            <IconLabel icon="star" size={24} className="flex-child mr6 color-yellow" />
             <h4 className="flex-child txt-h4 txt-bold">
-              {badge.title}
+              {outcome}
             </h4>
           </div>
-          <p>{badge.description}</p>
         </div>
       </div>
     );

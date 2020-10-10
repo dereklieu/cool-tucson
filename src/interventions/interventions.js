@@ -22,13 +22,19 @@ const interventions = i.map(d => {
     cost: d.cost,
     description: d.description,
     name: d.intervention,
-    type: d.location
+    type: d.location,
+    outcomes: d.outcomes.split('\n').map(o => o.trim())
   };
 }).reverse();
 
+const allOutcomes = new Set();
 const types = new Set();
+
 interventions.forEach(i => {
   types.add(i.type);
+  i.outcomes.forEach(o => {
+    allOutcomes.add(o);
+  });
 });
 
 const interventionTypes = Array.from(types);
@@ -54,5 +60,6 @@ export {
   interventionTypes,
   getIntervention,
   getNextIntervention,
-  getPrevIntervention
+  getPrevIntervention,
+  allOutcomes
 };
