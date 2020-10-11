@@ -23,7 +23,7 @@ let Thermometer = (props) => {
   const height = 300;
   const progress = (max - score) / max;
 
-  const heightStyle = { height: px(height) };
+  const heightStyle = { height: px(height), zIndex: 100 };
 
   const containerClass = c('absolute bg-white');
   const containerStyle = {

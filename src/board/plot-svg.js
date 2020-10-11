@@ -10,7 +10,7 @@ import { interventionSelectors } from '../store/intervention-selectors';
 import { boardActionCreators } from '../store/board-action-creators';
 import { boardSelectors } from '../store/board-selectors';
 
-import { px, vw, x, y } from '../util/style-util';
+import { px, x, y } from '../util/style-util';
 import constants from '../constants';
 
 let Plot = (props) => {
@@ -66,10 +66,10 @@ let Plot = (props) => {
 
   const { svg, placement } = position;
 
-  const width = vw(x(svg.w) * 100);
-  const height = vw(y(svg.h) * 100);
-  const left = vw(x(placement.x) * 100);
-  const top = vw(y(placement.y) * 100);
+  const width = px(x(svg.w) * containerWidth);
+  const height = px(y(svg.h) * containerWidth);
+  const left = px(x(placement.x) * containerWidth);
+  const top = px(y(placement.y) * containerWidth);
   let zIndex = 1;
 
   if (isActiveType) { zIndex += 10; }

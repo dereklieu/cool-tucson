@@ -2,7 +2,7 @@
 import React from 'react';
 import c from 'classnames';
 
-import { px, vw, x, y } from '../util/style-util';
+import { px, x, y } from '../util/style-util';
 
 class ActiveIntervention extends React.PureComponent {
   constructor(props) {
@@ -27,8 +27,8 @@ class ActiveIntervention extends React.PureComponent {
 
     const { svg, placement } = intervention;
 
-    const width = vw(x(svg.w) * 100);
-    const height = vw(y(svg.h) * 100);
+    const width = px(svg.w * ratio);
+    const height = px(svg.h * ratio);
     const left = px(placement.x * ratio);
     const top = px(placement.y * ratio);
 
