@@ -36,7 +36,8 @@ let Intervention = (props) => {
   const [{ canDrag, isDragging }, drag] = useDrag({
     item: {
       type: constants.NEW_INTERVENTION,
-      name
+      name,
+      interventionType: type
     },
     canDrag: () => currency >= cost,
     begin: () => {

@@ -1,10 +1,9 @@
 'use strict';
 import React from 'react';
 import { connect } from 'react-redux';
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
 import c from'classnames';
 
+import { ProvideDndProvider } from './dnd-provider';
 import { Menu } from './menu';
 import { Description } from '../interventions/description';
 import { Interventions } from '../interventions';
@@ -18,7 +17,7 @@ import { scoreSelectors } from '../store/score-selectors';
 
 let Game = (props) => (
   <>
-    <DndProvider backend={HTML5Backend}>
+    <ProvideDndProvider>
       <div className={c(
         'w-full viewport-full absolute top left flex-parent flex-parent--column flex-parent--end-main',
         { 'gradient-red': !props.hasWon, 'gradient-blue': props.hasWon }
@@ -37,7 +36,7 @@ let Game = (props) => (
         <Menu />
         <Interventions />
       </div>
-    </DndProvider>
+    </ProvideDndProvider>
     <div className="absolute bottom right mb120" style={{ zIndex: 20 }}>
       <Badges />
     </div>

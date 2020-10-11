@@ -13,6 +13,7 @@ export class ActiveBadge extends React.PureComponent {
   }
 
   componentDidMount() {
+    this.mounted = true;
     setTimeout(() => this.setState({ phase: 'open' }), 50);
   }
 
@@ -21,10 +22,22 @@ export class ActiveBadge extends React.PureComponent {
     if (phase === prevState.phase) return;
 
     if (phase === 'open') {
-      setTimeout(() => this.setState({ phase: 'post' }), 3000);
+      setTimeout(() => {
+        if (this.mounted) {
+          this.setState({ phase: 'post' })
+        }
+      }, 3000);
     } else if (phase === 'post') {
-      setTimeout(() => this.props.onRemove(this.props.outcome), 200);
+      setTimeout(() => {
+        if (this.mounted) {
+          this.props.onRemove(this.props.outcome)
+        }
+      }, 200);
     }
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
   }
 
   render() {

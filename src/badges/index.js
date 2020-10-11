@@ -117,7 +117,7 @@ let Badges = class Badges extends React.PureComponent {
           {active.map((outcome, i) => (
             <ActiveBadge
               index={i}
-              key={`${outcome}-${i}`}
+              key={outcome}
               outcome={outcome}
               onRemove={this.removeActive}
             />

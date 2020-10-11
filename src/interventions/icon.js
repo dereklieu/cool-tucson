@@ -2,6 +2,8 @@
 import React from 'react';
 import { px } from '../util/style-util';
 
+import constants from '../constants';
+
 import oaUrbanPark from '../assets/img/svg/interventions/oa-urban-park.svg';
 import oaWaterFeature from '../assets/img/svg/interventions/oa-water-feature.svg';
 import pbCoolRoof from '../assets/img/svg/interventions/pb-cool-roof.svg';
@@ -14,6 +16,8 @@ import stDrinkingWater from '../assets/img/svg/interventions/st-drinking-water.s
 import stGreenInfrastructure from '../assets/img/svg/interventions/st-green-infrastructure.svg';
 import thCoolingCenter from '../assets/img/svg/interventions/th-cooling-center.svg';
 import thPublicEducation from '../assets/img/svg/interventions/th-public-education.svg';
+
+import bulldozer from '../assets/img/svg/interventions/bulldozer.svg';
 
 const svgs = {
   'oa-urban-park': oaUrbanPark,
@@ -51,7 +55,13 @@ export const Icon = (props) => {
     className
   } = props;
 
-  const svg = getSvg(name, type);
+  let svg
+
+  if (name === constants.ERASER) {
+    svg = bulldozer;
+  } else {
+    svg = getSvg(name, type);
+  }
 
   const style = {
     width: px(size),

@@ -8,11 +8,9 @@ import ReactTooltip from 'react-tooltip';
 import { boardSelectors } from '../store/board-selectors';
 import { interventionActionCreators } from '../store/intervention-action-creators';
 
-import { IconLabel } from '../indicators/icon-label';
+import { Icon } from '../interventions/icon';
 import constants from '../constants';
 import { px } from '../util/style-util';
-
-import bulldozer from '../assets/img/svg/interventions/bulldozer.svg';
 
 const collect = (monitor) => {
   return {
@@ -39,7 +37,8 @@ let Eraser = (props) => {
     },
     item: {
       name: constants.ERASER,
-      type: constants.ERASER
+      type: constants.ERASER,
+      interventionType: constants.ERASER
     },
     collect
   });
@@ -69,9 +68,7 @@ let Eraser = (props) => {
         className={eraserClass}
         style={eraserStyle}
       >
-        <svg className="icon" style={eraserStyle}>
-          <use xlinkHref={`#${bulldozer.id}`} />
-        </svg>
+        <Icon size={size} name={constants.ERASER} type={constants.ERASER} />
       </div>
     </div>
   );
