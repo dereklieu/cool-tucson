@@ -5,12 +5,14 @@ import { connect } from 'react-redux';
 import { px, vw } from '../util/style-util';
 
 import { interventionSelectors } from '../store/intervention-selectors';
+import { boardSelectors } from '../store/board-selectors';
 
 import { Plot } from './plot-svg';
 import { positions } from './positions-svg';
 
 import constants from '../constants';
 import board from '../assets/img/board/board.svg';
+import boardTemperate from '../assets/img/board/board-temperate.svg';
 
 let Board = class Board extends React.PureComponent {
   getBoardDimensions = () => {
@@ -49,7 +51,7 @@ let Board = class Board extends React.PureComponent {
   };
 
   render() {
-    const { dragging } = this.props;
+    const { dragging, locale } = this.props;
     const { width, height } = this.getBoardDimensions();
 
     const svgStyle = {
@@ -69,10 +71,12 @@ let Board = class Board extends React.PureComponent {
       }
     );
 
+    const boardSvgId = locale === 't' ? boardTemperate.id : board.id;
+
     return (
       <div className="pt60" style={containerStyle}>
         <div className="relative" style={svgStyle}>
-          <svg className={svgClassName} style={svgStyle}><use xlinkHref={`#${board.id}`} /></svg>
+          <svg className={svgClassName} style={svgStyle}><use xlinkHref={`#${boardSvgId}`} /></svg>
           {positions.map(this.renderPosition)}
         </div>
       </div>
@@ -81,15 +85,10 @@ let Board = class Board extends React.PureComponent {
 }
 
 const mapStateToProps = state => ({
-  dragging: interventionSelectors.dragging(state)
+  dragging: interventionSelectors.dragging(state),
+  locale: boardSelectors.locale(state)
 });
 
-const mapDispatch = {
-};
-
-Board = connect(
-  mapStateToProps,
-  mapDispatch
-)(Board);
+Board = connect(mapStateToProps)(Board);
 
 export { Board };
