@@ -13,6 +13,8 @@ import { positions } from './positions-svg';
 import constants from '../constants';
 import board from '../assets/img/board/board.svg';
 import boardTemperate from '../assets/img/board/board-temperate.svg';
+import boardHotDry from '../assets/img/board/board-hot-dry.svg';
+import boardHotHumid from '../assets/img/board/board-hot-humid.svg';
 
 let Board = class Board extends React.PureComponent {
   getBoardDimensions = () => {
@@ -71,7 +73,22 @@ let Board = class Board extends React.PureComponent {
       }
     );
 
-    const boardSvgId = locale === 't' ? boardTemperate.id : board.id;
+    let boardSvgId;
+    console.log(locale);
+    switch (locale) {
+      case 't':
+        boardSvgId = boardTemperate.id;
+        break;
+      case 'hd':
+        boardSvgId = boardHotDry.id;
+        break;
+      case 'hh':
+        boardSvgId = boardHotHumid.id;
+        break;
+      default:
+        boardSvgId = board.id;
+        break;
+    }
 
     return (
       <div className="pt60" style={containerStyle}>
