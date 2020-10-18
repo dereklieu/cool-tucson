@@ -47,10 +47,15 @@ let Badges = class Badges extends React.PureComponent {
       'align-center align-middle',
       'border-t border-l border-b',
       'round-t round-l round-b',
-      'shadow-darken10 bg-white'
+      'shadow-darken10',
+      'btn btn--white color-black'
     );
     const containerStyle = {
       lineHeight: '60px'
+    };
+    const displayStyle = {
+      bottom: '-3px',
+      right: '-3px'
     };
     const count = this.props.outcomes.length;
     return (
@@ -59,14 +64,16 @@ let Badges = class Badges extends React.PureComponent {
         style={containerStyle}
         onClick={this.toggleShowOutcomes}
       >
-        <IconLabel
-          icon="star"
-          size={24}
-          className="inline-block color-yellow"
-        />
-        <span className="inline-block">
-          {count}
-        </span>
+        <div className="relative">
+          <IconLabel
+            icon="star"
+            size={24}
+            className="inline-block color-yellow"
+          />
+          <span className="absolute txt-bold" style={displayStyle}>
+            {count}
+          </span>
+        </div>
       </button>
     );
   }

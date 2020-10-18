@@ -9,11 +9,11 @@ import { px } from '../util/style-util';
 const markerStyle = { left: px(-36) };
 
 const Fire = () => (
-  <div className="absolute txt-xl" style={markerStyle}>🔥</div>
+  <div className="absolute txt-xl cursor-default" style={markerStyle}>🔥</div>
 );
 
 const Ice = () => (
-  <div className="absolute txt-xl bottom mb-neg24" style={markerStyle}>❄️</div>
+  <div className="absolute txt-xl bottom mb-neg24 cursor-default" style={markerStyle}>❄️</div>
 );
 
 let Thermometer = (props) => {

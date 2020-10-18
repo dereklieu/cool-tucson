@@ -74,7 +74,6 @@ let Board = class Board extends React.PureComponent {
     );
 
     let boardSvgId;
-    console.log(locale);
     switch (locale) {
       case 't':
         boardSvgId = boardTemperate.id;
