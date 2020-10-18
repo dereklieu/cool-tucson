@@ -32,7 +32,9 @@ let Menu = (props) => {
         </div>
       </div>
       <div className="absolute top right" onClick={() => toggleModal(!showModal)}>
-        <IconLabel className="mt12 mr12 cursor-pointer" icon="info" size={36} />
+        <button className="btn btn--transparent py3 px3 mt12 mr12 color-black transition" onClick={props.onClick}>
+          <IconLabel icon="info" size={36} />
+        </button>
       </div>
       {showModal ? (
         <Modal onExit={() => toggleModal(false)}>

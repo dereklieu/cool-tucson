@@ -12,6 +12,10 @@ import { Modal } from './modal';
 import { colorText } from '../util/style-util';
 import constants from '../constants';
 
+const notificationStyle = {
+  top: '60px'
+};
+
 let WinNotification = class WinNotification extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -55,8 +59,10 @@ let WinNotification = class WinNotification extends React.PureComponent {
     ) : null;
 
     const icon = hasWon ? (
-      <div className="fixed top right" onClick={this.showModal}>
-        <IconLabel className="mt60 mr12 cursor-pointer" icon="star" size={36} />
+      <div className="fixed right" onClick={this.showModal} style={notificationStyle}>
+        <button className="btn btn--transparent py3 px3 mr12 color-black transition" onClick={props.onClick}>
+          <IconLabel icon="star" size={36} />
+        </button>
       </div>
     ) : null;
 
