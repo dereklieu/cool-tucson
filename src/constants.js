@@ -1,6 +1,7 @@
 'use strict';
 
 import { interventions } from './board/interventions-svg';
+import { isHDPR } from './util/style-util';
 
 // Construct a map of interventions that require other interventions
 const prereqs = {};
@@ -32,6 +33,8 @@ const constants = {
     hd: 'Las Albusconix',
     t: 'San Porteattlopolis'
   },
+
+  INTERVENTION_SIZE: isHDPR() ? 48: 80,
 
   INITIAL_CURRENCY: 500,
   WIN_SCORE: 15,

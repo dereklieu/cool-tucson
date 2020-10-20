@@ -6,7 +6,7 @@ import c from 'classnames';
 import { scoreSelectors } from '../store/score-selectors';
 import { px } from '../util/style-util';
 
-const markerStyle = { left: px(-36) };
+const markerStyle = { right: px(-56) };
 
 const Fire = () => (
   <div className="absolute txt-xl cursor-default" style={markerStyle}>🔥</div>

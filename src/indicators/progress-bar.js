@@ -11,20 +11,17 @@ export function ProgressBar(props) {
     max,
     className,
     barClassName,
-    width,
     height
   } = props;
 
   const hasWinCondition = !isNaN(threshold);
   const progress = score / max * 100;
 
-  const hClass = height || 'h24';
-  const wClass = width || 'w300';
+  const hClass = height || 'h12';
 
   const containerClass = c(
     className,
     hClass,
-    wClass,
     'relative round border scroll-hidden'
   );
 

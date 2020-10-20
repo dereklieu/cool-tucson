@@ -53,7 +53,7 @@ let Intervention = (props) => {
     collect
   });
 
-  const size = 80;
+  const size = constants.INTERVENTION_SIZE;
 
   let cursor;
   if (isDragging) cursor = 'grabbing';

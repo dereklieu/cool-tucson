@@ -5,6 +5,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TouchBackend } from 'react-dnd-touch-backend';
 import { usePreview } from 'react-dnd-preview';
 
+import constants from '../constants';
 import { Icon } from '../interventions/icon';
 
 function isTouchDevice() {
@@ -25,7 +26,7 @@ const DndPreview = () => {
   const { name, interventionType } = item;
   return (
     <div style={{...style, zIndex: 30 }}>
-      <Icon size={80} name={name} type={interventionType} />
+      <Icon size={constants.INTERVENTION_SIZE} name={name} type={interventionType} />
     </div>
   )
 };

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { scoreSelectors } from '../store/score-selectors';
 import { ProgressBar } from './progress-bar';
 import constants from '../constants';
+import { pct } from '../util/style-util';
 
 const SCORE_PADDING = 1.1;
 
@@ -22,7 +23,7 @@ let Score = class Score extends React.PureComponent {
         barClassName: hasWon
         ? 'bg-blue-light'
         : 'bg-blue-dark',
-        label: 'Social score',
+        label: 'Social',
         tip: constants.SCORE_SOCIAL
       },
       {
@@ -30,23 +31,30 @@ let Score = class Score extends React.PureComponent {
         barClassName: hasWon
         ? 'bg-green-light'
         : 'bg-green-dark',
-        label: 'Environmental score',
+        label: 'Environmental',
         tip: constants.SCORE_ENVIRO
       }
     ];
 
     return (
-      <div className="flex-parent flex-parent--start-cross flex-parent--center-main color-white">
-        <div className="flex-child" data-tip={constants.SCORE_CURRENCY}>
+      <div className="flex-parent flex-parent--center-main color-white grid">
+        <div
+          className="flex-child col--4 px3 wmax240"
+          data-tip={constants.SCORE_CURRENCY}
+        >
           <ProgressBar
-            label="Resources remaining"
+            label="Resources"
             barClassName="bg-red-light"
             score={currency}
             max={constants.INITIAL_CURRENCY}
           />
         </div>
         {scores.map((s, i) => (
-          <div key={s.label} className="flex-child ml30" data-tip={s.tip}>
+          <div
+            key={s.label}
+            className="flex-child col--4 px3 wmax240"
+            data-tip={s.tip}
+          >
             <ProgressBar
               label={s.label}
               barClassName={s.barClassName}

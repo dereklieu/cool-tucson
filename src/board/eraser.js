@@ -43,7 +43,7 @@ let Eraser = (props) => {
     collect
   });
 
-  const size = 80;
+  const size = constants.INTERVENTION_SIZE;
   const eraserClass = c(className, {
     'opacity50': !canDrag
   });
