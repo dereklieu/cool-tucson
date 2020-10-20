@@ -46,7 +46,7 @@ let Description = (props) => {
   return (
     <div className={containerClass}>
       <div className="pb24 flex-parent flex-parent--center-cross flex-parent--space-between-main">
-        <div
+        <button
           className={inputClass}
           onClick={() => setIntervention(getPrevIntervention(intervention.name).name)}
         >
@@ -54,14 +54,14 @@ let Description = (props) => {
             icon="chevron-left"
             size={24}
           />
-        </div>
+        </button>
         <Icon
           className="round-full bg-white"
           name={intervention.name}
           type={intervention.type}
           size={iconSize}
         />
-        <div
+        <button
           className={inputClass}
           onClick={() => setIntervention(getNextIntervention(intervention.name).name)}
         >
@@ -69,7 +69,7 @@ let Description = (props) => {
             icon="chevron-right"
             size={24}
           />
-        </div>
+        </button>
       </div>
 
       <div className="flex-parent flex-parent--center-cross flex-parent--wrap">
