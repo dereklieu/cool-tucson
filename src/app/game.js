@@ -49,7 +49,7 @@ let Game = class Game extends React.PureComponent {
       <>
         <ProvideDndProvider>
           <div className={c(
-            'w-full viewport-full absolute top left flex-parent flex-parent--column flex-parent--end-main',
+            'w-full viewport-fill absolute top left flex-parent flex-parent--column flex-parent--end-main',
             { 'gradient-red': !props.hasWon, 'gradient-blue': props.hasWon }
           )} ref={this.container}>
             <div className="flex-child">
@@ -58,7 +58,7 @@ let Game = class Game extends React.PureComponent {
             <div className="flex-child px3 py3 bg-black">
               <Score />
             </div>
-            <div className="absolute right viewport-full mr60 flex-parent flex-parent--column flex-parent--center-main">
+            <div className="absolute right mr60 viewport-fill flex-parent flex-parent--column flex-parent--center-main">
               <Thermometer className="flex-child" />
             </div>
           </div>

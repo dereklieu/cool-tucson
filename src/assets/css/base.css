@@ -1,3 +1,11 @@
+#app, html, body {
+  height: 100%;
+}
+
+.viewport-fill {
+  height: 100%;
+}
+
 .title {
   font-family: 'Ranchers', cursive;
 }
