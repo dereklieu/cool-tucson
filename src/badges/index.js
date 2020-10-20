@@ -83,24 +83,33 @@ let Badges = class Badges extends React.PureComponent {
     const isAchieved = outcomes.indexOf(outcome) >= 0;
     const className = c(
       'px6 py6 border round align-center mb12 relative',
+      'flex-parent flex-parent--center-cross',
       {
         opacity50: !isAchieved,
         opacity100: isAchieved
       }
     );
+
+    const iconClass = c(
+      'flex-child mr6',
+      {
+        'color-yellow': isAchieved,
+        'color-gray': !isAchieved
+      }
+    );
+
     return (
       <li key={outcome} className={className}>
-        <p className="txt-l txt-bold mb3">{outcome}</p>
-        <p className="txt-s">{isAchieved ? 'Achieved!' : 'Not yet achieved'}</p>
-
-        { isAchieved ? (
-          <div className="absolute top left ml12 mt12 color-yellow">
-            <IconLabel
-              icon="star"
-              size={24}
-            />
-          </div>
-        ) : null }
+        <div className={iconClass}>
+          <IconLabel
+            icon="star"
+            size={24}
+          />
+        </div>
+        <div className="flex-child flex-child--grow mr30">
+          <p className="txt-l txt-bold mb3">{outcome}</p>
+          <p className="txt-s">{isAchieved ? 'Achieved!' : 'Not yet achieved'}</p>
+        </div>
       </li>
     );
   }

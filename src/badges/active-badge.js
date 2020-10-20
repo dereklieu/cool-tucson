@@ -45,7 +45,7 @@ export class ActiveBadge extends React.PureComponent {
     const { index, outcome } = this.props;
     const containerStyle = {
       transition: '300ms all',
-      top: px(-index * 70 - 70)
+      top: px(-index * 55 - 50)
     };
 
     switch (phase) {
