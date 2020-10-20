@@ -43,23 +43,9 @@ const getIntervention = (name) => {
   return interventions.find(i => i.name === name);
 };
 
-const getNextIntervention = (name) => {
-  const i = interventions.findIndex(i => i.name === name);
-  if (!interventions[i + 1]) return interventions[0];
-  return interventions[i + 1];
-};
-
-const getPrevIntervention = (name) => {
-  const i = interventions.findIndex(i => i.name === name);
-  if (i === 0) return interventions[interventions.length - 1];
-  return interventions[i - 1];
-};
-
 export {
   interventions,
   interventionTypes,
   getIntervention,
-  getNextIntervention,
-  getPrevIntervention,
   allOutcomes
 };

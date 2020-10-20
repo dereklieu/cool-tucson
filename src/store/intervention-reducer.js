@@ -1,8 +1,9 @@
 'use strict';
+import constants from '../constants';
 import * as immutable from 'object-path-immutable';
 
 const initialState = {
-  active: '',
+  active: constants.INTERVENTION_INTRO,
   dragging: ''
 };
 
