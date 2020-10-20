@@ -5,7 +5,7 @@ import { IconLabel } from '../indicators/icon-label';
 import { Title } from './title';
 import { Locale } from '../locales/locale';
 import { Modal } from '../indicators/modal';
-import { pct, colorText } from '../util/style-util';
+import { pct, colorText, isHDPR } from '../util/style-util';
 import constants from '../constants';
 
 import info from '../assets/img/info/info.png';
@@ -20,15 +20,17 @@ const infoStyle = {
 
 let Menu = (props) => {
   const [showModal, toggleModal] = useState(false);
+  const localeIconSize = isHDPR() ? 48 : 90;
+
   return (
     <div className="relative">
       <div className="align-center">
         <Title />
-        <h4 className="txt-h4 mt12 mb24 mx120">Tackle urban heat by <strong>dragging improvements onto the map</strong>. Tap an improvement to learn more.</h4>
+        <h4 className="txt-h4 mt12 mb24">Tackle urban heat by <strong>tapping an improvement</strong>.</h4>
       </div>
       <div className="absolute top left">
         <div className="mt12 ml12" data-tip={constants.LOCALE_CHANGE} onClick={() => props.changeLocale(null)}>
-          <Locale type={props.locale} size={90} onClick={x => x} />
+          <Locale type={props.locale} size={localeIconSize} onClick={x => x} />
         </div>
       </div>
       <div className="absolute top right" onClick={() => toggleModal(!showModal)}>

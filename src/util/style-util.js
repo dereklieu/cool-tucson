@@ -51,3 +51,5 @@ export const formatCost = (cost) => {
   const i = stops.findIndex(stop => cost <= stop);
   return [...new Array(i + 1)].map(() => '$').join('');
 };
+
+export const isHDPR = () => window.devicePixelRatio > 1;
