@@ -4,7 +4,7 @@ import c from 'classnames';
 import { CloseButton } from './close-button';
 
 const underlayStyle = {
-  zIndex: 10,
+  zIndex: 100,
   WebkitOverflowScrolling: 'touch'
 };
 
