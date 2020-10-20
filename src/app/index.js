@@ -9,7 +9,7 @@ let App = class App extends React.PureComponent {
   render() {
     const { locale } = this.props;
     return (
-      <div className="scroll-hidden relative viewport-fill">
+      <div className="scroll-auto relative viewport-fill viewport-min">
         {locale ? <Game /> : <Locales />}
       </div>
     );

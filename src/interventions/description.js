@@ -9,7 +9,7 @@ import {
 } from './interventions';
 import { interventionSelectors } from '../store/intervention-selectors';
 import { interventionActionCreators } from '../store/intervention-action-creators';
-import { pillClass, bgColor, formatCost } from '../util/style-util';
+import { pillClass, bgColor, formatCost, isHDPR } from '../util/style-util';
 import { Icon } from './icon';
 import { IconLabel } from '../indicators/icon-label';
 
@@ -41,6 +41,8 @@ let Description = (props) => {
 
   const inputClass = 'py60 px3 bg-lighten50 cursor-pointer color-blue-on-hover opacity75 opacity100-on-hover';
 
+  const iconSize = isHDPR() ? 180 : 240;
+
   return (
     <div className={containerClass}>
       <div className="pb24 flex-parent flex-parent--center-cross flex-parent--space-between-main">
@@ -57,7 +59,7 @@ let Description = (props) => {
           className="round-full bg-white"
           name={intervention.name}
           type={intervention.type}
-          size={240}
+          size={iconSize}
         />
         <div
           className={inputClass}

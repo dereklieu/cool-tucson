@@ -6,6 +6,7 @@ import constants from '../constants';
 export const px = (number) => Math.floor(number) + 'px';
 export const pct = (number) => number + '%';
 export const vw = (number) => number + 'vw';
+export const vh = (number) => number + 'vh';
 export const x = (width) => width / constants.BOARD_NATIVE_WIDTH;
 export const y = (height) => height / constants.BOARD_NATIVE_HEIGHT * constants.HEIGHT_RATIO;
 

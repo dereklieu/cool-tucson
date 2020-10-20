@@ -6,6 +6,10 @@
   height: 100%;
 }
 
+.viewport-min {
+  min-height: 530px;
+}
+
 .title {
   font-family: 'Ranchers', cursive;
 }

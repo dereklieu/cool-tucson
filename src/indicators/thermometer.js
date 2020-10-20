@@ -20,7 +20,7 @@ let Thermometer = (props) => {
   const { social, environmental } = props;
   const score = social + environmental;
   const max = 30;
-  const height = 300;
+  const height = 200;
   const progress = (max - score) / max;
 
   const heightStyle = { height: px(height), zIndex: 100 };
