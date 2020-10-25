@@ -5,6 +5,7 @@ import c from 'classnames';
 
 import { scoreSelectors } from '../store/score-selectors';
 import { px } from '../util/style-util';
+import constants from '../constants';
 
 const markerStyle = { right: px(-56) };
 
@@ -22,6 +23,7 @@ let Thermometer = (props) => {
   const max = 30;
   const height = 200;
   const progress = (max - score) / max;
+  const indicator = constants.WIN_SCORE / max;
 
   const heightStyle = { height: px(height), zIndex: 100 };
 
@@ -64,6 +66,14 @@ let Thermometer = (props) => {
     marginBottom: px(-20),
   };
 
+  const indicatorStyle = {
+    borderBottom: '1px solid black',
+    borderTop: '1px solid white',
+    left: px(-12),
+    height: px(1),
+    top: px(indicator * (height + 20))
+  }
+
   const innerCircleClass = c('absolute round-full w24 h24');
   const innerCircleStyle = {
     background: color,
@@ -77,6 +87,7 @@ let Thermometer = (props) => {
       <div className={containerClass} style={containerStyle}>
         <div className={outerBarClass} style={outerBarStyle}>
           <div className={innerBarClass} style={innerBarStyle} />
+          <div className="absolute w36" style={indicatorStyle} />
         </div>
       </div>
       <div className={innerCircleClass} style={innerCircleStyle} />
