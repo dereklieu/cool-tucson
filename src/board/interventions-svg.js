@@ -227,12 +227,12 @@ const street = {
   'Green infrastructure': {
     svg: {
       id: greenInfrastructure.id,
-      w: 1309,
-      h: 331.5
+      w: 1311,
+      h: 276.1
     },
     placement: {
-      x: 162.9,
-      y: 194.7,
+      x: 170,
+      y: 255,
       z: 2
     }
   },
