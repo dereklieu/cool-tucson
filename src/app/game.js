@@ -58,7 +58,7 @@ let Game = class Game extends React.PureComponent {
             <div className="flex-child px3 py3 bg-black">
               <Score />
             </div>
-            { containerWidth > 400 ? (
+            { containerWidth > 320 ? (
               <div className="absolute right mr60 viewport-fill flex-parent flex-parent--column flex-parent--center-main">
                 <Thermometer className="flex-child" />
               </div>

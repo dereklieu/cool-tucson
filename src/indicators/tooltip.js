@@ -79,13 +79,13 @@ let Tooltip = class Tooltip extends React.PureComponent {
     let body;
     switch (name) {
       case constants.SCORE_CURRENCY:
-        body = 'Resources determine how many improvements you can make. Use the bulldozer to remove improvements and reclaim resources if you run out.';
+        body = 'Every community has limited funds and resources, which determines how many improvements you can make. Use the bulldozer to remove improvements and reclaim resources if you run out.';
         break;
       case constants.SCORE_ENVIRO:
-        body = 'This captures positive impacts your improvements make on the environment!';
+        body = 'Extreme heat is no fun for anyone. This captures the positive impacts from your improvements that are felt by people, such as a more comfortable climate, or improved health outcomes.';
         break;
       case constants.SCORE_SOCIAL:
-        body = 'Extreme heat is no fun for anyone. This captures your positive impacts to society.';
+        body = 'The environment thanks you! This captures the positive impacts from your improvements that protect things like native wildlife, biodiversity, and natural resource sustainability.';
         break;
     }
     return (

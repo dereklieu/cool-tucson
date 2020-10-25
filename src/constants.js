@@ -39,7 +39,7 @@ const constants = {
   INTERVENTION_SIZE: isHDPR() ? 48: 80,
 
   INITIAL_CURRENCY: 500,
-  WIN_SCORE: 15,
+  WIN_SCORE: 20,
 
   INTERVENTION_PREREQUISITES: prereqs
 };
