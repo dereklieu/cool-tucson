@@ -62,7 +62,8 @@ let Description = class Description extends React.PureComponent {
             {colorText('cool roofs', 'color-blue')} onto the map to chill things out.</p>
           <p>Extreme heat (summertime temperatures that are much hotter than they have been in the past) is one of the most dangerous climate risks in communities today.</p>
           <p>Improvements will raise your {colorText('social', 'color-blue')} and {colorText('environmental', 'color-green')} score, but deplete your resources.</p>
-          <p>It's up to you to build the chillest city by reaching the goal on the indicator to the right!</p>
+          <p>It's up to you to build the chillest city by reaching the goal on the indicator to the right. Be sure to check out the yellow star at the bottom too, so you can see all the positive vibes you're creating!</p>
+          <p className="txt-s">Credits: Chill City was created by Jonathan Jae-an Crisman, Ladd Keith, Gregg Garfin, and Ida Sami at the University of Arizona with initial funding from the Restruct Strategic Initiative. Web development and graphic design by Derek Lieu. Contact: <a href="mailto:crisman@email.arizona.edu" target="_blank">crisman@email.arizona.edu</a>. Learn more at the <a href="https://heat.arizona.edu/resources">Extreme Heat Network</a>.</p>
         </div>
       );
     }
